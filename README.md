@@ -25,7 +25,7 @@ The University of Abuja School Management System, built on the Laravel framework
 - **User Authentication:**
   - Laravel's secure authentication system for students, faculty, and administrators.
 
-  * Student login page:
+* Student login page:
 ![img](https://github.com/EliezerSunny/University-of-Abuja-School-Management-System-Laravel-Project/main/public/assets/images/student_login.png)
 * Student dashboard page:
 ![img](https://github.com/EliezerSunny/University-of-Abuja-School-Management-System-Laravel-Pr
