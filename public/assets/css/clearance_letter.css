@@ -1,0 +1,88 @@
+*{
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+body{
+	background: #fafafa;
+	margin: 0;
+	padding: 0;
+}
+.page{
+	margin: auto;
+}
+/*.page[size="A4"][layout="landscape"] {
+	width: 29.7cm;
+	height: 21cm;
+}*/
+#print_letter{
+	padding: 1cm 1.5cm;
+	border: 5px #808080 solid;
+	height: 256mm;
+	outline: 100cm #eaecee solid;
+}
+@media print {
+	.page{
+		margin: 0;
+		border: initial;
+		border-radius: initial;
+		width: initial;
+		min-height: initial;
+		box-shadow: initial;
+		background: initial;
+		page-break-after: always;
+	}
+}
+
+.heading{
+	text-align: center;
+}
+.heading img{
+	width: 6rem;
+}
+.main-profi{
+	padding: 12px 0px;
+	font-size: 15px;
+	margin: auto 0;
+}
+.main-profi .main-profi-img, .details{
+	display: inline-block;
+}
+.clerify .main-profi-img2, .list{
+	display: inline-block;
+}
+.main-profi-img{
+	text-align: center;
+	margin: auto;
+	margin-bottom: 15px;
+}
+.main-profi-img img{
+	width: 6rem;
+	margin-left: 20px;
+	margin-bottom: 75px;
+	border-radius: 5%;
+}
+.main-profi-img2 img{
+	width: 8rem;
+	margin-left: 20px;
+}
+.print{
+	float: right;
+	margin-top: 10px;
+	border: 1px solid #f7f9fa;
+	outline: none;
+	border-radius: 3px;
+	padding: 6px 12px;
+    cursor: pointer;
+	color: #fff;
+	background: #0f172a;
+}
+/*.details{
+	float: left;
+}*/
+
+@media screen and (min-width: 760px){
+	.page{
+		width: 50%;
+		margin: auto;
+	}
+}
