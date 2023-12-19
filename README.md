@@ -26,17 +26,17 @@ The University of Abuja School Management System, built on the Laravel framework
   - Laravel's secure authentication system for students, faculty, and administrators.
 
   * Student login page:
-![img](assets/images/student_login.png?raw=true)
+![img](assets/images/student_login.png)
 * Student dashboard page:
-![img](assets/images/student_dashboard.png?raw=true)
+![img](assets/images/student_dashboard.png)
 * Lecturer login page:
-![img](assets/images/lecturer_login.png?raw=true)
+![img](assets/images/lecturer_login.png)
 * Lecturer dashboard page:
-![img](assets/images/lecturer_dashboard.png?raw=true)
+![img](assets/images/lecturer_dashboard.png)
 * Admin login page:
-![img](assets/images/admin_login.png?raw=true)
+![img](assets/images/admin_login.png)
 * Admin dashboard page:
-![img](assets/images/admin_dashboard.png?raw=true)
+![img](assets/images/admin_dashboard.png)
 
 - **Reports and Analytics:**
   - Generate comprehensive reports on student performance, attendance, and more.
