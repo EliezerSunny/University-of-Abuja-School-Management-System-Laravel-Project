@@ -27,25 +27,22 @@ The University of Abuja School Management System, built on the Laravel framework
 
 
   * Student login page:
-![img](https://github.com/EliezerSunny/University-of-Abuja-School-Management-System-Laravel-Project/main/public/assets/images/student_login.png)
+![img](public/assets/images/student_login.png)
 
 * Student dashboard page:
 ![img](public/assets/images/student_dashboard.png)
 
 * Lecturer login page:
-![img](https://github.com/EliezerSunny/University-of-Abuja-School-Management-System-Laravel-Pr
-oject/main/public/assets/images/lecturer_login.png)
+![img](public/assets/images/lecturer_login.png)
 
 * Lecturer dashboard page:
-![img](https://github.com/EliezerSunny/University-of-Abuja-School-Management-System-Laravel-Project/main/public/assets/images/lecturer_dashboard.png)
+![img](public/assets/images/lecturer_dashboard.png)
 
 * Admin login page:
-![img](https://github.com/EliezerSunny/University-of-Abuja-School-Management-System-Laravel-Pr
-oject/main/public/assets/images/admin_login.png)
+![img](public/assets/images/admin_login.png)
 
 * Admin dashboard page:
-![img](https://github.com/EliezerSunny/University-of-Abuja-School-Management-System-Laravel-Pr
-oject/main/public/assets/images/admin_dashboard.png)
+![img](public/assets/images/admin_dashboard.png)
 
 
 - **Reports and Analytics:**
