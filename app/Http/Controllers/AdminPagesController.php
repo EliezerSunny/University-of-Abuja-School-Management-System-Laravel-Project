@@ -10,7 +10,7 @@ use App\Models\Course;
 use App\Models\Result;
 use App\Models\Faculty;
 use App\Models\Payment;
-use App\Models\Session;
+use App\Models\Section;
 use App\Models\Lecturer;
 use App\Models\Semester;
 use App\Models\CourseReg;
@@ -43,7 +43,7 @@ class AdminPagesController extends Controller
         $student = User::paginate(10);
         $faculty = Faculty::paginate(10);
         $department = Department::paginate(10);
-        $session = Session::paginate(10);
+        $section = Section::paginate(10);
         $level = Level::paginate(10);
         $course = Course::paginate(10);
 
@@ -52,7 +52,7 @@ class AdminPagesController extends Controller
 
         
 
-        return view('lecturer/admin/dashboard', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'course'));
+        return view('lecturer/admin/dashboard', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'course'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -69,7 +69,7 @@ class AdminPagesController extends Controller
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $notificationn = ClearedClearance::get();
@@ -79,7 +79,7 @@ class AdminPagesController extends Controller
 
         
 
-        return view('lecturer/admin/add_admin', compact('admin', 'permissionn', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/add_admin', compact('admin', 'permissionn', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -99,7 +99,7 @@ public function edit_admin(Admin $admin) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $role = Role::paginate(10);
@@ -108,7 +108,7 @@ public function edit_admin(Admin $admin) {
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/edit_admin', compact('admin', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/edit_admin', compact('admin', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -135,7 +135,7 @@ public function add_role(Admin $admin) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $role = Role::paginate(10);
@@ -144,7 +144,7 @@ public function add_role(Admin $admin) {
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/add_role', compact('role', 'permission', 'admin', 'adminss', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/add_role', compact('role', 'permission', 'admin', 'adminss', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -164,7 +164,7 @@ public function edit_role(Admin $admin, Request $request, Role $roles, Permissio
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $role = Role::paginate(10);
@@ -174,7 +174,7 @@ public function edit_role(Admin $admin, Request $request, Role $roles, Permissio
     $notification = ClearedClearance::latest()->paginate(5);
 
 
-    return view('lecturer/admin/edit_role', compact('roles', 'role', 'permission', 'permissions', 'admin', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/edit_role', compact('roles', 'role', 'permission', 'permissions', 'admin', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -199,7 +199,7 @@ public function add_permission(Admin $admin) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $permission = Permission::paginate(10);
@@ -208,7 +208,7 @@ public function add_permission(Admin $admin) {
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/add_role', compact('permission', 'role', 'admin', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/add_role', compact('permission', 'role', 'admin', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -227,7 +227,7 @@ public function edit_permission(Admin $admin, Request $request, Permission $perm
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $permission = Permission::paginate(10);
@@ -236,7 +236,7 @@ public function edit_permission(Admin $admin, Request $request, Permission $perm
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/edit_permission', compact('permissions', 'permission', 'role', 'admin', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/edit_permission', compact('permissions', 'permission', 'role', 'admin', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -257,7 +257,7 @@ public function admin_role_permission(Admin $admin) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $role = Role::paginate(10);
@@ -267,7 +267,7 @@ public function admin_role_permission(Admin $admin) {
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/admin_role_permission', compact('role', 'permission', 'arp', 'admin', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/admin_role_permission', compact('role', 'permission', 'arp', 'admin', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 
 
 } else {
@@ -291,7 +291,7 @@ public function edit_admin_role_permission(Admin $admin, RoleHasPermission $perm
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $role = Role::paginate(10);
@@ -301,7 +301,7 @@ public function edit_admin_role_permission(Admin $admin, RoleHasPermission $perm
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/edit_admin_role_permission', compact('role', 'permission', 'permissions','name', 'arp', 'admin', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/edit_admin_role_permission', compact('role', 'permission', 'permissions','name', 'arp', 'admin', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 
 
 
@@ -327,13 +327,13 @@ public function edit_admin_role_permission(Admin $admin, RoleHasPermission $perm
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/add_lecturer', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/add_lecturer', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -350,13 +350,13 @@ public function change_lecturer_details(Admin $admin, Lecturer $lecturers) {
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/change_lecturer_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'lecturers', 'student', 'users', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/change_lecturer_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'lecturers', 'student', 'users', 'faculty', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -376,14 +376,14 @@ public function change_lecturer_details(Admin $admin, Lecturer $lecturers) {
         $student = User::paginate(10);
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
 
-        return view('lecturer/admin/add_student', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/add_student', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -400,13 +400,13 @@ public function change_student_details(Admin $admin, User $user) {
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/change_student_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/change_student_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -423,7 +423,7 @@ public function add_course(Admin $admin) {
     $student = User::paginate(10);
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
     $course = Course::paginate(10);
     $courses = Course::paginate(10);
@@ -432,7 +432,7 @@ public function add_course(Admin $admin) {
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/add_course', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'courses', 'course', 'semester'));
+    return view('lecturer/admin/add_course', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'courses', 'course', 'semester'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -448,7 +448,7 @@ public function change_course_details(Admin $admin, Course $coursess) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
     $course = Course::paginate(10);
     $semester = Semester::get();
@@ -456,7 +456,7 @@ public function change_course_details(Admin $admin, Course $coursess) {
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/change_course_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'course', 'coursess', 'semester'));
+    return view('lecturer/admin/change_course_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'course', 'coursess', 'semester'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -475,13 +475,13 @@ public function change_course_details(Admin $admin, Course $coursess) {
         $student = User::paginate();
         $faculty = Faculty::paginate(10);
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
         
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-            return view('lecturer/admin/add_faculty', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+            return view('lecturer/admin/add_faculty', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
             
 
     } else {
@@ -499,13 +499,13 @@ public function change_faculty_details(Admin $admin, Faculty $faculties) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
     
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/change_faculty_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'faculties', 'department', 'session', 'level'));
+        return view('lecturer/admin/change_faculty_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'faculties', 'department', 'section', 'level'));
         
 
 } else {
@@ -523,13 +523,13 @@ public function change_faculty_details(Admin $admin, Faculty $faculties) {
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate(10);
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/add_department', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/add_department', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -545,13 +545,13 @@ public function change_department_details(Admin $admin, Department $departments)
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/change_department_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'departments', 'session', 'level'));
+    return view('lecturer/admin/change_department_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'departments', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -559,7 +559,7 @@ public function change_department_details(Admin $admin, Department $departments)
 }
 
 
-    public function add_session(Admin $admin) {
+    public function add_section(Admin $admin) {
 
         if (Auth::guard('admin')->check()) {
 
@@ -567,13 +567,13 @@ public function change_department_details(Admin $admin, Department $departments)
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate(10);
+        $section = Section::paginate(10);
         $level = Level::paginate();
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/add_session', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/add_section', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -581,7 +581,7 @@ public function change_department_details(Admin $admin, Department $departments)
 }
 
 
-public function change_session_details(Admin $admin, Session $sessions) {
+public function change_section_details(Admin $admin, Section $sections) {
 
     if (Auth::guard('admin')->check()) {
 
@@ -589,13 +589,13 @@ public function change_session_details(Admin $admin, Session $sessions) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/change_session_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'sessions', 'level'));
+    return view('lecturer/admin/change_section_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'sections', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -611,13 +611,13 @@ public function change_session_details(Admin $admin, Session $sessions) {
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate(10);
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/add_level', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/add_level', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -634,13 +634,13 @@ public function change_level_details(Admin $admin, Level $levels) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/change_level_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'levels'));
+    return view('lecturer/admin/change_level_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'levels'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -657,14 +657,14 @@ public function add_semester(Admin $admin) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate(10);
     $semester = Semester::paginate(10);
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/add_semester', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'semester'));
+    return view('lecturer/admin/add_semester', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'semester'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -681,14 +681,14 @@ public function change_semester_details(Admin $admin, Semester $semesters) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
     $semester = Semester::paginate(10);
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/change_semester_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'semester', 'semesters'));
+    return view('lecturer/admin/change_semester_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'semester', 'semesters'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -706,7 +706,7 @@ public function change_semester_details(Admin $admin, Semester $semesters) {
         $student = User::paginate(10);
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
         $course = Course::paginate(10);
         $courses = Course::paginate(10);
@@ -716,7 +716,7 @@ public function change_semester_details(Admin $admin, Semester $semesters) {
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/add_payment', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'courses', 'course', 'semester', 'payment'));
+        return view('lecturer/admin/add_payment', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'courses', 'course', 'semester', 'payment'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -733,7 +733,7 @@ public function change_semester_details(Admin $admin, Semester $semesters) {
         $student = User::paginate(10);
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
         $course = Course::paginate(10);
         $courses = Course::paginate(10);
@@ -743,7 +743,7 @@ public function change_semester_details(Admin $admin, Semester $semesters) {
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/change_payment_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'courses', 'course', 'semester', 'payment', 'payments'));
+        return view('lecturer/admin/change_payment_details', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'courses', 'course', 'semester', 'payment', 'payments'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -760,14 +760,14 @@ public function change_semester_details(Admin $admin, Semester $semesters) {
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
         $studentsss = ClearedClearance::latest()->paginate(50);
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/clearance_form', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'studentsss', 'students'));
+        return view('lecturer/admin/clearance_form', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'studentsss', 'students'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -782,14 +782,14 @@ public function change_semester_details(Admin $admin, Semester $semesters) {
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
         $studentsss = ClearedClearance::latest()->paginate(50);
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/clearance', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'studentsss'));
+        return view('lecturer/admin/clearance', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'studentsss'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -804,13 +804,13 @@ public function change_semester_details(Admin $admin, Semester $semesters) {
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/settings_a', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/settings_a', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'seection', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -826,13 +826,13 @@ public function change_semester_details(Admin $admin, Semester $semesters) {
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/change_picture', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/change_picture', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -847,13 +847,13 @@ public function change_semester_details(Admin $admin, Semester $semesters) {
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/settings_a', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/settings_a', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -869,13 +869,13 @@ public function change_password(Admin $admin) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/change_password', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/change_password', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -893,13 +893,13 @@ public function calender(Admin $admin) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/calender', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/calender', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }

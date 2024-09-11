@@ -3,7 +3,10 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="UTF-8">
+ 
+  
+    
+ <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Uniabuja integrated portal">
   <title>Dashboard || Uniabuja - Portal</title>
@@ -18,16 +21,16 @@
   
   <script src="{{asset('assets/js/store.js')}}"></script>
 
-  <!-- scripts -->
-  <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+ <!-- scripts -->
+<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
   <script src="{{asset('assets/js/rt-plugins.js')}}"></script>
-  <script src="{{asset('assets/js/app.js')}}"></script>
+  <script src="{{asset('assets/js/app.js')}}"></script> 
 
   <script>
     var exitTime = {!! json_encode($countDownTime->coursereg_timer) !!};
   </script>
 
-  <script src="{{asset('assets/js/script.js')}}"></script>
+  <script src="{{asset('assets/js/script.js')}}"></script> 
 </head>
 
 
@@ -76,6 +79,7 @@
     <div class="sidebar-wrapper group w-0 hidden xl:w-[248px] xl:block">
       <div id="bodyOverlay" class="w-screen h-screen fixed top-0 bg-slate-900 bg-opacity-50 backdrop-blur-sm z-10 hidden"></div>
       <div class="logo-segment">
+          
         <a class="flex items-center" href="{{route('login.get')}}">
           <img src="{{asset('assets/images/logo/banner (1).png')}}" class="black_logo" alt="logo">
           <img src="{{asset('assets/images/logo/banner (1).png')}}" class="white_logo" alt="logo">
@@ -93,8 +97,10 @@
       <div id="nav_shadow" class="nav_shadow h-[60px] absolute top-[80px] nav-shadow z-[1] w-full transition-all duration-200 pointer-events-none
       opacity-0"></div>
       <div class="sidebar-menus bg-white dark:bg-slate-800 py-2 px-4 h-[calc(100%-80px)] z-50" id="sidebar_menus">
+          
         <ul class="sidebar-menu">
           <li class="sidebar-menu-title">MENU</li>
+          
           <li class="">
             <a href="{{route('dashboard')}}" class="navItem">
               <span class="flex items-center">
@@ -108,35 +114,39 @@
           <li class="">
             <a href="{{route('payment_section.get')}}" class="navItem">
               <span class="flex items-center">
-            <iconify-icon class=" nav-icon" icon="heroicons-outline:calendar"></iconify-icon>
+            <iconify-icon class=" nav-icon" icon="heroicons-outline:view-boards"></iconify-icon>
             <span>Payment Section</span>
               </span>
             </a>
           </li>
+          
           <li class="">
             <a href="{{route('add_course_reg.get')}}" class="navItem">
               <span class="flex items-center">
-            <iconify-icon class=" nav-icon" icon="heroicons-outline:calendar"></iconify-icon>
+            <iconify-icon class=" nav-icon" icon="heroicons-outline:view-boards"></iconify-icon>
             <span>Course Registration</span>
               </span>
             </a>
           </li>
+          
           <li class="">
             <a href="{{route('add_course_reg.get', '#registered_courses')}}" class="navItem">
               <span class="flex items-center">
-            <iconify-icon class=" nav-icon" icon="heroicons-outline:calendar"></iconify-icon>
+            <iconify-icon class=" nav-icon" icon="heroicons-outline:view-boards"></iconify-icon>
             <span>Add & Drop</span>
               </span>
             </a>
           </li>
+          
           <li class="">
             <a href="javascript:void(0)" class="navItem">
               <span class="flex items-center">
-            <iconify-icon class=" nav-icon" icon="heroicons-outline:calendar"></iconify-icon>
+            <iconify-icon class=" nav-icon" icon="heroicons-outline:view-boards"></iconify-icon>
             <span>Clearance Form</span>
               </span>
               <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
             </a>
+            
             <ul class="sidebar-submenu">
               <li>
                 <a href="{{route('clearance_form.get')}}">Clearance Form</a>
@@ -146,6 +156,7 @@
               </li>
             </ul>
           </li>
+          
           <li class="">
             <a href="{{route('calender.get')}}" class="navItem">
               <span class="flex items-center">
@@ -154,6 +165,22 @@
               </span>
             </a>
           </li>
+          
+          
+          <li class="">
+              
+            <form action="{{'/logout'}}" method="POST">
+                          @csrf
+                        <a class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white font-inter text-sm text-slate-600
+                        dark:text-white font-normal font-Inter font-weight:500">
+                          <iconify-icon icon="heroicons-outline:login" class="relative top-[2px] text-lg ltr:mr-1 rtl:ml-1"></iconify-icon>
+                          <button class="font-Inter">Logout</button>
+                        </a>
+                      </form>
+            
+          </li>
+          
+          
 
         </ul>
 
@@ -614,6 +641,8 @@
 <!-- END: Search Modal -->
 
 
+
+
 @yield('dashboard')
 @yield('change_picture')
 @yield('check_course_reg')
@@ -707,7 +736,16 @@
 
 
     <script src="{{url('https://js.paystack.co/v1/inline.js')}}"></script> 
-    <script src="{{asset('assets/js/payment.js')}}"></script>
+    <script src="{{asset('assets/js/payment.js')}}">
+        
+        
+        <!-- scripts -->
+  <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+  <script src="{{asset('assets/js/rt-plugins.js')}}"></script>
+  <script src="{{asset('assets/js/app.js')}}"></script>
+  
+  
+    </script>
     
 {{-- Footer --}}
   

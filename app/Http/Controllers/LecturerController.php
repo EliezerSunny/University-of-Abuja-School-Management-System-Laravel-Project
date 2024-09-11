@@ -173,7 +173,7 @@ class LecturerController extends Controller
             'department_id' => ['required'],
             'lecturer_id' => ['required'],
             // 'admin_id' => ['required'],
-            'session_id' => ['required'],
+            'section_id' => ['required'],
             'user_id' => ['required'],
             'student_clearance_id' => ['required'],
         ]);

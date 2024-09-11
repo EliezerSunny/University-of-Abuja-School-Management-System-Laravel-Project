@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Level;
 use App\Models\Result;
 use App\Models\Faculty;
-use App\Models\Session;
+use App\Models\Section;
 use App\Models\Lecturer;
 use App\Models\Department;
 use Illuminate\Support\Str;
@@ -62,12 +62,12 @@ class LecturerPagesController extends Controller
         // $level700 = User::where('level', '=', 7)->latest()->get();
         $faculty = Faculty::paginate(10);
         $department = Department::paginate(10);
-        $session = Session::paginate(10);
+        $section = Section::paginate(10);
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/dashboard', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session'));
+        return view('lecturer/dashboard', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -96,12 +96,12 @@ public function all_lecturers() {
     // $level700 = User::where('level', '=', 7)->latest()->get();
     $faculty = Faculty::paginate(10);
     $department = Department::paginate(10);
-    $session = Session::paginate(10);
+    $section = Section::paginate(10);
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/all_lecturers', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session'));
+    return view('lecturer/all_lecturers', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -130,12 +130,12 @@ public function all_students() {
     // $level700 = User::where('level', '=', 7)->latest()->get();
     $faculty = Faculty::paginate(10);
     $department = Department::paginate(10);
-    $session = Session::paginate(10);
+    $section = Section::paginate(10);
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/all_students', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session'));
+    return view('lecturer/all_students', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -165,7 +165,7 @@ public function get_students(Request $request)
     // $level700 = User::where('level', '=', 7)->latest()->get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
 
@@ -181,7 +181,7 @@ public function get_students(Request $request)
 
 
 
-        return view('/lecturer/get_students', compact('lecturer', 'tokensss', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session', 'level'));
+        return view('/lecturer/get_students', compact('lecturer', 'tokensss', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -213,7 +213,7 @@ public function get_students_result(Request $request)
     // $level700 = User::where('level', '=', 7)->latest()->get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
             $notificationn = ClearedClearance::get();
@@ -223,15 +223,15 @@ public function get_students_result(Request $request)
 
         $faculty_idd = $request->input('faculty_id');
         $department_idd = $request->input('department_id');
-        $session_idd = $request->input('session_id');
+        $section_idd = $request->input('section_id');
         $level_idd = $request->input('level_id');
 
-    if ($faculty_idd == NULL || $department_idd == NULL || $session_idd == NULL || $level_idd == NULL) {
+    if ($faculty_idd == NULL || $department_idd == NULL || $section_idd == NULL || $level_idd == NULL) {
         return back()->with('error', 'Input can\'t be empty');
     }
 
-    $studentss = User::where('faculty_id', '=', Auth::guard('lecturer')->user()->faculty_id)->where('department_id', '=', Auth::guard('lecturer')->user()->department_id)->where('session_id', '=', $session_idd)->where('level_id', '=', $level_idd)->get();
-    $studentsss = User::where('faculty_id', '=', Auth::guard('lecturer')->user()->faculty_id)->where('department_id', '=', Auth::guard('lecturer')->user()->department_id)->where('session_id', '=', $session_idd)->where('level_id', '=', $level_idd)->paginate(20);
+    $studentss = User::where('faculty_id', '=', Auth::guard('lecturer')->user()->faculty_id)->where('department_id', '=', Auth::guard('lecturer')->user()->department_id)->where('section_id', '=', $section_idd)->where('level_id', '=', $level_idd)->get();
+    $studentsss = User::where('faculty_id', '=', Auth::guard('lecturer')->user()->faculty_id)->where('department_id', '=', Auth::guard('lecturer')->user()->department_id)->where('section_id', '=', $section_idd)->where('level_id', '=', $level_idd)->paginate(20);
 
     for ($i=0; $i < 20; $i++) { 
         $tokenss = Str::random(100);
@@ -240,7 +240,7 @@ public function get_students_result(Request $request)
 
     $tokensss = base64_encode($tokenss);
 
-        return view('/lecturer/get_students_result', compact('lecturer', 'studentss', 'studentsss', 'tokensss', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session', 'level'));
+        return view('/lecturer/get_students_result', compact('lecturer', 'studentss', 'studentsss', 'tokensss', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section', 'level'));
 
     } else {
         return back()->with('error', 'Unauthorized access!');
@@ -273,7 +273,7 @@ public function check_result(Request $request, Result $results,User $id,$name)
     // $level700 = User::where('level', '=', 7)->latest()->get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
             $notificationn = ClearedClearance::get();
@@ -281,18 +281,18 @@ public function check_result(Request $request, Result $results,User $id,$name)
 
 
 
-        $fscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->get();
-        $sscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->get();
+        $fscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->get();
+        $sscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->get();
     
         
-    $ffscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->sum('weighted_grade_point');
-    $ssscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->sum('weighted_grade_point');
+    $ffscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->sum('weighted_grade_point');
+    $ssscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->sum('weighted_grade_point');
 
-    $fcourse_unit = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->with('course_regs', 'courses')->sum('course_unit');
-    $scourse_unit = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->with(['course_regs', 'courses'])->sum('course_unit');
+    $fcourse_unit = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->with('course_regs', 'courses')->sum('course_unit');
+    $scourse_unit = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->with(['course_regs', 'courses'])->sum('course_unit');
 
 
-        return view('/lecturer/check_result', compact( 'fscourse_reg', 'sscourse_reg', 'ffscourse_reg', 'ssscourse_reg', 'fcourse_unit', 'scourse_unit', 'lecturer', 'studentss', 'id', 'name', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session', 'level'));
+        return view('/lecturer/check_result', compact( 'fscourse_reg', 'sscourse_reg', 'ffscourse_reg', 'ssscourse_reg', 'fcourse_unit', 'scourse_unit', 'lecturer', 'studentss', 'id', 'name', 'notificationn', 'notification', 'student', 'lecturerss', 'lecturersf', 'departmentf', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section', 'level'));
 
     } else {
         return back()->with('error', 'Unauthorized access!');
@@ -325,13 +325,13 @@ public function check_result(Request $request, Result $results,User $id,$name)
             // $level700 = User::where('level', '=', 7)->latest()->get();
             $faculty = Faculty::paginate();
             $department = Department::paginate();
-            $session = Session::paginate();
+            $section = Section::paginate();
             $studentssss = ClearedClearance::where('department_id', '=', $lecturers)->latest()->paginate(50);
     
             $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-            return view('lecturer/clearance_form', compact('lecturer', 'notificationn', 'notification', 'student', 'students', 'lecturerss', 'studentss', 'studentsss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session', 'studentssss'));
+            return view('lecturer/clearance_form', compact('lecturer', 'notificationn', 'notification', 'student', 'students', 'lecturerss', 'studentss', 'studentsss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section', 'studentssss'));
         } else {
             return back()->with('error', 'Unauthorized access!');
         }
@@ -357,12 +357,12 @@ public function check_result(Request $request, Result $results,User $id,$name)
             // $level700 = User::where('level', '=', 7)->latest()->get();
             $faculty = Faculty::paginate();
             $department = Department::paginate();
-            $session = Session::paginate();
+            $section = Section::paginate();
 
             $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
     
-            return view('lecturer/clearance', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'studentss', 'studentsss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session'));
+            return view('lecturer/clearance', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'studentss', 'studentsss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section'));
         } else {
             return back()->with('error', 'Unauthorized access!');
         }
@@ -387,12 +387,12 @@ public function check_result(Request $request, Result $results,User $id,$name)
         // $level700 = User::where('level', '=', 7)->latest()->get();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/settings_l', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session'));
+        return view('lecturer/settings_l', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -419,12 +419,12 @@ public function check_result(Request $request, Result $results,User $id,$name)
         // $level700 = User::where('level', '=', 7)->latest()->get();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/change_picture', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session'));
+        return view('lecturer/change_picture', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -450,12 +450,12 @@ public function check_result(Request $request, Result $results,User $id,$name)
         // $level700 = User::where('level', '=', 7)->latest()->get();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/change_password', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session'));
+        return view('lecturer/change_password', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -483,12 +483,12 @@ public function calender() {
     // $level700 = User::where('level', '=', 7)->latest()->get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
 
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/calender', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'session'));
+    return view('lecturer/calender', compact('lecturer', 'notificationn', 'notification', 'student', 'lecturerss', 'studentss', 'level100', 'level200', 'level300', 'level400', 'faculty', 'department', 'section'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }

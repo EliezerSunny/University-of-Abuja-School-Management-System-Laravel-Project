@@ -92,7 +92,7 @@
                                             </th>
   
                                             <th scope="col" class=" table-th ">
-                                              Session
+                                              Section
                                             </th>
   
                                             <th scope="col" class=" table-th ">
@@ -139,12 +139,12 @@
                                                 {{$student->faculty->faculty_name}}
                                             </td>
                                             <td class="table-td ">{{$student->department->department_name}}</td>
-                                            <td class="table-td ">{{$student->session->session}}</td>
+                                            <td class="table-td ">{{$student->section->section}}</td>
                                             <td class="table-td ">
                                               <a href="/lecturer/admin/edit_result/{{$student->id}}&{{$student->name}}">View Courses</a>
                                             </td>
-                                            <td class="table-td "><?php echo time_elapsed_string($student->created_at); ?></td>
-                                            <td class="table-td "><?php echo time_elapsed_string($student->updated_at); ?></td>
+                                            <td class="table-td ">{{$student->created_at->diffForHumans()}}</td>
+                                            <td class="table-td ">{{$student->updated_at->diffForHumans()}}</td>
                                             <td class="table-td ">
             
                                               <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

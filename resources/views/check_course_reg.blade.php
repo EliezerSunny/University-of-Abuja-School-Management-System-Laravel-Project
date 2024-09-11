@@ -100,7 +100,7 @@
                                                 </th>
       
                                                 <th scope="col" class=" table-th ">
-                                                  Session
+                                                  Section
                                                 </th>
       
                                                 <th scope="col" class=" table-th ">
@@ -147,7 +147,7 @@
                                                 <td class="table-td ">{{$courses->department->department_name}}</td>
                                                 <td class="table-td ">{{$courses->level->level}}</td>
                                                 <td class="table-td ">{{$courses->semester->semester}}</td>
-                                                <td class="table-td ">{{$courses->session->session}}</td>
+                                                <td class="table-td ">{{$courses->section->section}}</td>
                                                 <td class="table-td "><?php echo time_elapsed_string($courses->created_at); ?></td>
                                                 <td class="table-td ">
                 
@@ -277,7 +277,7 @@
                                                 </th>
       
                                                 <th scope="col" class=" table-th ">
-                                                  Session
+                                                  Section
                                                 </th>
       
                                                 <th scope="col" class=" table-th ">
@@ -323,7 +323,7 @@
                                                 <td class="table-td ">{{$courses->department->department_name}}</td>
                                                 <td class="table-td ">{{$courses->level->level}}</td>
                                                 <td class="table-td ">{{$courses->semester->semester}}</td>
-                                                <td class="table-td ">{{$courses->session->session}}</td>
+                                                <td class="table-td ">{{$courses->section->section}}</td>
                                                 <td class="table-td "><?php echo time_elapsed_string($courses->created_at); ?></td>
                                                 <td class="table-td ">
                 

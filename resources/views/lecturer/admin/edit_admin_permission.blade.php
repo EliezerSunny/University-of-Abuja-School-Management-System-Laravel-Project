@@ -152,7 +152,7 @@
                                           </th>
 
                                           <th scope="col" class=" table-th ">
-                                            Session
+                                            Section
                                           </th>
 
                                           <th scope="col" class=" table-th ">
@@ -204,7 +204,7 @@
                                           <td class="table-td ">{{$admin->department->department_name}}</td>
                                           <td class="table-td ">
                                             <div>
-                                              {{$admin->session->session}}
+                                              {{$admin->section->section}}
                                             </div>
                                           </td>
                                           <td class="table-td ">{{$admin->school_email}}</td>
@@ -214,7 +214,7 @@
                                             @else
                                             <td class="table-td ">{{$admin->getPermissionNames()}}</td>
                                             @endif
-                                          <td class="table-td "><?php echo time_elapsed_string($admin->created_at); ?></td>
+                                          <td class="table-td ">{{$admin->created_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

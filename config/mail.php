@@ -100,7 +100,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'adetunjieliazer@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Eliezer Sunny'),
+        'name' => env('MAIL_FROM_NAME', 'University Of Abuja'),
     ],
 
     /*

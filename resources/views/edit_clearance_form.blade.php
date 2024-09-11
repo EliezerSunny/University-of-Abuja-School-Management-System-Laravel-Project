@@ -70,9 +70,9 @@
                                 </div>
 
                                 <div class="input-area" hidden>
-                                  <label for="session_id" class="form-label">Session:</label>
+                                  <label for="session_id" class="form-label">Section:</label>
                                   <div class="relative">
-                                    <input id="session_id" type="text" name="session_id" class="form-control" readonly value="{{Auth::guard('web')->user()->session->id}}" placeholder="Session" required="required">
+                                    <input id="session_id" type="text" name="session_id" class="form-control" readonly value="{{Auth::guard('web')->user()->section->id}}" placeholder="Session" required="required">
                                   </div>
                                 </div>
 
@@ -126,9 +126,9 @@
                                     </div>
 
                                     <div class="input-area">
-                                        <label for="session" class="form-label">Session:</label>
+                                        <label for="session" class="form-label">Section:</label>
                                         <div class="relative">
-                                          <input id="session" type="text" name="session" class="form-control" value="{{Auth::guard('web')->user()->session->session}}" readonly placeholder="Session" required="required">
+                                          <input id="session" type="text" name="session" class="form-control" value="{{Auth::guard('web')->user()->section->section}}" readonly placeholder="Session" required="required">
                                         </div>
                                       </div>
 
@@ -223,7 +223,7 @@
                                             </th>
 
                                           <th scope="col" class=" table-th ">
-                                            Session
+                                            Section
                                           </th>
 
                                           <th scope="col" class=" table-th ">
@@ -279,10 +279,10 @@
                                           </td>
                                           <td class="table-td ">
                                             <div>
-                                              {{$students->user->session->session}}
+                                              {{$students->user->section->section}}
                                             </div>
                                           </td>
-                                          <td class="table-td "><?php echo time_elapsed_string($students->created_at) ?></td>
+                                          <td class="table-td ">{{$students->created_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

@@ -155,8 +155,8 @@
                                           <td class="table-td">{{$loop->iteration}}</td>
                                           <td class="table-td ">{{$roles->guard_name}}</td>
                                           <td class="table-td ">{{$roles->name}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($roles->created_at); ?></td>
-                                          <td class="table-td "><?php echo time_elapsed_string($roles->updated_at); ?></td>
+                                          <td class="table-td ">{{$roles->created_at->diffForHumans()}}</td>
+                                          <td class="table-td ">{{$roles->updated_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

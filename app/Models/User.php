@@ -29,7 +29,7 @@ class User extends Authenticatable
         'level_id',
         'faculty_id',
         'department_id',
-        'session_id',
+        'section_id',
         'password',
         'reset_password_token',
         'school_email',
@@ -87,9 +87,9 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
-    public function session()
+    public function section()
     {
-        return $this->belongsTo(Session::class);
+        return $this->belongsTo(Section::class);
     }
 
     public function level()

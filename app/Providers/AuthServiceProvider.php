@@ -40,18 +40,19 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
-        // Reset password
-        ResetPassword::createUrlUsing(function (User $user, string $token) {
-            return 'http://127.0.0.1:8000/reset_password?token=' . $token;
+        
+        // Reset password for User
+        ResetPassword::createUrlUsing(function ($notifiable, string $token) {
+            if ($notifiable instanceof User) {
+                return 'http://127.0.0.1:8000/reset_password?token=' . $token;
+            } elseif ($notifiable instanceof Lecturer) {
+                return 'http://127.0.0.1:8000/lecturer/reset_password?token=' . $token;
+            } elseif ($notifiable instanceof Admin) {
+                return 'http://127.0.0.1:8000/lecturer/admin/reset_password?token=' . $token;
+            }
         });
-
-        ResetPassword::createUrlUsing(function (Lecturer $lecturer, string $token) {
-            return 'http://127.0.0.1:8000/lecturer/reset_password?token=' . $token;
-        });
-
-        ResetPassword::createUrlUsing(function (Admin $admin, string $token) {
-            return 'http://127.0.0.1:8000/lecturer/admin/reset_password?token=' . $token;
-        });
+        
+        
 
 
         // $this->registerPolicies();

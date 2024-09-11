@@ -10,7 +10,7 @@ use App\Models\Course;
 use App\Models\Result;
 use App\Models\Faculty;
 use App\Models\Payment;
-use App\Models\Session;
+use App\Models\Section;
 use App\Models\Student;
 use App\Models\Lecturer;
 use App\Models\Semester;
@@ -27,6 +27,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
+use App\Mail\StudentRegistration;
+use App\Mail\LecturerRegistration;
+use App\Mail\AdminRegistration;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -46,7 +50,7 @@ class AdminController extends Controller
             'department_id' => ['required', 'min:1', 'max:200'],
             'phone_no' => ['required', 'min:11', 'max:15'],
             'password' => ['required', 'min:5', 'max:200'],
-            'session_id' => ['required', 'max:200'],
+            'section_id' => ['required', 'max:200'],
             'location' => ['required', 'min:1'],
             // 'picture' => ['required', 'mimes:jpg,png,jpeg,webp', 'max:1000000']
         ]);
@@ -74,6 +78,10 @@ class AdminController extends Controller
 
         $admin->givePermissionTo('dashboard');
 
+
+        Mail::to($admin['email'])->send(new AdminRegistration($admin));
+        
+        
         return redirect('/lecturer/admin/add_admin')->with('success', 'Admin Successfully Added!');
     }
 
@@ -100,7 +108,7 @@ public function edit_admin(Request $request, Admin $admin) {
             'faculty_id' => ['required', 'min:1', 'max:200'],
             'department_id' => ['required', 'min:1', 'max:200'],
             'phone_no' => ['required', 'min:11', 'max:15'],
-            'session_id' => ['required', 'max:200'],
+            'section_id' => ['required', 'max:200'],
             'location' => ['required', 'min:1'],
     ]);
 
@@ -117,7 +125,7 @@ public function edit_admin(Request $request, Admin $admin) {
     $incomingFields['faculty_id'] = strip_tags($incomingFields['faculty_id']);
     $incomingFields['department_id'] = strip_tags($incomingFields['department_id']);
     $incomingFields['phone_no'] = strip_tags($incomingFields['phone_no']);
-    $incomingFields['session_id'] = strip_tags($incomingFields['session_id']);
+    $incomingFields['section_id'] = strip_tags($incomingFields['section_id']);
     $incomingFields['location'] = strip_tags($incomingFields['location']);
 
     $admin->update($incomingFields);
@@ -470,7 +478,7 @@ return back()->with('error', 'Something went wrong. Try again!');
             'department_id' => ['required', 'min:1', 'max:200'],
             'phone_no' => ['required', 'min:10', 'max:15'],
             'password' => ['required', 'min:5', 'max:200'],
-            'session_id' => ['required', 'max:200'],
+            'section_id' => ['required', 'max:200'],
             'location' => ['required', 'min:5'],
             // 'picture' => ['required', 'mimes:jpg,png,jpeg,webp', 'max:1000000']
         ]);
@@ -489,6 +497,11 @@ return back()->with('error', 'Something went wrong. Try again!');
 
         $lecturer->givePermissionTo('dashboard_l');
 
+
+
+        Mail::to($lecturer['email'])->send(new LecturerRegistration($lecturer));
+        
+        
         return redirect('/lecturer/admin/add_lecturer')->with('success', 'Lecturer Successfully Added!');
     }
 
@@ -506,7 +519,7 @@ public function change_lecturer_details(Request $request, Lecturer $lecturers) {
         'school_email' => ['required', 'min:5', 'max:200'],
         'faculty_id' => ['required', 'min:1', 'max:200'],
         'department_id' => ['required', 'min:1', 'max:200'],
-        'session_id' => ['required', 'max:1', 'max:200'],
+        'section_id' => ['required', 'max:1', 'max:200'],
     ]);
 
     
@@ -515,7 +528,7 @@ public function change_lecturer_details(Request $request, Lecturer $lecturers) {
     $incomingFields['school_email'] = strip_tags($incomingFields['school_email']);
     $incomingFields['faculty_id'] = strip_tags($incomingFields['faculty_id']);
     $incomingFields['department_id'] = strip_tags($incomingFields['department_id']);
-    $incomingFields['session_id'] = strip_tags($incomingFields['session_id']);
+    $incomingFields['section_id'] = strip_tags($incomingFields['section_id']);
     
     $lecturers->update($incomingFields);
     
@@ -551,7 +564,7 @@ return back()->with('error', 'Something went wrong. Try again!');
 
         if (Auth::guard('admin')->check()) {
 
-            if (empty($request['name']) || empty($request['email']) || empty($request['school_email']) || empty($request['faculty_id']) || empty($request['department_id']) || empty($request['department_abbreviation']) || empty($request['password']) || empty($request['level_id']) || empty($request['session_id'])) {
+            if (empty($request['name']) || empty($request['email']) || empty($request['school_email']) || empty($request['faculty_id']) || empty($request['department_id']) || empty($request['department_abbreviation']) || empty($request['password']) || empty($request['level_id']) || empty($request['section_id'])) {
                 return back()->with('error', 'Input can\'t be empty!');
             }
 
@@ -566,7 +579,7 @@ return back()->with('error', 'Something went wrong. Try again!');
             'phone_no' => ['required', 'min:10', 'max:15'],
             'password' => ['required', 'min:5', 'max:200'],
             'level_id' => ['required', 'min:1', 'max:200'],
-            'session_id' => ['required', 'max:1', 'max:200'],
+            'section_id' => ['required', 'max:1', 'max:200'],
             'location' => ['required', 'min:1'],
         ]);
 
@@ -575,31 +588,31 @@ return back()->with('error', 'Something went wrong. Try again!');
         
         if ($requests['department_id'] == 1) {
             $code = $requests['department_abbreviation'];
-            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('session_id', $requests['session_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
+            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('section_id', $requests['section_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
         } elseif ($requests['department_id'] == 2) {
             $code = $requests['department_abbreviation'];
-            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('session_id', $requests['session_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
+            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('section_id', $requests['section_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
         } elseif ($requests['department_id'] == 3) {
             $code = $requests['department_abbreviation'];
-            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('session_id', $requests['session_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
+            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('section_id', $requests['section_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
         } elseif ($requests['department_id'] == 4) {
             $code = $requests['department_abbreviation'];
-            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('session_id', $requests['session_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
+            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('section_id', $requests['section_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
         } elseif ($requests['department_id'] == 5) {
             $code = $requests['department_abbreviation'];
-            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('session_id', $requests['session_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
+            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('section_id', $requests['section_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
         } elseif ($requests['department_id'] == 6) {
             $code = $requests['department_abbreviation'];
-            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('session_id', $requests['session_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
+            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('section_id', $requests['section_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
         } elseif ($requests['department_id'] == 7) {
             $code = $requests['department_abbreviation'];
-            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('session_id', $requests['session_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
+            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('section_id', $requests['section_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
         } elseif ($requests['department_id'] == 8) {
             $code = $requests['department_abbreviation'];
-            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('session_id', $requests['session_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
+            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('section_id', $requests['section_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
         } elseif ($requests['department_id'] == 9) {
             $code = $requests['department_abbreviation'];
-            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('session_id', $requests['session_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
+            $regno = str_pad(User::where('department_id', $requests['department_id'])->where('section_id', $requests['section_id'])->count() + 1, 3, '0', STR_PAD_LEFT);
         }
 
         
@@ -610,7 +623,7 @@ return back()->with('error', 'Something went wrong. Try again!');
         $dept_code = $requests['department_id'];
         $requests['unique_id'] = $code . '/' . $year . $facty_code . $dept_code . '/' . $regno;
 
-        $token = base64_encode($requests['name']) . base64_encode($requests['unique_id']) . base64_encode($requests['session_id']) . base64_encode($requests['faculty_id'])  . base64_encode($requests['department_id']);
+        $token = base64_encode($requests['name']) . base64_encode($requests['unique_id']) . base64_encode($requests['section_id']) . base64_encode($requests['faculty_id'])  . base64_encode($requests['department_id']);
         
         $requests['programme'] = $token;
 
@@ -624,6 +637,9 @@ return back()->with('error', 'Something went wrong. Try again!');
         // $permission = Permission::all();
 
         $user->givePermissionTo(['dashboard_s']);
+        
+        
+        Mail::to($user['email'])->send(new StudentRegistration($user));
 
 
         return redirect('/lecturer/admin/add_student')->with('success', 'Student Successfully Added!');
@@ -640,7 +656,7 @@ public function change_student_details(Request $request, User $user) {
 
     if (Auth::guard('admin')->check()) {
 
-        if (empty($request['name']) || empty($request['email']) || empty($request['school_email']) || empty($request['faculty_id']) || empty($request['department_id']) || empty($request['level_id']) || empty($request['session_id'])) {
+        if (empty($request['name']) || empty($request['email']) || empty($request['school_email']) || empty($request['faculty_id']) || empty($request['department_id']) || empty($request['level_id']) || empty($request['section_id'])) {
             return back()->with('error', 'Input can\'t be empty!');
         }
 
@@ -652,10 +668,10 @@ public function change_student_details(Request $request, User $user) {
         'faculty_id' => ['required', 'min:1', 'max:200'],
         'department_id' => ['required', 'min:1', 'max:200'],
         'level_id' => ['required', 'min:1', 'max:200'],
-        'session_id' => ['required', 'max:1', 'max:200'],
+        'section_id' => ['required', 'max:1', 'max:200'],
     ]);
 
-    $token = base64_encode($incomingFields['name']) . base64_encode($incomingFields['unique_id']) . base64_encode($incomingFields['session_id']) . base64_encode($incomingFields['faculty_id'])  . base64_encode($incomingFields['department_id']);
+    $token = base64_encode($incomingFields['name']) . base64_encode($incomingFields['unique_id']) . base64_encode($incomingFields['section_id']) . base64_encode($incomingFields['faculty_id'])  . base64_encode($incomingFields['department_id']);
         
     $incomingFields['programme'] = $token;
 
@@ -666,7 +682,7 @@ public function change_student_details(Request $request, User $user) {
     $incomingFields['faculty_id'] = strip_tags($incomingFields['faculty_id']);
     $incomingFields['department_id'] = strip_tags($incomingFields['department_id']);
     $incomingFields['level_id'] = strip_tags($incomingFields['level_id']);
-    $incomingFields['session_id'] = strip_tags($incomingFields['session_id']);
+    $incomingFields['section_id'] = strip_tags($incomingFields['section_id']);
     $incomingFields['programme'] = strip_tags($incomingFields['programme']);
     
     $user->update($incomingFields);
@@ -710,7 +726,7 @@ return back()->with('error', 'Something went wrong. Try again!');
             'department_id' => ['required'],
             'lecturer_id' => ['required'],
             'admin_id' => ['required'],
-            'session_id' => ['required'],
+            'section_id' => ['required'],
             'user_id' => ['required'],
             'student_clearance_id' => ['required'],
             'status' => ['required'],
@@ -720,7 +736,7 @@ return back()->with('error', 'Something went wrong. Try again!');
         ]);
 
 
-        $token = base64_encode($requests['student_name']) . base64_encode($requests['reg_no']) . base64_encode($requests['session_id']) . base64_encode($requests['faculty_id'])  . base64_encode($requests['department_id']);
+        $token = base64_encode($requests['student_name']) . base64_encode($requests['reg_no']) . base64_encode($requests['section_id']) . base64_encode($requests['faculty_id'])  . base64_encode($requests['department_id']);
 
 
         $requests['proof'] = $token;
@@ -915,25 +931,25 @@ return back()->with('error', 'Something went wrong. Try again!');
 
 
 
-    // Session Controller
-    public function add_session(Request $request) {
+    // Section Controller
+    public function add_section(Request $request) {
 
         if (Auth::guard('admin')->check()) {
 
-            if (empty($request['session'])) {
+            if (empty($request['section'])) {
                 return back()->with('error', 'Input can\'t be empty!');
             }
 
         $requests = $request->validate([
-            'session' => ['required', 'min:8', 'max:9', Rule::unique('sessions', 'session')],
+            'section' => ['required', 'min:8', 'max:9', Rule::unique('sections', 'section')],
         ]);
 
         $requests['unique_id'] = rand(time(), 1000000);
         $requests['status'] = 'Active';
 
-        $session = Session::create($requests);
+        $section = Section::create($requests);
 
-        return redirect('/lecturer/admin/add_session')->with('success', 'Session Successfully Added!');
+        return redirect('/lecturer/admin/add_section')->with('success', 'Section Successfully Added!');
     }
 
 }
@@ -941,28 +957,28 @@ return back()->with('error', 'Something went wrong. Try again!');
 
 
 
-public function change_session_details(Request $request, Session $sessions) {
+public function change_section_details(Request $request, Section $sections) {
 
     if (Auth::guard('admin')->check()) {
 
-        if (empty($request['session'])) {
+        if (empty($request['section'])) {
             return back()->with('error', 'Input can\'t be empty!');
         }
 
     $requests = $request->validate([
-        'session' => ['required', 'min:8', 'max:9'],
+        'section' => ['required', 'min:8', 'max:9'],
     ]);
 
-    $requests['session'] = strip_tags($requests['session']);
+    $requests['section'] = strip_tags($requests['section']);
 
-    $sessions->update($requests);
+    $sections->update($requests);
 
     return back()->with('success', 'Successfully Updated!');
 }
 
 }
 
-    // Session Controller End
+    // Section Controller End
 
 
 
@@ -1028,7 +1044,7 @@ public function change_level_details(Request $request, Level $levels) {
             }
 
         $requests = $request->validate([
-            'session_id' => ['required', 'min:1'],
+            'section_id' => ['required', 'min:1'],
             'semester' => ['required', 'min:1'],
         ]);
 
@@ -1053,11 +1069,11 @@ public function change_semester_details(Request $request, Semester $semesters) {
         }
 
     $requests = $request->validate([
-        'session_id' => ['required', 'min:1'],
+        'section_id' => ['required', 'min:1'],
         'semester' => ['required', 'min:1'],
     ]);
 
-    $requests['session_id'] = strip_tags($requests['session_id']);
+    $requests['section_id'] = strip_tags($requests['section_id']);
     $requests['semester'] = strip_tags($requests['semester']);
 
     $semesters->update($requests);
@@ -1081,7 +1097,7 @@ public function change_semester_details(Request $request, Semester $semesters) {
             'faculty_id' => ['required', 'min:1'],
             'department_id' => ['required', 'min:1'],
             'level_id' => ['required', 'min:1'],
-            'session_id' => ['required', 'min:1'],
+            'section_id' => ['required', 'min:1'],
             'semester_id' => ['required', 'min:1'],
             'course_code' => ['required', 'min:1', 'max:8'],
             'course_title' => ['required', 'min:1', 'max:250'],
@@ -1165,6 +1181,115 @@ return back()->with('error', 'Something went wrong. Try again!');
 
 
 
+/*
+
+// Results multiple data at once 
+
+
+    // Result Controller
+public function upload_result(Request $request) {
+
+    if (Auth::guard('admin')->check()) {
+    
+       // dd($request->all());
+
+        $request->validate([
+            'faculty_id' => ['required', 'array'],
+            'department_id' => ['required', 'array'],
+            'level_id' => ['required', 'array'],
+            'section_id' => ['required', 'array'],
+            'semester_id' => ['required', 'array'],
+            'course_reg_id' => ['required', 'array'],
+            'user_id' => ['required', 'array'],
+            'course_unit' => ['required', 'array'],
+            'final_score' => ['required', 'array', 'numeric', 'between:0,100'],
+        ]);
+        
+        $resultsToInsert = [];
+        $selectedCourseRegIds = $request->course_reg_id;
+      //  $selectedCourseUnits = $request->course_unit;
+        $selectedFinalScore = $request->final_score;
+        
+        foreach ($selectedCourseRegIds as $index => $courseRegId) {
+            $facultyId = $request->faculty_id[$courseRegId];
+            $departmentId = $request->department_id[$courseRegId];
+            $levelId = $request->level_id[$courseRegId];
+            $sectionId = $request->section_id[$courseRegId];
+            $semesterId = $request->semester_id[$courseRegId];
+            $userId = $request->user_id[$courseRegId];
+            $finalScore = $selectedFinalScore[$courseRegId];
+            $courseUnit = $request->course_unit[$courseRegId];
+
+            // Check if result already exists
+            $rcourse = Result::where('user_id', $userId)
+                             ->where('course_reg_id', $courseRegId)
+                             ->exists();
+
+            if ($rcourse) {
+                return back()->with('error', 'Result for course {$courseRegId} already uploaded for student {$userId}.');
+            }
+
+            // Grade calculation
+            if ($finalScore >= 70) {
+                $grade = 'A';
+                $grade_point = 5;
+            } elseif ($finalScore >= 60) {
+                $grade = 'B';
+                $grade_point = 4;
+            } elseif ($finalScore >= 50) {
+                $grade = 'C';
+                $grade_point = 3;
+            } elseif ($finalScore >= 45) {
+                $grade = 'D';
+                $grade_point = 2;
+            } elseif ($finalScore >= 40) {
+                $grade = 'E';
+                $grade_point = 1;
+            } else {
+                $grade = 'F';
+                $grade_point = 0;
+            }
+
+            $weighted_grade_point = $courseUnit * $grade_point;
+
+            // Prepare data for batch insert
+            $resultsToInsert[] = [
+                'user_id' => $userId,
+                'faculty_id' => $facultyId,
+                'department_id' => $departmentId,
+                'level_id' => $levelId,
+                'section_id' => $sectionId,
+                'semester_id' => $semesterId,
+                'course_reg_id' => $courseRegId,
+                'course_unit' => $courseUnit,
+                'final_score' => $finalScore,
+                'grade' => $grade,
+                'grade_point' => $grade_point,
+                'weighted_grade_point' => $weighted_grade_point,
+                'lecturer_id' => 1,
+                'unique_id' => rand(time(), 1000000),
+                'status' => 'Active',
+            ];
+        }
+        
+
+        // Batch insert results
+        Result::create($resultsToInsert);
+
+        return back()->with('success', 'Results Successfully uploaded!');
+    }
+
+}
+
+
+
+// Results multiple data at once end
+
+*/
+
+
+
+
 
     // Result Controller
     public function upload_result(Request $request) {
@@ -1176,13 +1301,15 @@ return back()->with('error', 'Something went wrong. Try again!');
             'faculty_id' => ['required', 'min:1'],
             'department_id' => ['required', 'min:1'],
             'level_id' => ['required', 'min:1'],
-            'session_id' => ['required', 'min:1'],
+            'section_id' => ['required', 'min:1'],
             'semester_id' => ['required', 'min:1'],
             'course_reg_id' => ['required', 'min:1'],
             'user_id' => ['required', 'min:1'],
             'course_unit' => ['required', 'min:1'],
             'final_score' => ['max:3'],
         ]);
+        
+       //  foreach ($requests as $key => $requestt) {
 
         $rcourse = Result::where('user_id', '=', $requests['user_id'])->where('course_reg_id', '=', $requests['course_reg_id'])->exists();
 
@@ -1228,7 +1355,7 @@ return back()->with('error', 'Something went wrong. Try again!');
         $requests['unique_id'] = rand(time(), 1000000);
         $requests['status'] = 'Active';
 
-        // foreach ($requests as $requestt) {
+        
 
             Result::create($requests);
         // }
@@ -1238,7 +1365,10 @@ return back()->with('error', 'Something went wrong. Try again!');
 
 }
 
+
 // Result End
+
+
 
 
 
@@ -1253,7 +1383,7 @@ public function edit_results(Request $request, Result $results) {
         // 'faculty_id' => ['required', 'min:1'],
         // 'department_id' => ['required', 'min:1'],
         // 'level_id' => ['required', 'min:1'],
-        // 'session_id' => ['required', 'min:1'],
+        // 'section_id' => ['required', 'min:1'],
         // 'semester_id' => ['required', 'min:1'],
         // 'course_reg_id' => ['required', 'min:1'],
         // 'user_id' => ['required', 'min:1'],
@@ -1303,7 +1433,7 @@ public function edit_results(Request $request, Result $results) {
         // $requests['faculty_id'] = strip_tags($requests['faculty_id']);
         // $requests['department_id'] = strip_tags($requests['department_id']);
         // $requests['level_id'] = strip_tags($requests['level_id']);
-        // $requests['session_id'] = strip_tags($requests['session_id']);
+        // $requests['section_id'] = strip_tags($requests['section_id']);
         // $requests['semester_id'] = strip_tags($requests['semester_id']);
         // $requests['course_reg_id'] = strip_tags($requests['course_reg_id']);
         // $requests['user_id'] = strip_tags($requests['user_id']);
@@ -1337,7 +1467,7 @@ public function edit_results(Request $request, Result $results) {
             'faculty_id' => ['required', 'min:1'],
             'department_id' => ['required', 'min:1'],
             'level_id' => ['required', 'min:1'],
-            'session_id' => ['required', 'min:1'],
+            'section_id' => ['required', 'min:1'],
             // 'semester_id' => ['required', 'min:1'],
             'currency' => ['required', 'min:1', 'max:5'],
             'amount' => ['required', 'min:1', 'max:250'],
@@ -1372,7 +1502,7 @@ public function change_payment_details(Request $request, Payment $payments) {
         'faculty_id' => ['required', 'min:1'],
             'department_id' => ['required', 'min:1'],
             'level_id' => ['required', 'min:1'],
-            'session_id' => ['required', 'min:1'],
+            'section_id' => ['required', 'min:1'],
             // 'semester_id' => ['required', 'min:1'],
             'currency' => ['required', 'min:1', 'max:5'],
             'amount' => ['required', 'min:1', 'max:250'],
@@ -1389,7 +1519,7 @@ public function change_payment_details(Request $request, Payment $payments) {
     $requests['faculty_id'] = strip_tags($requests['faculty_id']);
     $requests['department_id'] = strip_tags($requests['department_id']);
     $requests['level_id'] = strip_tags($requests['level_id']);
-    $requests['session_id'] = strip_tags($requests['session_id']);
+    $requests['section_id'] = strip_tags($requests['section_id']);
     // $requests['semester_id'] = strip_tags($requests['semester_id']);
     $requests['currency'] = strip_tags($requests['currency']);
     $requests['amount'] = strip_tags($requests['amount']);

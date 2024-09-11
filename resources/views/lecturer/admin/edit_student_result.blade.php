@@ -70,12 +70,12 @@
                                   </div>
 
                                   <div class="input-area">
-                                    <label for="session_id" class="form-label">Academic Session:</label>
-                                    <select name="session_id" id="sessionSelect" class="form-control w-full mt-2">
+                                    <label for="session_id" class="form-label">Academic Section:</label>
+                                    <select name="section_id" id="sectionSelect" class="form-control w-full mt-2">
                                       <option selected="Selected" disabled="disabled" value="none" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">Select an option</option>
                                       
-                                      @foreach ($session as $sessions)
-                                      <option value="{{$sessions->id}}" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">{{$sessions->session}}</option>
+                                      @foreach ($section as $sections)
+                                      <option value="{{$sections->id}}" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">{{$sections->section}}</option>
                                       @endforeach
                                       
                                     </select>
@@ -170,7 +170,7 @@
                                             </th>
   
                                             <th scope="col" class=" table-th ">
-                                              Session
+                                              Section
                                             </th>
   
                                             <th scope="col" class=" table-th ">
@@ -217,12 +217,12 @@
                                                 {{$student->faculty->faculty_name}}
                                             </td>
                                             <td class="table-td ">{{$student->department->department_name}}</td>
-                                            <td class="table-td ">{{$student->session->session}}</td>
+                                            <td class="table-td ">{{$student->section->section}}</td>
                                             <td class="table-td ">
                                               <a href="/lecturer/admin/edit_result/{{$student->id}}&{{$student->name}}">View Courses</a>
                                             </td>
-                                            <td class="table-td "><?php echo time_elapsed_string($student->created_at); ?></td>
-                                            <td class="table-td "><?php echo time_elapsed_string($student->updated_at); ?></td>
+                                            <td class="table-td ">{{$student->created_at->diffForHumans()}}</td>
+                                            <td class="table-td ">{{$student->updated_at->diffForHumans()}}</td>
                                             <td class="table-td ">
             
                                               <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

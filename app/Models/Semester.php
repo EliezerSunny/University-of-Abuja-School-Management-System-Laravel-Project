@@ -11,15 +11,15 @@ class Semester extends Model
 
 
     protected $fillable = [
-        'session_id',
+        'section_id',
         'unique_id',
         'semester',
         'status',
     ];
 
-    public function session()
+    public function section()
     {
-        return $this->belongsTo(Session::class);
+        return $this->belongsTo(Section::class);
     }
 
     public function admin()

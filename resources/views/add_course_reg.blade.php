@@ -207,24 +207,29 @@
 
                                                 {{-- <div class="checkbox-area secondary-checkbox mr-2 sm:mr-4 mt-2">
                                                     <label class="inline-flex items-center cursor-pointer">
-                                                      <input type="checkbox" class="hidden" name="checkbox" value="secondary" checked="checked">
+                                                      <!-- <input type="hidden" class="hidden" name="checkbox" value="secondary" checked="checked">  -->
                                                       <span class="h-4 w-4 border flex-none border-slate-100 dark:border-slate-800 rounded inline-flex ltr:mr-3 rtl:ml-3 relative transition-all duration-150 bg-slate-100 dark:bg-slate-900">
                                                                   <img src="assets/images/icon/ck-white.svg" alt="" class="h-[10px] w-[10px] block m-auto opacity-0"></span>
                                                       <span class="text-secondary-500 dark:text-slate-400 text-sm leading-6 capitalize">secondary</span>
                                                     </label>
                                                   </div> --}}
                                                   
-                                                <input id="course_id" type="checkbox" name="course_id" value="{{$courses->id}}" class="checkbox">
-                                                <input hidden checked="checked" id="faculty_id" type="checkbox" name="faculty_id" value="{{$courses->faculty_id}}" class="checkbox" required="required">
-                                                <input hidden checked="checked" id="department_id" type="checkbox" name="department_id" value="{{$courses->department_id}}" class="checkbox" required="required">
-                                                <input hidden checked="checked" id="level_id" type="checkbox" name="level_id" value="{{$courses->level_id}}" class="checkbox" required="required">
-                                                <input hidden checked="checked" id="session_id" type="checkbox" name="session_id" value="{{$courses->session_id}}" class="checkbox" required="required">
-                                                <input hidden checked="checked" id="semester_id" type="checkbox" name="semester_id" value="{{$courses->semester_id}}" class="checkbox" required="required">
+                                                <input id="course_id_{{$courses->id}}" type="checkbox" name="course_id[]" value="{{$courses->id}}" class="checkbox" onchange="toggleFields({{$courses->id}})">
+                                     
+                              
+                                                
+                                                <input  id="faculty_id_{{$courses->id}}" type="hidden" name="faculty_id[{{$courses->id}}]" value="{{$courses->faculty_id}}" disabled="disabled">
+                                                <input  id="department_id_{{$courses->id}}" type="hidden" name="department_id[{{$courses->id}}]" value="{{$courses->department_id}}" disabled="disabled" required="required">
+                                                <input  id="level_id_{{$courses->id}}" type="hidden" name="level_id[{{$courses->id}}]" value="{{$courses->level_id}}" disabled="disabled" required="required">
+                                                <input  id="section_id_{{$courses->id}}" type="hidden" name="section_id[{{$courses->id}}]" value="{{$courses->section_id}}" disabled="disabled" required="required">
+                                                <input  id="semester_id_{{$courses->id}}" type="hidden" name="semester_id[{{$courses->id}}]" value="{{$courses->semester_id}}" disabled="disabled" required="required">
+                                                
+                                                
                                                 
                                                 </td>
                                               <td class="table-td ">{{$courses->course_code}}</td>
                                               <td class="table-td ">{{$courses->course_title}}</td>
-                                              <td class="table-td "> <input type="hidden" name="course_unit" value="{{$courses->course_unit}}"> {{$courses->course_unit}}</td>
+                                              <td class="table-td "> <input type="hidden" id="course_unit_{{$courses->id}}" name="course_unit[{{$courses->id}}]" value="{{$courses->course_unit}}" disabled="disabled"> {{$courses->course_unit}}</td>
                                               <td class="table-td ">{{$courses->course_status}}</td>
                                             </tr>
               
@@ -233,6 +238,19 @@
                                           </tbody>
     
                                           @endforeach
+                                          <script>
+    function toggleFields(courseId) {
+        const isChecked = document.getElementById('course_id_' + courseId).checked;
+        
+        // Enable or disable related hidden fields based on checkbox status
+        document.getElementById('faculty_id_' + courseId).disabled = !isChecked;
+        document.getElementById('department_id_' + courseId).disabled = !isChecked;
+        document.getElementById('level_id_' + courseId).disabled = !isChecked;
+        document.getElementById('section_id_' + courseId).disabled = !isChecked;
+        document.getElementById('semester_id_' + courseId).disabled = !isChecked;
+        document.getElementById('course_unit_' + courseId).disabled = !isChecked;
+    }
+</script>
                                           @endif
 
     
@@ -334,23 +352,29 @@
 
                                                 {{-- <div class="checkbox-area secondary-checkbox mr-2 sm:mr-4 mt-2">
                                                     <label class="inline-flex items-center cursor-pointer">
-                                                      <input type="checkbox" class="hidden" name="checkbox" value="secondary" checked="checked">
+                                                      <!-- <input type="hidden" class="hidden" name="checkbox" value="secondary" checked="checked">  -->
                                                       <span class="h-4 w-4 border flex-none border-slate-100 dark:border-slate-800 rounded inline-flex ltr:mr-3 rtl:ml-3 relative transition-all duration-150 bg-slate-100 dark:bg-slate-900">
                                                                   <img src="assets/images/icon/ck-white.svg" alt="" class="h-[10px] w-[10px] block m-auto opacity-0"></span>
                                                       <span class="text-secondary-500 dark:text-slate-400 text-sm leading-6 capitalize">secondary</span>
                                                     </label>
                                                   </div> --}}
                                                   
-                                                <input id="course_id" type="checkbox" name="course_id" value="{{$courses->id}}" class="checkbox" required="required">
-                                                <input hidden checked="checked" id="faculty_id" type="checkbox" name="faculty_id" value="{{$courses->faculty_id}}" class="checkbox" required="required">
-                                                <input hidden checked="checked" id="department_id" type="checkbox" name="department_id" value="{{$courses->department_id}}" class="checkbox" required="required">
-                                                <input hidden checked="checked" id="level_id" type="checkbox" name="level_id" value="{{$courses->level_id}}" class="checkbox" required="required">
-                                                <input hidden checked="checked" id="session_id" type="checkbox" name="session_id" value="{{$courses->session_id}}" class="checkbox" required="required">
-                                                <input hidden checked="checked" id="semester_id" type="checkbox" name="semester_id" value="{{$courses->semester_id}}" class="checkbox" required="required">
+                                                <input id="course_id_{{$courses->id}}" type="checkbox" name="course_id[]" value="{{$courses->id}}" class="checkbox" onchange="toggleFields({{$courses->id}})">
+                                     
+                              
+                                                
+                                                <input  id="faculty_id_{{$courses->id}}" type="hidden" name="faculty_id[{{$courses->id}}]" value="{{$courses->faculty_id}}" disabled="disabled">
+                                                <input  id="department_id_{{$courses->id}}" type="hidden" name="department_id[{{$courses->id}}]" value="{{$courses->department_id}}" disabled="disabled" required="required">
+                                                <input  id="level_id_{{$courses->id}}" type="hidden" name="level_id[{{$courses->id}}]" value="{{$courses->level_id}}" disabled="disabled" required="required">
+                                                <input  id="section_id_{{$courses->id}}" type="hidden" name="section_id[{{$courses->id}}]" value="{{$courses->section_id}}" disabled="disabled" required="required">
+                                                <input  id="semester_id_{{$courses->id}}" type="hidden" name="semester_id[{{$courses->id}}]" value="{{$courses->semester_id}}" disabled="disabled" required="required">
+                                                
+                                                
+                                                
                                                 </td>
                                               <td class="table-td ">{{$courses->course_code}}</td>
                                               <td class="table-td ">{{$courses->course_title}}</td>
-                                              <td class="table-td "> <input type="hidden" name="course_unit" value="{{$courses->course_unit}}"> {{$courses->course_unit}}</td>
+                                              <td class="table-td "> <input type="hidden" id="course_unit_{{$courses->id}}" name="course_unit[{{$courses->id}}]" value="{{$courses->course_unit}}" disabled="disabled"> {{$courses->course_unit}}</td>
                                               <td class="table-td ">{{$courses->course_status}}</td>
                                             </tr>
               
@@ -359,6 +383,19 @@
                                           </tbody>
     
                                           @endforeach
+                                          <script>
+    function toggleFields(courseId) {
+        const isChecked = document.getElementById('course_id_' + courseId).checked;
+        
+        // Enable or disable related hidden fields based on checkbox status
+        document.getElementById('faculty_id_' + courseId).disabled = !isChecked;
+        document.getElementById('department_id_' + courseId).disabled = !isChecked;
+        document.getElementById('level_id_' + courseId).disabled = !isChecked;
+        document.getElementById('section_id_' + courseId).disabled = !isChecked;
+        document.getElementById('semester_id_' + courseId).disabled = !isChecked;
+        document.getElementById('course_unit_' + courseId).disabled = !isChecked;
+    }
+</script>
                                           @endif
     
                                         </table>
@@ -454,7 +491,7 @@
                                                 </th>
       
                                                 <th scope="col" class=" table-th ">
-                                                  Session
+                                                  Section
                                                 </th>
       
                                                 <th scope="col" class=" table-th ">
@@ -491,7 +528,7 @@
                                                 <td class="table-td">
                                                   <span class="text-sm text-slate-600 dark:text-slate-300 capitalize">{{$courses->course->course_title}}</span>
                                                 </td>
-                                                <td class="table-td ">{{$courses->course->course_unit}}</td>
+                                                <td class="table-td ">{{$courses->course_unit}}</td>
                                                 <td class="table-td ">{{$courses->course->course_status}}</td>
                                                 <td class="table-td ">
                                                   <div>
@@ -501,8 +538,8 @@
                                                 <td class="table-td ">{{$courses->department->department_name}}</td>
                                                 <td class="table-td ">{{$courses->level->level}}</td>
                                                 <td class="table-td ">{{$courses->semester->semester}}</td>
-                                                <td class="table-td ">{{$courses->session->session}}</td>
-                                                <td class="table-td "><?php echo time_elapsed_string($courses->created_at); ?></td>
+                                                <td class="table-td ">{{$courses->section->section}}</td>
+                                                <td class="table-td ">{{$courses->created_at->diffForHumans()}}</td>
                                                 <td class="table-td ">
                 
                                                   <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
@@ -631,7 +668,7 @@
                                                 </th>
       
                                                 <th scope="col" class=" table-th ">
-                                                  Session
+                                                  Section
                                                 </th>
       
                                                 <th scope="col" class=" table-th ">
@@ -677,8 +714,8 @@
                                                 <td class="table-td ">{{$courses->department->department_name}}</td>
                                                 <td class="table-td ">{{$courses->level->level}}</td>
                                                 <td class="table-td ">{{$courses->semester->semester}}</td>
-                                                <td class="table-td ">{{$courses->session->session}}</td>
-                                                <td class="table-td "><?php echo time_elapsed_string($courses->created_at); ?></td>
+                                                <td class="table-td ">{{$courses->section->secfion}}</td>
+                                                <td class="table-td ">{{$courses->created_at->diffForHumans()}}</td>
                                                 <td class="table-td ">
                 
                                                   <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
@@ -759,6 +796,7 @@
         <!-- END: Main_content -->
 
       </div>
+      
       
 
       @endsection

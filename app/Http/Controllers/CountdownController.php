@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Level;
 use App\Models\Faculty;
-use App\Models\Session;
+use App\Models\Section;
 use App\Models\Lecturer;
 use App\Models\Countdown;
 use App\Models\Department;
@@ -31,14 +31,14 @@ class CountdownController extends Controller
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate(10);
+        $section = Section::paginate(10);
         $level = Level::paginate();
         $countdown = Countdown::paginate(10);
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-        return view('lecturer/admin/upload_countdown', compact('admin', 'notificationn', 'notification', 'countdown', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/upload_countdown', compact('admin', 'notificationn', 'notification', 'countdown', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     }
 
 }
@@ -73,14 +73,14 @@ public function edit_countdown(Admin $admin, Countdown $countdown) {
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate(10);
+        $section = Section::paginate(10);
         $level = Level::paginate();
         $countdowns = Countdown::paginate(10);
 
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/edit_countdown', compact('admin', 'notificationn', 'notification', 'countdown', 'lecturer', 'student', 'faculty', 'department', 'session', 'countdowns', 'level'));
+    return view('lecturer/admin/edit_countdown', compact('admin', 'notificationn', 'notification', 'countdown', 'lecturer', 'student', 'faculty', 'department', 'section', 'countdowns', 'level'));
 }
 
 }

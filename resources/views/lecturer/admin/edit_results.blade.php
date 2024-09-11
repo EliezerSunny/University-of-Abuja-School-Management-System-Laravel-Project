@@ -132,7 +132,7 @@
                                             {{-- <td class="table-td " hidden><input type="hidden" name="faculty_id" value="{{$results->faculty->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="department_id" value="{{$results->department->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="level_id" value="{{$results->level->id}}"></td>
-                                            <td class="table-td " hidden><input type="hidden" name="session_id" value="{{$results->session->id}}"></td>
+                                            <td class="table-td " hidden><input type="hidden" name="section_id" value="{{$results->section->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="semester_id" value="{{$results->semester->id}}"></td>
                                             <td class="table-td "><input type="checkbox" name="course_reg_id" value="{{$results->id}}" checked></td>
                                             <td class="table-td " hidden><input type="hidden" name="user_id" value="{{$results->user->id}}"></td> --}}

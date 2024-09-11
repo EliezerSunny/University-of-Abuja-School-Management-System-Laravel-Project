@@ -105,7 +105,7 @@
                                             </th>
 
                                           <th scope="col" class=" table-th ">
-                                            Session
+                                            Section
                                           </th>
 
                                           <th scope="col" class=" table-th ">
@@ -170,10 +170,10 @@
                                           </td>
                                           <td class="table-td ">
                                             <div>
-                                              {{$students->user->session->session}}
+                                              {{$students->user->section->section}}
                                             </div>
                                           </td>
-                                          <td class="table-td "><?php echo time_elapsed_string($students->created_at) ?></td>
+                                          <td class="table-td ">{{$students->created_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             @if ($students->status === 'Unapprove')

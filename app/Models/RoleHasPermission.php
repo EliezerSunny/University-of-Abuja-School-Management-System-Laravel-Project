@@ -14,6 +14,21 @@ class RoleHasPermission extends Model
         'permission_id',
         'role_id',
     ];
+    
+    public function admin()
+    {
+        return $this->hasMany(Admin::class);
+    }
+    
+    public function permission()
+    {
+        return $this->belongsTo(Permission::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 
 
 }

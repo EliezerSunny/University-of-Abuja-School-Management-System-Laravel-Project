@@ -54,6 +54,13 @@
           <!-- BEGIN: Login Form -->
           <form class="space-y-4" action='{{route('forgot_password.post')}}' method="POST">
             @csrf
+            
+            <div class="fromGroup">
+              <label for="unique_id" class="block capitalize form-label">Matric. No.</label>
+              <div class="relative ">
+                <input type="text" id="unique_id" name="unique_id" class="form-control py-2" placeholder="Application No. / Reg No. / Matric No." required>
+              </div>
+            </div>
 
             <div class="fromGroup">
               <label class="block capitalize form-label">Email</label>
@@ -64,7 +71,7 @@
 
             <div class="flex justify-between">
 
-              <a class="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium" href="{{route('login')}}">Back</a>
+              <a class="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium" href="{{route('login.get')}}">Back</a>
             </div>
 
             <button class="btn btn-green block w-full text-center">Submit Email</button>

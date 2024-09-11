@@ -8,7 +8,7 @@ use App\Models\Level;
 use App\Models\Course;
 use App\Models\Result;
 use App\Models\Faculty;
-use App\Models\Session;
+use App\Models\Section;
 use App\Models\Lecturer;
 use App\Models\Semester;
 use App\Models\CourseReg;
@@ -31,7 +31,7 @@ public function search_student_result(Request $request, Admin $admin, User $user
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
@@ -42,7 +42,7 @@ public function search_student_result(Request $request, Admin $admin, User $user
 
     $results = User::where('name', 'LIKE', '%' . $query . '%')->orWhere('unique_id', 'LIKE', '%' . $query . '%')->paginate(15);
     
-    return view('lecturer/admin/search_student_result', compact('results', 'query', 'admin', 'notificationn', 'notification', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/search_student_result', compact('results', 'query', 'admin', 'notificationn', 'notification', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'section', 'level'));
 
 }
 
@@ -63,7 +63,7 @@ public function search_student_result(Request $request, Admin $admin, User $user
         $users = User::get();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $notificationn = ClearedClearance::get();
@@ -74,7 +74,7 @@ public function search_student_result(Request $request, Admin $admin, User $user
     
         $results = User::where('name', 'LIKE', '%' . $query . '%')->orWhere('unique_id', 'LIKE', '%' . $query . '%')->paginate(15);
         
-        return view('lecturer/admin/search_students_result', compact('results', 'query', 'admin','notificationn', 'notification', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/search_students_result', compact('results', 'query', 'admin','notificationn', 'notification', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'section', 'level'));
     
     }
     
@@ -96,7 +96,7 @@ public function search_student_result(Request $request, Admin $admin, User $user
             $students = User::paginate(10);
             $faculty = Faculty::paginate();
             $department = Department::paginate();
-            $session = Session::paginate();
+            $section = Section::paginate();
             $level = Level::paginate();
             $course = Course::paginate(10);
             $courses = Course::paginate(10);
@@ -117,7 +117,7 @@ public function search_student_result(Request $request, Admin $admin, User $user
 
 
 
-        return view('/lecturer/admin/get_students', compact('admin', 'tokensss', 'notificationn', 'notification', 'lecturer', 'students', 'faculty', 'department', 'session', 'level', 'course', 'courses', 'course_reg', 'semester', 'result'));
+        return view('/lecturer/admin/get_students', compact('admin', 'tokensss', 'notificationn', 'notification', 'lecturer', 'students', 'faculty', 'department', 'section', 'level', 'course', 'courses', 'course_reg', 'semester', 'result'));
 
     }
 
@@ -135,7 +135,7 @@ public function get_students_for_result(Request $request, Admin $admin, User $us
             $students = User::paginate(10);
             $faculty = Faculty::paginate();
             $department = Department::paginate();
-            $session = Session::paginate();
+            $section = Section::paginate();
             $level = Level::paginate();
             $course = Course::paginate(10);
             $courses = Course::paginate(10);
@@ -150,15 +150,15 @@ public function get_students_for_result(Request $request, Admin $admin, User $us
 
         $faculty_idd = $request->input('faculty_id');
         $department_idd = $request->input('department_id');
-        $session_idd = $request->input('session_id');
+        $section_idd = $request->input('section_id');
         $level_idd = $request->input('level_id');
 
-    if ($faculty_idd == NULL || $department_idd == NULL || $session_idd == NULL || $level_idd == NULL) {
+    if ($faculty_idd == NULL || $department_idd == NULL || $section_idd == NULL || $level_idd == NULL) {
         return back()->with('error', 'Input can\'t be empty');
     }
 
-    $studentss = User::where('faculty_id', '=', $faculty_idd)->where('department_id', '=', $department_idd)->where('session_id', '=', $session_idd)->where('level_id', '=', $level_idd)->get();
-    $studentsss = User::where('faculty_id', '=', $faculty_idd)->where('department_id', '=', $department_idd)->where('session_id', '=', $session_idd)->where('level_id', '=', $level_idd)->paginate(20);
+    $studentss = User::where('faculty_id', '=', $faculty_idd)->where('department_id', '=', $department_idd)->where('section_id', '=', $section_idd)->where('level_id', '=', $level_idd)->get();
+    $studentsss = User::where('faculty_id', '=', $faculty_idd)->where('department_id', '=', $department_idd)->where('section_id', '=', $section_idd)->where('level_id', '=', $level_idd)->paginate(20);
 
     for ($i=0; $i < 20; $i++) { 
         $tokenss = Str::random(100);
@@ -167,7 +167,7 @@ public function get_students_for_result(Request $request, Admin $admin, User $us
 
     $tokensss = base64_encode($tokenss);
 
-        return view('/lecturer/admin/get_students_for_result', compact('admin', 'tokensss', 'faculty_idd', 'department_idd', 'session_idd', 'level_idd', 'notificationn', 'notification', 'lecturer', 'students', 'studentss', 'studentsss', 'faculty', 'department', 'session', 'level', 'course', 'courses', 'course_reg', 'semester', 'result'));
+        return view('/lecturer/admin/get_students_for_result', compact('admin', 'tokensss', 'faculty_idd', 'department_idd', 'section_idd', 'level_idd', 'notificationn', 'notification', 'lecturer', 'students', 'studentss', 'studentsss', 'faculty', 'department', 'section', 'level', 'course', 'courses', 'course_reg', 'semester', 'result'));
 
     }
 
@@ -186,7 +186,7 @@ public function edit_student_result(Request $request, Admin $admin, User $user)
             $students = User::paginate(10);
             $faculty = Faculty::paginate();
             $department = Department::paginate();
-            $session = Session::paginate();
+            $section = Section::paginate();
             $level = Level::paginate();
             $course = Course::paginate(10);
             $courses = Course::paginate(10);
@@ -208,7 +208,7 @@ public function edit_student_result(Request $request, Admin $admin, User $user)
 
 
 
-        return view('/lecturer/admin/edit_student_result', ['admin' => $admin, 'tokensss' => $tokensss, 'notificationn' => $notificationn, 'notification' => $notification, 'lecturer' => $lecturer,'students' => $students,'faculty' => $faculty,'department' => $department,'session' => $session,'level' => $level,'course' => $course,'courses' => $courses,'course_reg' => $course_reg,'semester' => $semester,'result' => $result]);
+        return view('/lecturer/admin/edit_student_result', ['admin' => $admin, 'tokensss' => $tokensss, 'notificationn' => $notificationn, 'notification' => $notification, 'lecturer' => $lecturer,'students' => $students,'faculty' => $faculty,'department' => $department,'section' => $section,'level' => $level,'course' => $course,'courses' => $courses,'course_reg' => $course_reg,'semester' => $semester,'result' => $result]);
 
     }
 
@@ -229,7 +229,7 @@ public function edit_student_for_result(Request $request, Admin $admin, User $us
             $students = User::paginate(10);
             $faculty = Faculty::paginate();
             $department = Department::paginate();
-            $session = Session::paginate();
+            $section = Section::paginate();
             $level = Level::paginate();
             $course = Course::paginate(10);
             $courses = Course::paginate(10);
@@ -244,15 +244,15 @@ public function edit_student_for_result(Request $request, Admin $admin, User $us
 
         $faculty_idd = $request->input('faculty_id');
         $department_idd = $request->input('department_id');
-        $session_idd = $request->input('session_id');
+        $section_idd = $request->input('section_id');
         $level_idd = $request->input('level_id');
 
-    if ($faculty_idd == NULL || $department_idd == NULL || $session_idd == NULL || $level_idd == NULL) {
+    if ($faculty_idd == NULL || $department_idd == NULL || $section_idd == NULL || $level_idd == NULL) {
         return back()->with('error', 'Input can\'t be empty');
     }
 
-    $studentss = User::where('faculty_id', '=', $faculty_idd)->where('department_id', '=', $department_idd)->where('session_id', '=', $session_idd)->where('level_id', '=', $level_idd)->get();
-    $studentsss = User::where('faculty_id', '=', $faculty_idd)->where('department_id', '=', $department_idd)->where('session_id', '=', $session_idd)->where('level_id', '=', $level_idd)->paginate(20);
+    $studentss = User::where('faculty_id', '=', $faculty_idd)->where('department_id', '=', $department_idd)->where('section_id', '=', $section_idd)->where('level_id', '=', $level_idd)->get();
+    $studentsss = User::where('faculty_id', '=', $faculty_idd)->where('department_id', '=', $department_idd)->where('section_id', '=', $section_idd)->where('level_id', '=', $level_idd)->paginate(20);
 
     for ($i=0; $i < 20; $i++) { 
         $tokenss = Str::random(100);
@@ -261,7 +261,7 @@ public function edit_student_for_result(Request $request, Admin $admin, User $us
 
     $tokensss = base64_encode($tokenss);
 
-        return view('/lecturer/admin/edit_student_for_result', compact('admin', 'tokensss', 'faculty_idd', 'department_idd', 'session_idd', 'level_idd', 'notificationn', 'notification', 'lecturer', 'students', 'studentss', 'studentsss', 'faculty', 'department', 'session', 'level', 'course', 'courses', 'course_reg', 'semester', 'result'));
+        return view('/lecturer/admin/edit_student_for_result', compact('admin', 'tokensss', 'faculty_idd', 'department_idd', 'section_idd', 'level_idd', 'notificationn', 'notification', 'lecturer', 'students', 'studentss', 'studentsss', 'faculty', 'department', 'section', 'level', 'course', 'courses', 'course_reg', 'semester', 'result'));
 
     }
 
@@ -282,7 +282,7 @@ public function upload_result(Admin $admin, User $id,$name) {
     $student = User::paginate(10);
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
     $course = Course::paginate(10);
     $courses = Course::paginate(10);
@@ -293,10 +293,10 @@ public function upload_result(Admin $admin, User $id,$name) {
     $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
 
-    $fscourse_reg = CourseReg::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->get();
-    $sscourse_reg = CourseReg::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->get();
+    $fscourse_reg = CourseReg::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->get();
+    $sscourse_reg = CourseReg::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->get();
 
-    return view('lecturer/admin/upload_result', compact('admin', 'notificationn', 'notification', 'id', 'name', 'fscourse_reg', 'sscourse_reg', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'courses', 'course', 'course_reg', 'result', 'semester'));
+    return view('lecturer/admin/upload_result', compact('admin', 'notificationn', 'notification', 'id', 'name', 'fscourse_reg', 'sscourse_reg', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'courses', 'course', 'course_reg', 'result', 'semester'));
 }
 
 }
@@ -312,7 +312,7 @@ public function edit_result(Admin $admin, Result $results,User $id,$name) {
         $student = User::paginate(10);
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
         $course = Course::paginate(10);
         $courses = Course::paginate(10);
@@ -323,17 +323,17 @@ public function edit_result(Admin $admin, Result $results,User $id,$name) {
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
     
-        $fscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->get();
-        $sscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->get();
+        $fscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->get();
+        $sscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->get();
     
         
-    $ffscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->sum('weighted_grade_point');
-    $ssscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->sum('weighted_grade_point');
+    $ffscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->sum('weighted_grade_point');
+    $ssscourse_reg = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->sum('weighted_grade_point');
 
-    $fcourse_unit = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->with('course_regs', 'courses')->sum('course_unit');
-    $scourse_unit = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->with(['course_regs', 'courses'])->sum('course_unit');
+    $fcourse_unit = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->with('course_regs', 'courses')->sum('course_unit');
+    $scourse_unit = Result::where('user_id', '=', $id->id)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->with(['course_regs', 'courses'])->sum('course_unit');
 
-        return view('lecturer/admin/edit_result', compact('admin', 'notificationn', 'notification', 'fcourse_unit', 'scourse_unit', 'ffscourse_reg', 'ssscourse_reg', 'id', 'name', 'fscourse_reg', 'sscourse_reg', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'courses', 'course', 'course_reg', 'result', 'results', 'semester'));
+        return view('lecturer/admin/edit_result', compact('admin', 'notificationn', 'notification', 'fcourse_unit', 'scourse_unit', 'ffscourse_reg', 'ssscourse_reg', 'id', 'name', 'fscourse_reg', 'sscourse_reg', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'courses', 'course', 'course_reg', 'result', 'results', 'semester'));
     }
 
 }
@@ -349,7 +349,7 @@ public function edit_results(Admin $admin, Result $results) {
         $student = User::paginate(10);
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
         $course = Course::paginate(10);
         $courses = Course::paginate(10);
@@ -360,10 +360,10 @@ public function edit_results(Admin $admin, Result $results) {
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
     
-        // $fscourse_reg = Result::where('id', '=', $results)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->get();
-        // $sscourse_reg = Result::where('id', '=', $results)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->get();
+        // $fscourse_reg = Result::where('id', '=', $results)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->get();
+        // $sscourse_reg = Result::where('id', '=', $results)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->get();
     
-        return view('lecturer/admin/edit_results', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'session', 'level', 'courses', 'course', 'course_reg', 'result', 'results', 'semester'));
+        return view('lecturer/admin/edit_results', compact('admin', 'notificationn', 'notification', 'lecturer', 'student', 'faculty', 'department', 'section', 'level', 'courses', 'course', 'course_reg', 'result', 'results', 'semester'));
     }
 
 }

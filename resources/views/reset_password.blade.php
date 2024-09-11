@@ -45,7 +45,7 @@
           <div class="text-center 2xl:mb-10 mb-5">
             <h4 class="font-medium">Reset Password?</h4>
             <div class="text-slate-500 dark:text-slate-400 text-base">
-                Enter your Matric No. and new password!
+                Enter your Email and new password!
             </div>
 
             @include('layouts.messages')
@@ -58,7 +58,7 @@
             {{-- <div class="fromGroup" hidden>
               <label class="block capitalize form-label">Token</label>
               <div class="relative "> --}}
-                <input type="hidden" name="token" class="form-control py-2" placeholder="Token" value="">
+                <input type="hidden" name="token" class="form-control py-2" placeholder="Token" value="{{$tokens}}">
               {{-- </div>
             </div> --}}
 
@@ -67,12 +67,27 @@
                 <div class="relative ">
                   <input type="text" name="unique_id" class="form-control py-2" placeholder="Application No. / Reg No. / Matric No." required>
                 </div>
+              </div> 
+            
+              
+              <div class="fromGroup">
+                <label class="block capitalize form-label">Email.</label>
+                <div class="relative ">
+                  <input type="text" name="email" class="form-control py-2" placeholder="Email" required>
+                </div>
               </div>
 
               <div class="fromGroup">
                 <label class="block capitalize form-label">Password</label>
                 <div class="relative ">
                   <input type="password" name="password" class="form-control py-2" placeholder="Enter your password" value="">
+                </div>
+              </div>
+              
+              <div class="fromGroup">
+                <label class="block capitalize form-label">Confirm Password</label>
+                <div class="relative ">
+                  <input type="password" name="password_confirmation" class="form-control py-2" placeholder="Confirm your password" value="">
                 </div>
               </div>
 

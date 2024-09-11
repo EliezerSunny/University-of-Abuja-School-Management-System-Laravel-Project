@@ -234,7 +234,7 @@
                                           </td>
                                           <td class="table-td ">{{$courses->department->department_name}}</td>
                                           <td class="table-td ">{{$courses->level->level}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($courses->created_at); ?></td>
+                                          <td class="table-td ">{{$courses->created_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

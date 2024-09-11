@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Level;
 use App\Models\Faculty;
-use App\Models\Session;
+use App\Models\Section;
 use App\Models\Lecturer;
 use App\Models\Department;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class UpdatePermissionController extends Controller
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $notificationn = ClearedClearance::get();
@@ -42,7 +42,7 @@ class UpdatePermissionController extends Controller
 
         
 
-        return view('lecturer/admin/get_admin_permission', compact('admin', 'permissionn', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/get_admin_permission', compact('admin', 'permissionn', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -62,7 +62,7 @@ class UpdatePermissionController extends Controller
         $student = User::paginate();
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
     
         $role = Role::where('guard_name', '=', 'admin')->get();
@@ -71,7 +71,7 @@ class UpdatePermissionController extends Controller
         $notificationn = ClearedClearance::get();
         $notification = ClearedClearance::latest()->paginate(5);
     
-        return view('lecturer/admin/edit_admin_permission', compact('admin', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+        return view('lecturer/admin/edit_admin_permission', compact('admin', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
     }
 
 }
@@ -87,7 +87,7 @@ public function remove_admin_permission(Admin $admin) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $role = Role::where('guard_name', '=', 'admin')->get();
@@ -96,7 +96,7 @@ public function remove_admin_permission(Admin $admin) {
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/remove_admin_permission', compact('admin', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/remove_admin_permission', compact('admin', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 }
 
 }
@@ -174,7 +174,7 @@ public function edit_lecturer_permission(Lecturer $lecturer) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $role = Role::where('guard_name', '=', 'lecturer')->get();
@@ -183,7 +183,7 @@ public function edit_lecturer_permission(Lecturer $lecturer) {
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/edit_lecturer_permission', compact('lecturerr', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/edit_lecturer_permission', compact('lecturerr', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 }
 
 }
@@ -199,7 +199,7 @@ public function remove_lecturer_permission(Lecturer $lecturer) {
     $student = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $role = Role::where('guard_name', '=', 'lecturer')->get();
@@ -208,7 +208,7 @@ public function remove_lecturer_permission(Lecturer $lecturer) {
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/remove_lecturer_permission', compact('lecturerr', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/remove_lecturer_permission', compact('lecturerr', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 }
 
 }
@@ -284,7 +284,7 @@ public function edit_student_permission(User $student) {
     $studentt = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $role = Role::where('guard_name', '=', 'web')->get();
@@ -293,7 +293,7 @@ public function edit_student_permission(User $student) {
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/edit_student_permission', compact('studentt', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/edit_student_permission', compact('studentt', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 }
 
 }
@@ -309,7 +309,7 @@ public function remove_student_permission(User $student) {
     $studentt = User::paginate();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $role = Role::where('guard_name', '=', 'web')->get();
@@ -318,7 +318,7 @@ public function remove_student_permission(User $student) {
     $notificationn = ClearedClearance::get();
     $notification = ClearedClearance::latest()->paginate(5);
 
-    return view('lecturer/admin/remove_student_permission', compact('studentt', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/remove_student_permission', compact('studentt', 'role', 'permission', 'notificationn', 'notification', 'admins', 'lecturer', 'student', 'faculty', 'department', 'section', 'level'));
 }
 
 }

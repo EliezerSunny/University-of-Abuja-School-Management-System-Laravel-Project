@@ -185,11 +185,11 @@
           
                                         <tr>
                                           <td class="table-td">{{$loop->iteration}}</td>
-                                          <td class="table-td ">{{$permissions->admin->name}}</td>
+                                          <td class="table-td ">{{$permissions->permission->guard_name}}</td>
                                           <td class="table-td ">{{$permissions->role->name}}</td>
                                           <td class="table-td ">{{$permissions->permission->name}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($permissions->created_at); ?></td>
-                                          <td class="table-td "><?php echo time_elapsed_string($permissions->updated_at); ?></td>
+                                          <td class="table-td ">{{$permissions->permission->created_at->diffForHumans()}}</td>
+                                          <td class="table-td ">{{$permissions->permission->updated_at->diffForHumans()}}</td>
                                             <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
@@ -203,7 +203,7 @@
                                               {{-- <button class="action-btn" type="button">
                                                 <iconify-icon icon="heroicons:eye"></iconify-icon>
                                               </button> --}}
-                                              <a href="/lecturer/admin/edit_admin_role_permission/{{$permissions->id}}&{{$permissions->admin->name}}">
+                                              <a href="/lecturer/admin/edit_admin_role_permission/{{$permissions->id}}&{{$permissions->permission->guard_name}}">
                                                 <button class="action-btn" type="button">
                                                   <iconify-icon icon="heroicons:pencil-square"></iconify-icon>
                                                 </button></a>

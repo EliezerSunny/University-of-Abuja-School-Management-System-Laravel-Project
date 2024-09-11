@@ -13,7 +13,7 @@ class Payment extends Model
         'faculty_id',
         'department_id',
         'level_id',
-        'session_id',
+        'section_id',
         'semester_id',
         'course_id',
         'user_id',
@@ -43,9 +43,9 @@ class Payment extends Model
         return $this->belongsTo(Level::class);
     }
 
-    public function session()
+    public function section()
     {
-        return $this->belongsTo(Session::class);
+        return $this->belongsTo(Section::class);
     }
 
     public function semester()

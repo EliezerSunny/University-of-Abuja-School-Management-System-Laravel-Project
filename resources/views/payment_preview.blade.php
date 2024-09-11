@@ -169,7 +169,7 @@
                                           </th>
           
                                           <th scope="col" class=" table-th ">
-                                            Academic Session
+                                            Academic Section
                                           </th>
           
                                           <th scope="col" class=" table-th ">

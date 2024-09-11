@@ -90,19 +90,19 @@
                                         </div>
       
                                         <div class="input-area">
-                                          <label for="session_id" class="form-label">Academic Session: <i>{{$payments->session->session}}</i></label>
-                                          <select name="session_id" id="session_id" class="form-control w-full mt-2">
+                                          <label for="section_id" class="form-label">Academic Section: <i>{{$payments->section->section}}</i></label>
+                                          <select name="section_id" id="section_id" class="form-control w-full mt-2">
                                             <option selected="Selected" disabled="disabled" value="none" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">Select an option</option>
                                             
-                                            @foreach ($session as $sessions)
-                                            <option value="{{$sessions->id}}" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">{{$sessions->session}}</option>
+                                            @foreach ($section as $sections)
+                                            <option value="{{$sections->id}}" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">{{$sections->section}}</option>
                                             @endforeach
                                             
                                           </select>
                                         </div>
       
                                         <div class="input-area">
-                                          <label for="semester_id" class="form-label">Semester: <i>{{$payments->semester->semester}}</i></label>
+                                          <label for="semester_id" class="form-label">Semester: {{-- <i>{{$payments->semester->semester_id}}</i> --}}</label>
                                           <select name="semester_id" id="semester_id" class="form-control w-full mt-2">
                                             {{-- <option selected="Selected" disabled="disabled" value="none" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">Select an option</option> --}}
                                             
@@ -198,7 +198,7 @@
                                             </th>
   
                                             <th scope="col" class=" table-th ">
-                                              Session
+                                              Section
                                             </th>
   
                                             <th scope="col" class=" table-th ">
@@ -242,8 +242,8 @@
                                             </td>
                                             <td class="table-td ">{{$payments->department->department_name}}</td>
                                             <td class="table-td ">{{$payments->level->level}}</td>
-                                            <td class="table-td ">{{$payments->session->session}}</td>
-                                            <td class="table-td "><?php echo time_elapsed_string($payments->created_at); ?></td>
+                                            <td class="table-td ">{{$payments->section->section}}</td>
+                                            <td class="table-td ">{{$payments->created_at->diffForHumans()}}</td>
                                             <td class="table-td ">
             
                                               <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

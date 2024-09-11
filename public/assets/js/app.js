@@ -470,11 +470,11 @@
       },
       password: {
         required: true,
-        minlength: 6
+        minlength: 5
       },
       confirm_password: {
         required: true,
-        minlength: 6,
+        minlength: 5,
         equalTo: "#password"
       }
     },
@@ -486,11 +486,11 @@
       },
       password: {
         required: "Enter your password",
-        minlength: "Password should contain minimum 6 character"
+        minlength: "Password should contain minimum 5 character"
       },
       confirm_password: {
         required: "Enter your password",
-        minlength: "Password should contain minimum 6 character",
+        minlength: "Password should contain minimum 5 character",
         equalTo: "Did not match the password"
       }
     }
@@ -507,7 +507,7 @@
       },
       Password: {
         required: true,
-        minlength: 8
+        minlength: 5
       },
       rangeType: {
         required: true,
@@ -536,7 +536,7 @@
       },
       Password: {
         required: "Enter your password",
-        minlength: "Password should contain minimum 8 character"
+        minlength: "Password should contain minimum 5 character"
       },
       specifiedLength: {
         minlength: "Should contain minimum 3 character"

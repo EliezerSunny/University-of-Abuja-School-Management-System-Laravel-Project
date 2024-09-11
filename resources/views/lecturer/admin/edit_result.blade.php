@@ -143,7 +143,7 @@
                     <div class="lg:col-span-12 col-span-12">
                         <div class="card h-full">
                           <header class="card-header">
-                            <h4 class="card-title"> 1<sup>st</sup> Semester {{--$fscourse_reg->session--}}</h4>
+                            <h4 class="card-title"> 1<sup>st</sup> Semester {{--$fscourse_reg->section--}}</h4>
   
                             <form action="{{url('/lecturer/admin/search_students_result')}}" method="GET">
                               <div class="relative">
@@ -234,7 +234,7 @@
                                             {{-- <td class="table-td " hidden><input type="hidden" name="faculty_id" value="{{$course->faculty->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="department_id" value="{{$course->department->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="level_id" value="{{$course->level->id}}"></td>
-                                            <td class="table-td " hidden><input type="hidden" name="session_id" value="{{$course->session->id}}"></td>
+                                            <td class="table-td " hidden><input type="hidden" name="section_id" value="{{$course->section->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="semester_id" value="{{$course->semester->id}}"></td>
                                             <td class="table-td "><input type="checkbox" name="course_reg_id" value="{{$course->id}}" checked></td>
                                             <td class="table-td " hidden><input type="hidden" name="user_id" value="{{$course->user->id}}"></td> --}}
@@ -440,7 +440,7 @@
                                             {{-- <td class="table-td " hidden><input type="hidden" name="faculty_id" value="{{$course->faculty->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="department_id" value="{{$course->department->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="level_id" value="{{$course->level->id}}"></td>
-                                            <td class="table-td " hidden><input type="hidden" name="session_id" value="{{$course->session->id}}"></td>
+                                            <td class="table-td " hidden><input type="hidden" name="section_id" value="{{$course->section->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="semester_id" value="{{$course->semester->id}}"></td>
                                             <td class="table-td "><input type="checkbox" name="course_reg_id" value="{{$course->id}}" checked></td>
                                             <td class="table-td " hidden><input type="hidden" name="user_id" value="{{$course->user->id}}"></td> --}}

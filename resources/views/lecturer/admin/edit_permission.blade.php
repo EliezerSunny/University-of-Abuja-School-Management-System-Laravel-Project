@@ -158,8 +158,8 @@
                                             <td class="table-td">{{$loop->iteration}}</td>
                                             <td class="table-td ">{{$permissions->guard_name}}</td>
                                             <td class="table-td ">{{$permissions->name}}</td>
-                                            <td class="table-td "><?php echo time_elapsed_string($permissions->created_at); ?></td>
-                                            <td class="table-td "><?php echo time_elapsed_string($permissions->updated_at); ?></td>
+                                            <td class="table-td ">{{$permissions->created_at->diffForHumans()}}</td>
+                                            <td class="table-td ">{{$permissions->updated_at->diffForHumans()}}</td>
                                             <td class="table-td ">
             
                                               <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

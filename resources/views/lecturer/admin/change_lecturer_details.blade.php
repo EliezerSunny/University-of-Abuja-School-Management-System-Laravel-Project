@@ -80,9 +80,9 @@
                                   </div>
 
                                   <div class="input-area">
-                                    <label for="session_id" class="form-label">Academic Session: <i>{{$lecturers->session->session}}</i></label>
+                                    <label for="session_id" class="form-label">Academic Section: <i>{{$lecturers->section->section}}</i></label>
                                         <div class="relative">
-                                            <input id="session_id" type="text" name="session_id" class="form-control" value="{{$lecturers->session_id}}" placeholder="Session" required="required">
+                                            <input id="session_id" type="text" name="section_id" class="form-control" value="{{$lecturers->section_id}}" placeholder="Section" required="required">
                                           </div>
                                       
                                   </div>
@@ -156,7 +156,7 @@
                                             </th>
   
                                             <th scope="col" class=" table-th ">
-                                              Session
+                                              Section
                                             </th>
   
                                             <th scope="col" class=" table-th ">
@@ -216,13 +216,13 @@
                                             <td class="table-td ">{{$lecturers->department->department_name}}</td>
                                             <td class="table-td ">
                                               <div>
-                                                {{$lecturers->session->session}}
+                                                {{$lecturers->section->section}}
                                               </div>
                                             </td>
                                             <td class="table-td ">{{$lecturers->school_email}}</td>
                                             <td class="table-td ">{{$lecturers->phone_no}}</td>
                                             <td class="table-td ">{{$lecturers->last_activity}}</td>
-                                            <td class="table-td "><?php echo time_elapsed_string($lecturers->created_at); ?></td>
+                                            <td class="table-td ">{{$lecturers->created_at->diffForHumans()}}</td>
                                             <td class="table-td ">
             
                                               <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

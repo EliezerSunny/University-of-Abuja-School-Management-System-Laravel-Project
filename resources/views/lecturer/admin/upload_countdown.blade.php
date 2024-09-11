@@ -128,8 +128,8 @@
                                         <tr>
                                           <td class="table-td">{{$countdowns->id}}</td>
                                           <td class="table-td ">{{$countdowns->coursereg_timer}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($countdowns->created_at); ?></td>
-                                          <td class="table-td "><?php echo time_elapsed_string($countdowns->updated_at); ?></td>
+                                          <td class="table-td ">{{$countdowns->created_at->diffForHumans()}}</td>
+                                          <td class="table-td ">{{$countdowns->updated_at->diffForHumans()}}</td>
 
                                           <td class="table-td ">
                                             <div class="flex space-x-3 rtl:space-x-reverse">

@@ -54,13 +54,17 @@
           <!-- BEGIN: Login Form -->
           <form class="space-y-4" action='{{route('lecturer.reset_password.post')}}' method="POST">
             @csrf
+            
+            
 
-            <div class="fromGroup" hidden>
-                <label class="block capitalize form-label">Token</label>
-                <div class="relative ">
-                  <input type="hidden" name="token" class="form-control py-2" placeholder="Token" value="">
-                </div>
-              </div>
+            {{-- <div class="fromGroup" hidden>
+              <label class="block capitalize form-label">Token</label>
+              <div class="relative "> --}}
+                <input type="hidden" name="token" class="form-control py-2" placeholder="Token" value="{{$tokens}}">
+              {{-- </div>
+            </div> --}}
+            
+            
 
             <div class="fromGroup">
                 <label class="block capitalize form-label">Email</label>
@@ -69,12 +73,23 @@
                 </div>
               </div>
 
+
+
             <div class="fromGroup">
               <label class="block capitalize form-label">Password</label>
               <div class="relative ">
                 <input type="password" name="password" class="form-control py-2" placeholder="Enter your password" value="">
               </div>
             </div>
+            
+            
+            <div class="fromGroup">
+                <label class="block capitalize form-label">Confirm Password</label>
+                <div class="relative ">
+                  <input type="password" name="password_confirmation" class="form-control py-2" placeholder="Confirm your password" value="">
+                </div>
+              </div>
+              
 
             {{-- <div class="flex justify-between">
 

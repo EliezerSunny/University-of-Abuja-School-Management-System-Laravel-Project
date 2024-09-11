@@ -54,7 +54,7 @@ Route::get('/lecturer', [LecturerPagesController::class, 'lecturer_login'])->nam
 Route::post('/lecturer', [LecturerController::class, 'lecturer_login'])->name('lecturer.post');
 
 Route::get('/lecturer/forgot_password', [LecturerForgotPasswordController::class, 'forgot_password'])->name('lecturer.forgot_password.get');
-Route::post('/lecturer/forgot_password', [LecturerForgotPasswordController::class, 'forgot_password'])->name('lecturer.forgot_password.post');
+Route::post('/lecturer/forgot_password', [LecturerForgotPasswordController::class, 'forgot_passwordd'])->name('lecturer.forgot_password.post');
 Route::get('/lecturer/reset_password', [LecturerForgotPasswordController::class, 'reset_password'])->name('lecturer.reset_password.get');
 Route::post('/lecturer/reset_password', [LecturerForgotPasswordController::class, 'reset_passwordd'])->name('lecturer.reset_password.post');
 
@@ -64,7 +64,7 @@ Route::get('/lecturer/admin', [AdminPagesController::class, 'admin_login'])->nam
 Route::post('/lecturer/admin', [AdminController::class, 'admin_login'])->name('lecturer.admin.post');
 
 Route::get('/lecturer/admin/forgot_password', [AdminForgotPasswordController::class, 'forgot_password'])->name('lecturer.admin.forgot_password.get');
-Route::post('/lecturer/admin/forgot_password', [AdminForgotPasswordController::class, 'forgot_password'])->name('lecturer.admin.forgot_password.post');
+Route::post('/lecturer/admin/forgot_password', [AdminForgotPasswordController::class, 'forgot_passwordd'])->name('lecturer.admin.forgot_password.post');
 Route::get('/lecturer/admin/reset_password', [AdminForgotPasswordController::class, 'reset_password'])->name('lecturer.admin.reset_password.get');
 Route::post('/lecturer/admin/reset_password', [AdminForgotPasswordController::class, 'reset_passwordd'])->name('lecturer.admin.reset_password.post');
 
@@ -201,7 +201,7 @@ Route::get('/lecturer/admin/add_lecturer', [AdminPagesController::class, 'add_le
 Route::get('/lecturer/admin/add_student', [AdminPagesController::class, 'add_student'])->name('/lecturer.admin.add_student');
 Route::get('/lecturer/admin/add_faculty', [AdminPagesController::class, 'add_faculty'])->name('/lecturer.admin.add_faculty');
 Route::get('/lecturer/admin/add_department', [AdminPagesController::class, 'add_department'])->name('/lecturer.admin.add_department');
-Route::get('/lecturer/admin/add_session', [AdminPagesController::class, 'add_session'])->name('/lecturer.admin.add_session');
+Route::get('/lecturer/admin/add_section', [AdminPagesController::class, 'add_section'])->name('/lecturer.admin.add_section');
 Route::get('/lecturer/admin/add_level', [AdminPagesController::class, 'add_level'])->name('/lecturer.admin.add_level');
 Route::get('/lecturer/admin/clearance_form/{students}', [AdminPagesController::class, 'clearance_form'])->name('/lecturer.admin.clearance_form.{students}');
 Route::put('/lecturer/admin/clearance_form/{students}', [AdminController::class, 'change_clearance_status'])->name('/lecturer.admin.clearance_form.{students}');
@@ -216,7 +216,7 @@ Route::post('/lecturer/admin/add_admin', [AdminController::class, 'admin_up'])->
 
 Route::post('/lecturer/admin/add_faculty', [AdminController::class, 'add_faculty'])->name('/lecturer.admin.add_faculty');
 Route::post('/lecturer/admin/add_department', [AdminController::class, 'add_department'])->name('/lecturer.admin.add_department');
-Route::post('/lecturer/admin/add_session', [AdminController::class, 'add_session'])->name('/lecturer.admin.add_session');
+Route::post('/lecturer/admin/add_section', [AdminController::class, 'add_section'])->name('/lecturer.admin.add_section');
 Route::post('/lecturer/admin/add_level', [AdminController::class, 'add_level'])->name('/lecturer.admin.add_level');
 Route::post('/lecturer/admin/clearance', [AdminController::class, 'clearance'])->name('/lecturer.admin.clearance');
 
@@ -248,8 +248,8 @@ Route::delete('/lecturer/admin/delete_department/{departments}', [AdminControlle
 Route::get('/lecturer/admin/change_level_details/{levels}', [AdminPagesController::class, 'change_level_details'])->name('/lecturer.admin.change_level_details.{levels}');
 Route::put('/lecturer/admin/change_level_details/{levels}', [AdminController::class, 'change_level_details'])->name('/lecturer.admin.change_level_details.{levels}');
 
-Route::get('/lecturer/admin/change_session_details/{sessions}', [AdminPagesController::class, 'change_session_details'])->name('/lecturer.admin.change_session_details.{sessions}');
-Route::put('/lecturer/admin/change_session_details/{sessions}', [AdminController::class, 'change_session_details'])->name('/lecturer.admin.change_session_details.{sessions}');
+Route::get('/lecturer/admin/change_section_details/{sections}', [AdminPagesController::class, 'change_section_details'])->name('/lecturer.admin.change_section_details.{sections}');
+Route::put('/lecturer/admin/change_section_details/{sections}', [AdminController::class, 'change_section_details'])->name('/lecturer.admin.change_section_details.{sections}');
 
 Route::get('/lecturer/admin/add_semester', [AdminPagesController::class, 'add_semester'])->name('/lecturer.admin.add_semester');
 Route::post('/lecturer/admin/add_semester', [AdminController::class, 'add_semester'])->name('/lecturer.admin.add_semester');

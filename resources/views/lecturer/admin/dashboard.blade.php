@@ -172,18 +172,18 @@
 
 
 
-                        <a href="{{('/lecturer/admin/add_session')}}">
-                        <div class="py-[18px] px-4 rounded-[6px] bg-[#E5F9FF] dark:bg-slate-900	 " title="Total Session">
+                        <a href="{{('/lecturer/admin/add_section')}}">
+                        <div class="py-[18px] px-4 rounded-[6px] bg-[#E5F9FF] dark:bg-slate-900	 " title="Total Section">
                           <div class="flex items-center space-x-6 rtl:space-x-reverse">
                             <div class="flex-none">
                               <div id="wline1"></div>
                             </div>
                             <div class="flex-1">
                               <div class="text-slate-800 dark:text-slate-300 text-sm mb-1 font-medium">
-                                Total Session
+                                Total Section
                               </div>
                               <div class="text-slate-900 dark:text-white text-lg font-medium">
-                                {{count($session)}}
+                                {{count($section)}}
                               </div>
                             </div>
                           </div>
@@ -256,7 +256,7 @@
                                           </th>
 
                                           <th scope="col" class=" table-th ">
-                                            Session
+                                            Section
                                           </th>
 
                                           <th scope="col" class=" table-th ">
@@ -316,13 +316,13 @@
                                           <td class="table-td ">{{$lecturers->department->department_name}}</td>
                                           <td class="table-td ">
                                             <div>
-                                              {{$lecturers->session->session}}
+                                              {{$lecturers->section->section}}
                                             </div>
                                           </td>
                                           <td class="table-td ">{{$lecturers->school_email}}</td>
                                           <td class="table-td ">{{$lecturers->phone_no}}</td>
                                           <td class="table-td ">{{$lecturers->last_activity}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($lecturers->created_at); ?></td>
+                                          <td class="table-td ">{{$lecturers->created_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
@@ -426,7 +426,7 @@
                                           </th>
 
                                           <th scope="col" class=" table-th ">
-                                            Session
+                                            Section
                                           </th>
 
                                           <th scope="col" class=" table-th ">
@@ -483,12 +483,12 @@
                                           <td class="table-td ">{{$students->level->level}}</td>
                                           <td class="table-td ">
                                             <div>
-                                              {{$students->session->session}}
+                                              {{$students->section->section}}
                                             </div>
                                           </td>
                                           <td class="table-td ">{{$students->school_email}}</td>
                                           <td class="table-td ">{{$students->phone_no}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($students->created_at); ?></td>
+                                          <td class="table-td ">{{$students->created_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
@@ -597,7 +597,7 @@
                                         <tr>
                                           <td class="table-td">{{$faculties->id}}</td>
                                           <td class="table-td ">{{$faculties->faculty_name}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($faculties->created_at); ?></td>
+                                          <td class="table-td ">{{$faculties->created_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
@@ -716,8 +716,8 @@
                                           <td class="table-td">{{$departments->id}}</td>
                                           <td class="table-td ">{{$departments->department_name}}</td>
                                           <td class="table-td ">{{$departments->department_abbreviation}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($departments->created_at); ?></td>
-                                          <td class="table-td "><?php echo time_elapsed_string($departments->updated_at); ?></td>
+                                          <td class="table-td ">{{$departments->created_at->diffForHumans()}}</td>
+                                          <td class="table-td ">{{$departments->updated_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
@@ -827,7 +827,7 @@
                                           </th>
 
                                           <th scope="col" class=" table-th ">
-                                            Session
+                                            Section
                                           </th>
 
                                           <th scope="col" class=" table-th ">
@@ -865,8 +865,8 @@
                                           <td class="table-td ">{{$courses->department->department_name}}</td>
                                           <td class="table-td ">{{$courses->level->level}}</td>
                                           <td class="table-td ">{{$courses->semester->semester}}</td>
-                                          <td class="table-td ">{{$courses->session->session}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($courses->created_at); ?></td>
+                                          <td class="table-td ">{{$courses->section->section}}</td>
+                                          <td class="table-td ">{{$courses->created_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
@@ -972,7 +972,7 @@
                                         <tr>
                                           <td class="table-td">{{$loop->iteration}}</td>
                                           <td class="table-td ">{{$levels->level}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($levels->created_at); ?></td>
+                                          <td class="table-td ">{{$levels->created_at->diffForHumans()}}</td>
                                           
                                           <td class="table-td ">
                                             <div class="flex space-x-3 rtl:space-x-reverse">
@@ -1014,13 +1014,13 @@
 
 
 
-                    {{-- Session --}}
+                    {{-- Section --}}
                     <div class="lg:col-span-12 col-span-12">
                       <div class="card h-full">
                         <header class="card-header">
-                          <h4 class="card-title">All Sessions</h4>
+                          <h4 class="card-title">All Sections</h4>
 
-                          <a href="{{('/lecturer/admin/add_session')}}">
+                          <a href="{{('/lecturer/admin/add_section')}}">
                             <button class="flex justify-center cursor-pointer px-3 min-w-[90px] text-center ml-auto py-2 rounded-[999px] text-white
                             bg-black">Add</button>
                             </a>
@@ -1044,7 +1044,7 @@
                                           </th>
           
                                           <th scope="col" class=" table-th ">
-                                            Academic Session
+                                            Academic Section
                                           </th>
 
                                           <th scope="col" class=" table-th ">
@@ -1058,7 +1058,7 @@
                                         </tr>
                                       </thead>
 
-                                      @if (count($session) === 0)
+                                      @if (count($section) === 0)
                                   <td>
                                      <th colspan="4">
                                         <h5 style="color:red; text-align: center;">No record found</h5>
@@ -1066,14 +1066,14 @@
                                   </tr>
                                   @else
 
-                                      @foreach ($session as $sessions)
+                                      @foreach ($section as $sections)
 
                                       <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
           
                                         <tr>
-                                          <td class="table-td">{{$sessions->id}}</td>
-                                          <td class="table-td ">{{$sessions->session}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($sessions->created_at); ?></td>
+                                          <td class="table-td">{{$sections->id}}</td>
+                                          <td class="table-td ">{{$sections->section}}</td>
+                                          <td class="table-td ">{{$sections->created_at->diffForHumans()}}</td>
                                           
                                           <td class="table-td ">
                                             <div class="flex space-x-3 rtl:space-x-reverse">
@@ -1081,7 +1081,7 @@
                                                 {{-- <button class="action-btn" type="button">
                                                   <iconify-icon icon="heroicons:eye"></iconify-icon>
                                                 </button> --}}
-                                                <a href="/lecturer/admin/change_session_details/{{$sessions->id}}">
+                                                <a href="/lecturer/admin/change_section_details/{{$sections->id}}">
                                                   <button class="action-btn" type="button">
                                                     <iconify-icon icon="heroicons:pencil-square"></iconify-icon>
                                                   </button></a>
@@ -1110,7 +1110,7 @@
 
                       </div>
                     </div>
-                    {{-- Session End--}}
+                    {{-- Section End--}}
 
 
                     <div class="lg:col-span-7 col-span-12">
@@ -1201,7 +1201,7 @@
                                   PHONE
                                 </div>
                                 <a href="tel:+2348154596494" class="text-base text-slate-600 dark:text-slate-50">
-                                  +234{{auth()->guard('admin')->user()->phone_no}}
+                                  {{auth()->guard('admin')->user()->phone_no}}
                                 </a>
                               </div>
                             </li>

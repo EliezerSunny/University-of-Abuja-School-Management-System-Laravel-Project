@@ -14,7 +14,7 @@ class StudentClearance extends Model
         'level_id',
         'faculty_id',
         'department_id',
-        'session_id',
+        'section_id',
         'user_id',
         'school_receipt',
         'student_result',
@@ -34,9 +34,9 @@ class StudentClearance extends Model
         return $this->belongsTo(Department::class);
     }
 
-    public function session()
+    public function section()
     {
-        return $this->belongsTo(Session::class);
+        return $this->belongsTo(Section::class);
     }
 
     public function level()

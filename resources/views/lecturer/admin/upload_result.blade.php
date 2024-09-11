@@ -229,24 +229,38 @@
             
                                           <tr>
                                             <td class="table-td">{{$loop->iteration}}</td>
-                                            <td class="table-td " hidden><input type="hidden" name="faculty_id" value="{{$course->faculty->id}}"></td>
-                                            <td class="table-td " hidden><input type="hidden" name="department_id" value="{{$course->department->id}}"></td>
-                                            <td class="table-td " hidden><input type="hidden" name="level_id" value="{{$course->level->id}}"></td>
-                                            <td class="table-td " hidden><input type="hidden" name="session_id" value="{{$course->session->id}}"></td>
-                                            <td class="table-td " hidden><input type="hidden" name="semester_id" value="{{$course->semester->id}}"></td>
-                                            <td class="table-td "><input type="checkbox" name="course_reg_id" value="{{$course->id}}" checked></td>
-                                            <td class="table-td " hidden><input type="hidden" name="user_id" value="{{$course->user->id}}"></td>
-                                            {{-- <td class="table-td " hidden><input type="hidden" name="lecturer_id" value="{{$course->lecturer->id}}"></td> --}}
+                                           
+                                            <td class="table-td "> 
+                           <input checked id="course_reg_id_{{$course->id}}" type="checkbox" name="course_reg_id[]" value="{{$course->id}}" class="checkbox" onchange="toggleFields({{$course->id}})">
+                                     
+                              
+                                                
+                                                <input  id="faculty_id_{{$course->id}}" type="hidden" name="faculty_id[{{$course->id}}]" value="{{$course->faculty->id}}" disabled="disabled" required="required" >
+                                                <input  id="department_id_{{$course->id}}" type="hidden" name="department_id[{{$course->id}}]" value="{{$course->department->id}}" disabled="disabled" required="required">
+                                                <input  id="level_id_{{$course->id}}" type="hidden" name="level_id[{{$course->id}}]" value="{{$course->level->id}}" disabled="disabled" required="required">
+                                                <input  id="section_id_{{$course->id}}" type="hidden" name="section_id[{{$course->id}}]" value="{{$course->section->id}}" disabled="disabled" required="required">
+                                                <input  id="semester_id_{{$course->id}}" type="hidden" name="semester_id[{{$course->id}}]" value="{{$course->semester->id}}" disabled="disabled" required="required">   
+                                                
+                                                <input type="hidden" id="user_id_{{$course->id}}" name="user_id[{{$course->id}}]" value="{{$course->user->id}}" disabled="disabled" required="required">     
+                                                
+                          {{-- <input type="hidden" name="lecturer_id[{{$courses->id}}]" id="lecturer_id_{{$courses->id}}" value="{{$course->lecturer->id}}" disabled="disabled" required="required"> --}}                                  
+                                                 
+                                                 </td>
+                                     
+                                            
                                             <td class="table-td ">
                                                 {{$course->course->course_code}}
                                             </td>
                                             <td class="table-td ">{{$course->course->course_title}}</td>
                                             
                                             
-                                            <td class="table-td "> <input type="hidden" name="course_unit" value="{{$course->course->course_unit}}"> {{$course->course->course_unit}}</td>
+                                            <td class="table-td "> 
+                      
+                                                
+                                                <input type="hidden" id="course_unit_{{$course->id}}" name="course_unit[{{$course->id}}]" value="{{$course->course->course_unit}}" disabled="disabled" {{$course->course->course_unit}}</td>
                                             <td class="table-td ">{{$course->course->course_status}}</td>
                                             <td class="table-td ">
-                                                      <input id="final_score" type="text" name="final_score" class="form-control" placeholder="Final Score">
+                                                      <input id="final_score_{{$course->id}}" type="text" name="final_score[{{$course->id}}]" class="form-control" placeholder="Final Score">
                                                 </td>
 
                                           </tr>
@@ -256,6 +270,21 @@
                                         </tbody>
   
                                         @endforeach
+                                        <script>
+    function toggleFields(courseRegId) {
+        const isChecked = document.getElementById('course_reg_id_' + courseRegId).checked;
+
+        // Enable or disable related hidden fields based on checkbox status
+        document.getElementById('faculty_id_' + courseRegId).disabled = !isChecked;
+        document.getElementById('department_id_' + courseRegId).disabled = !isChecked;
+        document.getElementById('level_id_' + courseRegId).disabled = !isChecked;
+        document.getElementById('section_id_' + courseRegId).disabled = !isChecked;
+        document.getElementById('semester_id_' + courseRegId).disabled = !isChecked;
+        document.getElementById('user_id_' + courseRegId).disabled = !isChecked;
+        document.getElementById('course_unit_' + courseRegId).disabled = !isChecked;
+        document.getElementById('final_score_' + courseRegId).disabled = !isChecked;
+    }
+</script>
                                         @endif
   
                                       </table>
@@ -364,7 +393,7 @@
                                             <td class="table-td " hidden><input type="hidden" name="faculty_id" value="{{$course->faculty->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="department_id" value="{{$course->department->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="level_id" value="{{$course->level->id}}"></td>
-                                            <td class="table-td " hidden><input type="hidden" name="session_id" value="{{$course->session->id}}"></td>
+                                            <td class="table-td " hidden><input type="hidden" name="section_id" value="{{$course->section->id}}"></td>
                                             <td class="table-td " hidden><input type="hidden" name="semester_id" value="{{$course->semester->id}}"></td>
                                             <td class="table-td "><input type="checkbox" name="course_reg_id" value="{{$course->id}}" checked></td>
                                             <td class="table-td " hidden><input type="hidden" name="user_id" value="{{$course->user->id}}"></td>
@@ -378,7 +407,7 @@
                                             <td class="table-td "> <input type="hidden" name="course_unit" value="{{$course->course->course_unit}}"> {{$course->course->course_unit}}</td>
                                             <td class="table-td ">{{$course->course->course_status}}</td>
                                             <td class="table-td ">
-                                                      <input id="final_score" type="text" name="final_score" class="form-control" placeholder="Final Score" required="required">
+                                                      <input id="final_score" type="text" name="final_score" class="form-control" placeholder="Final Score">
                                                 </td>
                                             
                                           </tr>

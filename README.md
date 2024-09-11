@@ -79,16 +79,22 @@ For detailed installation instructions, please refer to the [Installation Guide]
 
 ### Admin Logins
 
-1. email: eliezersunny@eliezersunny.com password: 12345
+url: 127.0.0.1:8000/lecturer/admin
+
+1. email: adetunjieliazer@gmail.com password: 12345
 2. email: paulsontsemaye@paulsontsemaye.com password: 12345
 
 ### Lecturer Logins
+
+url: 127.0.0.1:8000/lecturer
 
 1. email: eliezersunny@eliezersunny.com password: 12345
 2. email: paulsontsemaye@paulsontsemaye.com password: 12345
 3. email: priceless@priceless.com password: 12345
 
 ### Student Logins
+
+url: 127.0.0.1:8000
 
 1. matric no: CSC/2371/001 password: 12345
 2. matric no: ACC/2362/001 password: 12345
@@ -102,7 +108,6 @@ Provide a concise case study highlighting the University of Abuja's specific req
 
 - [Eliezer Sunny](https://twitter.com/eliezersunny).
 - [Paulson Tsemaye](https://twitter.com/PaulsonTsemaye).
-
 
 
 

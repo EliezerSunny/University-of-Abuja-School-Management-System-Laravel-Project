@@ -159,8 +159,8 @@
                                           <td class="table-td">{{$departments->id}}</td>
                                           <td class="table-td ">{{$departments->department_name}}</td>
                                           <td class="table-td ">{{$departments->department_abbreviation}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($departments->created_at); ?></td>
-                                          <td class="table-td "><?php echo time_elapsed_string($departments->updated_at); ?></td>
+                                          <td class="table-td ">{{$departments->created_at->diffForHumans()}}</td>
+                                          <td class="table-td ">{{$departments->updated_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

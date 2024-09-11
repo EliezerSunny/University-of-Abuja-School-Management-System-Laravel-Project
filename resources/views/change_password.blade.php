@@ -76,6 +76,19 @@
                                         </button>
                                       </div>
                                     </div>
+                                    
+                                    
+                                    <div class="input-area">
+                                      <label for="confirm_password" class="form-label">Password Confirmation</label>
+                                      <div class="relative">
+                                        <input id="confirm_password" type="password" name="confirm_password" class="form-control pr-9" placeholder="Password Confirmation" required="required">
+                                        <button id="passIcon" class="passIcon absolute top-2.5 right-3 text-slate-300 text-xl p-0 leading-none" type="button">
+                                          <iconify-icon id="passwordhide" class="inline-block" icon="heroicons-solid:eye-off"></iconify-icon>
+                                          <iconify-icon id="passwordshow" class="hidden" icon="heroicons-outline:eye"></iconify-icon>
+                                        </button>
+                                      </div>
+                                    </div>
+                                    
   
                                     <button class="flex justify-center cursor-pointer px-3 min-w-[90px] text-center ml-auto py-2 rounded-[999px] text-white
                               bg-black" title="Change" onclick="return confirm('Are you sure you want to change your password?')">Update</button>

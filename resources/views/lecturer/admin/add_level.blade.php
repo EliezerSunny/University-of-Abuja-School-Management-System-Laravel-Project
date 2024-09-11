@@ -125,7 +125,7 @@
                                         <tr>
                                           <td class="table-td">{{$loop->iteration}}</td>
                                           <td class="table-td ">{{$levels->level}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($levels->created_at); ?></td>
+                                          <td class="table-td ">{{$levels->created_at->diffForHumans()}}</td>
                                           
                                           <td class="table-td ">
                                             <div class="flex space-x-3 rtl:space-x-reverse">

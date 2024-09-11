@@ -102,8 +102,8 @@
                                     <select name="session_id" id="session_id" class="form-control w-full mt-2">
                                       <option selected="Selected" disabled="disabled" value="none" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">Select an option</option>
                                       
-                                      @foreach ($session as $sessions)
-                                      <option value="{{$sessions->id}}" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">{{$sessions->session}}</option>
+                                      @foreach ($section as $sections)
+                                      <option value="{{$sections->id}}" class="py-1 inline-block font-Inter font-normal text-sm text-slate-600">{{$sections->section}}</option>
                                       @endforeach
                                       
                                     </select>
@@ -223,7 +223,7 @@
                                           </th>
 
                                           <th scope="col" class=" table-th ">
-                                            Session
+                                            Section
                                           </th>
 
                                           <th scope="col" class=" table-th ">
@@ -275,13 +275,13 @@
                                           <td class="table-td ">{{$admin->department->department_name}}</td>
                                           <td class="table-td ">
                                             <div>
-                                              {{$admin->session->session}}
+                                              {{$admin->section->section}}
                                             </div>
                                           </td>
                                           <td class="table-td ">{{$admin->school_email}}</td>
                                           <td class="table-td ">{{$admin->phone_no}}</td>
                                           <td class="table-td ">{{$admin->last_activity}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($admin->created_at); ?></td>
+                                          <td class="table-td ">{{$admin->created_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

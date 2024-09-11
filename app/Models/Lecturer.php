@@ -32,7 +32,7 @@ class Lecturer extends Authenticatable implements MustVerifyEmail
         'picture',
         'faculty_id',
         'department_id',
-        'session_id',
+        'section_id',
         'password',
         'reset_password_token',
         'school_email',
@@ -76,9 +76,9 @@ class Lecturer extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Department::class);
     }
 
-    public function session()
+    public function section()
     {
-        return $this->belongsTo(Session::class);
+        return $this->belongsTo(Section::class);
     }
 
 

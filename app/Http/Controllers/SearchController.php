@@ -7,7 +7,7 @@ use App\Models\Admin;
 use App\Models\Level;
 use App\Models\Course;
 use App\Models\Faculty;
-use App\Models\Session;
+use App\Models\Section;
 use App\Models\Lecturer;
 use App\Models\Semester;
 use App\Models\Department;
@@ -30,7 +30,7 @@ public function search_lecturer(Request $request, Admin $admin, Lecturer $lectur
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
@@ -41,7 +41,7 @@ public function search_lecturer(Request $request, Admin $admin, Lecturer $lectur
 
     $results = Lecturer::where('name', 'LIKE', '%' . $query . '%')->orWhere('position', 'LIKE', '%' . $query . '%')->paginate(15);
 
-    return view('lecturer/admin/search_lecturer', compact('results', 'query', 'admin', 'notificationn', 'notification', 'lecturer', 'lecturers', 'student', 'users', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/search_lecturer', compact('results', 'query', 'admin', 'notificationn', 'notification', 'lecturer', 'lecturers', 'student', 'users', 'faculty', 'department', 'section', 'level'));
 
 }
 
@@ -63,7 +63,7 @@ public function search_student(Request $request, Admin $admin, User $user)
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
@@ -74,7 +74,7 @@ public function search_student(Request $request, Admin $admin, User $user)
 
     $results = User::where('name', 'LIKE', '%' . $query . '%')->orWhere('unique_id', 'LIKE', '%' . $query . '%')->paginate(15);
 
-    return view('lecturer/admin/search_student', compact('results', 'query', 'admin', 'notificationn', 'notification', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/search_student', compact('results', 'query', 'admin', 'notificationn', 'notification', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'section', 'level'));
 
 }
 
@@ -95,7 +95,7 @@ public function search_course(Request $request, Admin $admin, Course $course)
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
@@ -106,7 +106,7 @@ public function search_course(Request $request, Admin $admin, Course $course)
 
     $results = Course::where('course_code', 'LIKE', '%' . $query . '%')->orWhere('course_title', 'LIKE', '%' . $query . '%')->paginate(15);
 
-    return view('lecturer/admin/search_course', compact('results', 'query', 'admin', 'notificationn', 'notification', 'lecturer', 'student', 'users', 'course', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/search_course', compact('results', 'query', 'admin', 'notificationn', 'notification', 'lecturer', 'student', 'users', 'course', 'faculty', 'department', 'section', 'level'));
 
 }
 
@@ -131,7 +131,7 @@ public function search_lecturer_l(Request $request)
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $lecturers = Auth::guard('lecturer')->user()->department_id;
@@ -148,7 +148,7 @@ public function search_lecturer_l(Request $request)
 
     $results = Lecturer::where('name', 'LIKE', '%' . $query . '%')->orWhere('position', 'LIKE', '%' . $query . '%')->paginate(15);
 
-    return view('lecturer/search_lecturer', compact('results', 'notificationn', 'notification', 'query', 'lecturer', 'lecturerss', 'departmentf', 'studentss', 'student', 'users', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/search_lecturer', compact('results', 'notificationn', 'notification', 'query', 'lecturer', 'lecturerss', 'departmentf', 'studentss', 'student', 'users', 'faculty', 'department', 'section', 'level'));
 
 }
 
@@ -170,7 +170,7 @@ public function search_student_l(Request $request, User $user)
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $lecturers = Auth::guard('lecturer')->user()->department_id;
@@ -187,7 +187,7 @@ public function search_student_l(Request $request, User $user)
 
     $results = User::where('name', 'LIKE', '%' . $query . '%')->orWhere('unique_id', 'LIKE', '%' . $query . '%')->paginate(15);
 
-    return view('lecturer/search_student', compact('results', 'notificationn', 'notification', 'query', 'lecturerss', 'departmentf', 'studentss', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/search_student', compact('results', 'notificationn', 'notification', 'query', 'lecturerss', 'departmentf', 'studentss', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'section', 'level'));
 
 }
 
@@ -208,7 +208,7 @@ public function search_course_l(Request $request, Lecturer $lecturers, Course $c
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $lecturers = Auth::guard('lecturer')->user()->department_id;
@@ -226,7 +226,7 @@ public function search_course_l(Request $request, Lecturer $lecturers, Course $c
 
     $results = Course::where('course_code', 'LIKE', '%' . $query . '%')->orWhere('course_title', 'LIKE', '%' . $query . '%')->orwhere('department_id', '=', $lecturers)->paginate(15);
 
-    return view('lecturer/search_course', compact('results', 'notificationn', 'notification', 'query', 'lecturerss', 'departmentf', 'studentss', 'lecturer', 'student', 'users', 'course', 'courses', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/search_course', compact('results', 'notificationn', 'notification', 'query', 'lecturerss', 'departmentf', 'studentss', 'lecturer', 'student', 'users', 'course', 'courses', 'faculty', 'department', 'section', 'level'));
 
 }
 
@@ -255,7 +255,7 @@ public function search_lecturer_p(Request $request)
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
 
@@ -267,7 +267,7 @@ public function search_lecturer_p(Request $request)
 
     $results = Lecturer::where('name', 'LIKE', '%' . $query . '%')->orWhere('position', 'LIKE', '%' . $query . '%')->paginate(15);
 
-    return view('lecturer/admin/search_lecturer_p', compact('results', 'notificationn', 'notification', 'query', 'lecturer', 'student', 'users', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/search_lecturer_p', compact('results', 'notificationn', 'notification', 'query', 'lecturer', 'student', 'users', 'faculty', 'department', 'section', 'level'));
 
 }
 
@@ -289,7 +289,7 @@ public function search_student_p(Request $request, User $user)
     $users = User::get();
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $notificationn = ClearedClearance::get();
@@ -300,7 +300,7 @@ public function search_student_p(Request $request, User $user)
 
     $results = User::where('name', 'LIKE', '%' . $query . '%')->orWhere('unique_id', 'LIKE', '%' . $query . '%')->paginate(15);
 
-    return view('lecturer/admin/search_student_p', compact('results', 'notificationn', 'notification', 'query', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'session', 'level'));
+    return view('lecturer/admin/search_student_p', compact('results', 'notificationn', 'notification', 'query', 'lecturer', 'student', 'users', 'user', 'faculty', 'department', 'section', 'level'));
 
 }
 

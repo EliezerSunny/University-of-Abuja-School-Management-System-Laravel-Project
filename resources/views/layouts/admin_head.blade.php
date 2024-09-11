@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-<head>
+ <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Uniabuja integrated portal">
@@ -12,15 +12,21 @@
   <link href="{{url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap')}}" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('assets/css/rt-plugins.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
 
+  
   <script src="{{asset('assets/js/store.js')}}"></script>
+  
 
-  <!-- scripts -->
+ {{-- <!-- scripts -->
   <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
   <script src="{{asset('assets/js/rt-plugins.js')}}"></script>
-  <script src="{{asset('assets/js/app.js')}}"></script>
+  <script src="{{asset('assets/js/app.js')}}"></script> --}}
 
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+  <script src="{{asset('assets/js/script.js')}}"></script>
+  
 </head>
 
 
@@ -60,7 +66,8 @@
     <div class="sidebar-wrapper group w-0 hidden xl:w-[248px] xl:block">
       <div id="bodyOverlay" class="w-screen h-screen fixed top-0 bg-slate-900 bg-opacity-50 backdrop-blur-sm z-10 hidden"></div>
       <div class="logo-segment">
-        <a class="flex items-center" href="{{('/')}}">
+        
+        <a class="flex items-center" href="{{route('login.get')}}">
           <img src="{{asset('assets/images/logo/banner (1).png')}}" class="black_logo" alt="logo">
           <img src="{{asset('assets/images/logo/banner (1).png')}}" class="white_logo" alt="logo">
           {{-- <span class="ltr:ml-3 rtl:mr-3 text-xl font-Inter font-bold text-slate-900 dark:text-white">Uniabuja</span> --}}
@@ -77,8 +84,10 @@
       <div id="nav_shadow" class="nav_shadow h-[60px] absolute top-[80px] nav-shadow z-[1] w-full transition-all duration-200 pointer-events-none
       opacity-0"></div>
       <div class="sidebar-menus bg-white dark:bg-slate-800 py-2 px-4 h-[calc(100%-80px)] z-50" id="sidebar_menus">
+          
         <ul class="sidebar-menu">
           <li class="sidebar-menu-title">MENU</li>
+          
           <li class="">
             <a href="{{('/lecturer/admin/dashboard')}}" class="navItem">
               <span class="flex items-center">
@@ -99,6 +108,8 @@
               </span>
               <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
             </a>
+            
+            
             <ul class="sidebar-submenu">
               <li>
                 <a href="{{route('lecturer.admin.add_role')}}">Add Role</a>
@@ -115,7 +126,7 @@
           <li class="">
             <a href="{{('/lecturer/admin/add_payment')}}" class="navItem">
               <span class="flex items-center">
-            <iconify-icon class=" nav-icon" icon="heroicons-outline:home"></iconify-icon>
+            <iconify-icon class=" nav-icon" icon="heroicons-outline:view-boards"></iconify-icon>
             <span>Payment</span>
               </span>
               {{-- <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon> --}}
@@ -136,7 +147,7 @@
                 <a href="{{url('/lecturer/admin/add_course')}}">Add Course</a>
               </li>
               <li>
-                <a href="{{url('/lecturer/admin/edit_countdown')}}">Change Countdown</a>
+                <a href="{{url('/lecturer/admin/upload_countdown')}}">Change Countdown</a>
               </li>
             </ul>
 
@@ -165,7 +176,7 @@
           <li class="">
             <a href="{{url('/lecturer/admin/clearance')}}" class="navItem">
               <span class="flex items-center">
-            <iconify-icon class=" nav-icon" icon="heroicons-outline:calendar"></iconify-icon>
+            <iconify-icon class=" nav-icon" icon="heroicons-outline:view-boards"></iconify-icon>
             <span>Clearance</span>
               </span>
               {{-- <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon> --}}
@@ -196,15 +207,17 @@
               </span>
             </a>
           </li> --}}
+          
           <li class="">
             <a href="{{('/lecturer/admin/settings_a')}}" class="navItem">
               <span class="flex items-center">
-            <iconify-icon class=" nav-icon" icon="heroicons-outline:calendar"></iconify-icon>
+            <iconify-icon class=" nav-icon" icon="material-symbols:settings-outline-rounded"></iconify-icon>
             <span>Settings</span>
               </span>
             </a>
           </li>
           </li>
+          
           <li class="">
             <a href="{{route('lecturer.admin.calender.get')}}" class="navItem">
               <span class="flex items-center">
@@ -213,6 +226,7 @@
               </span>
             </a>
           </li>
+          
           {{-- <li class="">
             <a href="javascript:void(0)" class="navItem">
               <span class="flex items-center">
@@ -233,6 +247,24 @@
               </li>
             </ul>
           </li> --}}
+          
+          
+          
+          <li class="">
+              
+            <form action="{{'/lecturer/admin/logout'}}" method="POST">
+                          @csrf
+                        <a class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white font-inter text-sm text-slate-600
+                        dark:text-white font-normal font-Inter font-weight:500">
+                          <iconify-icon icon="heroicons-outline:login" class="relative top-[2px] text-lg ltr:mr-1 rtl:ml-1"></iconify-icon>
+                          <button class="font-Inter">Logout</button>
+                        </a>
+                      </form>
+            
+          </li>
+          
+          
+          
 
         </ul>
 
@@ -735,11 +767,6 @@
 
 
 
-</div>
-
-
-
-
 
 
 
@@ -754,7 +781,7 @@
 @yield('add_level')
 @yield('add_payment')
 @yield('add_semester')
-@yield('add_session')
+@yield('add_section')
 @yield('add_student')
 @yield('calender')
 
@@ -767,7 +794,7 @@
 @yield('change_payment_details')
 @yield('change_picture')
 @yield('change_semester_details')
-@yield('change_session_details')
+@yield('change_section_details')
 @yield('change_student_details')
 
 @yield('clearance_form')
@@ -790,6 +817,8 @@
 @yield('upload_countdown')
 @yield('upload_result')
 
+@yield('edit_admin_role_permission')
+
 @yield('get_admin_permission')
 @yield('edit_admin_permission')
 @yield('edit_lecturer_permission')
@@ -807,10 +836,11 @@
 
 
 
+</div>
+</div>
 
 
-
-
+</main>
 
 
 
@@ -882,6 +912,13 @@
 
 
 
+<!-- scripts -->
+<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+  <script src="{{asset('assets/js/rt-plugins.js')}}"></script>
+  <script src="{{asset('assets/js/app.js')}}"></script>
+  
+</script>
+
     {{-- end footer --}}
 
 
@@ -889,11 +926,6 @@
 
 
 
-
-
-
-  </div>
-</main>
 
 
 </body>

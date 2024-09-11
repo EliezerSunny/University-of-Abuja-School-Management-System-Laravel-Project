@@ -36,6 +36,7 @@ class UserController extends Controller
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
             
+            
                 return redirect('/dashboard')->with('success', 'Successfully logged in!');
             
         } else{
@@ -134,18 +135,18 @@ class UserController extends Controller
 
         $user = Auth::guard('web')->user();
 
-        if (empty($request['password']) || empty($request['current_password']) || empty($request['password_confirmation'])) {
+        if (empty($request['password']) || empty($request['current_password']) || empty($request['confirm_password'])) {
             return back()->with('error', 'Input can\'t be empty!');
         }
 
-        if ($request['password'] != $request['password_confirmation']) {
+        if ($request['password'] != $request['confirm_password']) {
             return back()->with('error', 'New password and confirm password must match!');
         }
 
         $incomingFields = $request->validate([
-            'password' => ['required', 'min:5', 'max:200', 'confirmed'],
+            'password' => ['required', 'min:5', 'max:200'],
             'current_password' => ['required'],
-            'password_confirmation' => ['required'],
+            'confirm_password' => ['required'],
         ]);
 
 
@@ -171,6 +172,105 @@ class UserController extends Controller
 
 
 
+// course reg testing
+
+    
+    public function add_course_reg(Request $request)
+{
+    if (Auth::guard('web')->check()) {
+
+        $request->validate([
+            'faculty_id' => ['required', 'array'], // Array for multiple courses
+            'department_id' => ['required', 'array'],
+            'level_id' => ['required', 'array'],
+            'section_id' => ['required', 'array'],
+            'semester_id' => ['required', 'array'],
+            'course_id' => ['required', 'array'], // Array of selected course IDs
+            'course_unit' => ['required', 'array'], // Array of course units
+        ], 
+        [
+    'faculty_id.required' => 'Faculty ID is required.',
+    'department_id.required' => 'Department ID is required.',
+    'level_id.required' => 'Level ID is required.',
+    'section_id.required' => 'Section ID is required.',
+    'semester_id.required' => 'Semester ID is required.',
+    'course_id.required' => 'You must select at least one course.',
+    'course_unit.required' => 'Course unit is required for each course.',
+]
+        );
+
+        $userId = Auth::guard('web')->user()->id;
+        
+        $selectedCourseIds = $request->course_id; // Array of course IDs
+        $selectedCourseUnits = $request->course_unit; // Array of course units
+
+        // Loop through the selected courses
+        foreach ($selectedCourseIds as $index => $courseId) {
+            
+            $facultyId = $request->faculty_id[$courseId];
+            $departmentId = $request->department_id[$courseId];
+            $levelId = $request->level_id[$courseId];
+            $sectionId = $request->section_id[$courseId];
+            $semesterId = $request->semester_id[$courseId];
+            $courseUnit = $selectedCourseUnits[$courseId]; // Course unit for this course
+
+            // Check if the course is already registered by the user
+            $courseExist = CourseReg::where('user_id', $userId)
+                ->where('course_id', $courseId)
+                ->exists();
+
+            if ($courseExist) {
+                return back()->with('error', 'You have already selected one of the courses.');
+            }
+
+            // Check total course units for the semester and level
+            $totalFirstSemesterUnits = CourseReg::where('user_id', $userId)
+                ->where('level_id', $levelId)
+                ->where('section_id', $sectionId)
+                ->where('semester_id', 1)
+                ->sum('course_unit');
+
+            $totalSecondSemesterUnits = CourseReg::where('user_id', $userId)
+                ->where('level_id', $levelId)
+                ->where('section_id', $sectionId)
+                ->where('semester_id', 2)
+                ->sum('course_unit');
+
+            // Check if course unit limit is exceeded
+            if (($semesterId == 1 && $totalFirstSemesterUnits + $courseUnit > 25) || ($semesterId == 2 && $totalSecondSemesterUnits + $courseUnit > 25)) {
+                return back()->with('error', 'NOTE: You can\'t select more than 25 course units per semester.');
+            }
+
+            // Prepare data to save
+            $courseRegData = [
+                'user_id' => $userId,
+                'faculty_id' => $facultyId,
+                'department_id' => $departmentId,
+                'level_id' => $levelId,
+                'section_id' => $sectionId,
+                'semester_id' => $semesterId,
+                'course_id' => $courseId,
+                'course_unit' => $courseUnit,
+                'unique_id' => rand(time(), 1000000),
+                'status' => 'Active',
+            ];
+
+            // Save each course registration
+            CourseReg::create($courseRegData);
+        }
+
+        return back()->with('success', 'Courses registered successfully!');
+    }
+
+    return back()->with('error', 'User not authenticated.');
+}
+    
+// testing ends
+
+
+
+
+/*
     // Course Reg Controller
     public function add_course_reg(Request $request) {
 
@@ -182,7 +282,7 @@ class UserController extends Controller
             'faculty_id' => ['required', 'min:1'],
             'department_id' => ['required', 'min:1'],
             'level_id' => ['required', 'min:1'],
-            'session_id' => ['required', 'min:1'],
+            'section_id' => ['required', 'min:1'],
             'semester_id' => ['required', 'min:1'],
             'course_id' => ['required', 'min:1'],
             'course_unit' => ['required', 'min:1'],
@@ -195,6 +295,8 @@ class UserController extends Controller
         $requests['status'] = 'Active';
 
         $userId = Auth::guard('web')->user()->id;
+        
+        $requests['course_unit'] = $request->course_unit;
 
         $courseexist = CourseReg::where('user_id', $userId)->where('course_id', $requests['course_id'])->exists();
 
@@ -202,8 +304,8 @@ class UserController extends Controller
             return back()->with('error', 'You have already selected one of the course.');
         }
 
-        $fcourse_unit = CourseReg::where('user_id', '=', $userId)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->sum('course_unit');
-        $scourse_unit = CourseReg::where('user_id', '=', $userId)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->sum('course_unit');
+        $fcourse_unit = CourseReg::where('user_id', '=', $userId)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->sum('course_unit');
+        $scourse_unit = CourseReg::where('user_id', '=', $userId)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->sum('course_unit');
 
         if ($fcourse_unit >= 25) {
             return back()->with('error', 'NOTE: You can\'t select more than 25 unit course.');
@@ -213,7 +315,7 @@ class UserController extends Controller
             return back()->with('error', 'NOTE: You can\'t select more than 25 unit course.');
         }
         
-        // $combined_course = $request['faculty_id'] . $request['department_id'] . $request['level_id'] . $request['session_id'] . $request['semester_id'] . $request['course_id'] . $request['course_unit'];
+        // $combined_course = $request['faculty_id'] . $request['department_id'] . $request['level_id'] . $request['section_id'] . $request['semester_id'] . $request['course_id'] . $request['course_unit'];
  
         // $combined_course = $request['course_id'];
  
@@ -225,19 +327,27 @@ class UserController extends Controller
 
         
 
-            // foreach ($requests as $value) {
+            //
+            
+         //   $enroll_no = $request->enroll_no;
+       //     $student_name = $request->student_name;
+          //  $present= $request->present;
 
-                // $values = new CourseReg();
-                // $values->faculty_id = $value;
-                // $values->department_id = $value;
-                // $values->level_id = $value;
-                // $values->session_id = $value;
-                // $values->semester_id = $value;
-                // $values->course_id = $value;
-                // $values->course_unit = $value;
+            foreach($enroll_no as $key => $no)
+             {
+               $input['enroll_no'] = $no;
+               $input['student_name '] =            
+               $student_name[$key];
+               $input['present'] = $present[$key];
+ 
+               CourseReg::create($requests);
+
+}
+            
+            //
 
                 CourseReg::create($requests);
-            // }
+  
 
             
 
@@ -246,7 +356,7 @@ class UserController extends Controller
     }
 
 }
-
+*/
 
 
 public function change_course_reg_details(Request $request, CourseReg $courseregs) {
@@ -257,7 +367,7 @@ public function change_course_reg_details(Request $request, CourseReg $coursereg
             'faculty_id' => ['required', 'min:1'],
             'department_id' => ['required', 'min:1'],
             'level_id' => ['required', 'min:1'],
-            'session_id' => ['required', 'min:1'],
+            'section_id' => ['required', 'min:1'],
             'semester_id' => ['required', 'min:1'],
             'course_id' => ['required', 'min:1'],
             'course_unit' => ['required', 'min:1'],
@@ -267,7 +377,7 @@ public function change_course_reg_details(Request $request, CourseReg $coursereg
     $requests['faculty_id'] = strip_tags($requests['faculty_id']);
     $requests['department_id'] = strip_tags($requests['department_id']);
     $requests['level_id'] = strip_tags($requests['level_id']);
-    $requests['session_id'] = strip_tags($requests['session_id']);
+    $requests['section_id'] = strip_tags($requests['section_id']);
     $requests['semester_id'] = strip_tags($requests['semester_id']);
     $requests['course_id'] = strip_tags($requests['course_id']);
     $requests['course_unit'] = strip_tags($requests['course_unit']);
@@ -320,7 +430,7 @@ return back()->with('error', 'Something went wrong. Try again!');
             'faculty_id' => ['required'],
             'department_id' => ['required'],
             'level_id' => ['required'],
-            'session_id' => ['required'],
+            'section_id' => ['required'],
             'user_id' => ['required'],
             'school_receipt' => ['required', 'mimes:jpg,png,jpeg,pdf', 'max:1000000'],
             'student_result' => ['required', 'mimes:jpg,png,jpeg,pdf', 'max:1000000'],
@@ -421,7 +531,7 @@ return back()->with('error', 'Something went wrong. Try again!');
 
         $currentSession = $this->getCurrentSession();
 
-        $studentLevel = User::where('session_id', $currentSession)->get();
+        $studentLevel = User::where('section_id', $currentSession)->get();
 
         DB::transaction(function () use ($studentLevel) {
             foreach ($studentLevel as $studentLevels) {

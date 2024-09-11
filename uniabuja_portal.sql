@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2023 at 03:47 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Sep 11, 2024 at 06:27 AM
+-- Server version: 11.5.2-MariaDB
+-- PHP Version: 8.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `admins` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `faculty_id` bigint(20) UNSIGNED NOT NULL,
   `department_id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `unique_id` bigint(20) UNSIGNED DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `position` varchar(255) DEFAULT NULL,
@@ -52,8 +52,8 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `faculty_id`, `department_id`, `session_id`, `unique_id`, `name`, `position`, `picture`, `password`, `remember_token`, `school_email`, `email`, `phone_no`, `location`, `last_activity`, `status`, `created_at`, `updated_at`) VALUES
-(2, 7, 1, 3, 1577303032, 'Eliezer Sunny', 'Admin', '1702910251-Eliezer Sunny.jpg', '$2y$10$I5UaLcWTxoO4vwNrB.vvoOSLc8bIKOJJjJrRVnqHZ3rydcfni4/h2', NULL, 'eliezersunny2019@uniabuja.edu.ng', 'eliezersunny@eliezersunny.com', '+2348154596494', 'Oyo State. Nigeria', NULL, 'Active Now', '2023-12-03 19:38:51', '2023-12-18 22:37:31'),
+INSERT INTO `admins` (`id`, `faculty_id`, `department_id`, `section_id`, `unique_id`, `name`, `position`, `picture`, `password`, `remember_token`, `school_email`, `email`, `phone_no`, `location`, `last_activity`, `status`, `created_at`, `updated_at`) VALUES
+(2, 7, 1, 3, 1577303032, 'Eliezer Sunny', 'Admin', '1702910251-Eliezer Sunny.jpg', '$2y$10$YmA/fxBmcTt/QPglo9MLM.ZT0gtSJ.AurqQKVNuv4LTj5c2na0OnS', 'imYMs4gS6PLIsG4QLQWJbYynnbBlXW5mmrvuFCo7hWMJ1kfX3zvb4ssKClZp', 'eliezersunny2019@uniabuja.edu.ng', 'adetunjieliazer@gmail.com', '+2348154596494', 'Oyo State. Nigeria', NULL, 'Active Now', '2023-12-03 19:38:51', '2024-09-09 08:48:12'),
 (5, 7, 1, 3, 569527403, 'Paulson Tsemaye', 'Admin', 'user.png', '$2y$10$tud4cwdjBOz3qi7I7/3kROHZqOsxFpXPRBZjeChOgpssyOB77QxjS', NULL, 'paulsontsemaye2019@uniabuja.edu.ng', 'paulsontsemaye@paulsontsemaye.com', '+2348154596494', 'Oyo State. Nigeria', NULL, 'Active Now', '2023-12-18 00:35:00', '2023-12-18 22:36:43');
 
 -- --------------------------------------------------------
@@ -66,7 +66,7 @@ CREATE TABLE `cleared_clearances` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `faculty_id` bigint(20) UNSIGNED NOT NULL,
   `department_id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `lecturer_id` bigint(20) UNSIGNED NOT NULL,
   `admin_id` bigint(20) UNSIGNED DEFAULT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE `cleared_clearances` (
 -- Dumping data for table `cleared_clearances`
 --
 
-INSERT INTO `cleared_clearances` (`id`, `faculty_id`, `department_id`, `session_id`, `user_id`, `lecturer_id`, `admin_id`, `student_clearance_id`, `school_receipt`, `student_result`, `proof`, `status`, `created_at`, `updated_at`) VALUES
+INSERT INTO `cleared_clearances` (`id`, `faculty_id`, `department_id`, `section_id`, `user_id`, `lecturer_id`, `admin_id`, `student_clearance_id`, `school_receipt`, `student_result`, `proof`, `status`, `created_at`, `updated_at`) VALUES
 (10, 7, 1, 1, 1, 1, 2, 1, NULL, NULL, 'QWRldHVuamkgRWxpZXplciBBZGV0YXlvQ1NDLzIzNzEvMDAxMQ==Nw==MQ==', 'Approved', '2023-12-03 19:52:53', '2023-12-03 19:57:36');
 
 -- --------------------------------------------------------
@@ -106,7 +106,7 @@ CREATE TABLE `countdowns` (
 --
 
 INSERT INTO `countdowns` (`id`, `unique_id`, `coursereg_timer`, `status`, `created_at`, `updated_at`) VALUES
-(1, '425948287', 'December 31, 2023 23:59:59', 'Active', '2023-11-17 16:20:29', '2023-11-21 07:05:16');
+(1, '425948287', 'December 7, 2024 23:59:59', 'Active', '2023-11-17 16:20:29', '2024-09-08 23:20:46');
 
 -- --------------------------------------------------------
 
@@ -119,7 +119,7 @@ CREATE TABLE `courses` (
   `faculty_id` bigint(20) UNSIGNED NOT NULL,
   `department_id` bigint(20) UNSIGNED NOT NULL,
   `level_id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `semester_id` bigint(20) UNSIGNED NOT NULL,
   `unique_id` varchar(255) DEFAULT NULL,
   `course_code` varchar(255) DEFAULT NULL,
@@ -135,8 +135,28 @@ CREATE TABLE `courses` (
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `faculty_id`, `department_id`, `level_id`, `session_id`, `semester_id`, `unique_id`, `course_code`, `course_title`, `course_unit`, `course_status`, `status`, `created_at`, `updated_at`) VALUES
-(14, 7, 1, 1, 1, 1, '991825427', 'GST101A', 'USE OF ENGLISH', '2', 'C', 'Active', '2023-11-24 05:00:25', '2023-11-24 05:00:25');
+INSERT INTO `courses` (`id`, `faculty_id`, `department_id`, `level_id`, `section_id`, `semester_id`, `unique_id`, `course_code`, `course_title`, `course_unit`, `course_status`, `status`, `created_at`, `updated_at`) VALUES
+(14, 7, 1, 1, 1, 1, '991825427', 'GST101A', 'USE OF ENGLISH', '2', 'C', 'Active', '2023-11-24 05:00:25', '2023-11-24 05:00:25'),
+(15, 7, 1, 1, 1, 1, '1012869519', 'BIO101', 'GENERAL BIOLOGY I', '4', 'C', 'Active', '2024-08-26 19:48:43', '2024-08-26 19:48:43'),
+(16, 7, 1, 1, 1, 1, '291083867', 'CHM121', 'FOUNDATION CHEMISTRY I', '3', 'C', 'Active', '2024-08-26 19:50:08', '2024-08-26 19:50:08'),
+(17, 7, 1, 1, 1, 1, '615999394', 'MTH101', 'ELEMENTARY SET THEORY AND ALGEBRA', '2', 'C', 'Active', '2024-08-26 19:55:19', '2024-08-26 19:55:19'),
+(18, 7, 1, 1, 1, 1, '1249055869', 'MTH103', 'TRIGONOMETRY', '3', 'C', 'Active', '2024-08-26 19:56:15', '2024-08-26 19:56:15'),
+(19, 7, 1, 1, 1, 1, '1074447088', 'MTH105', 'COORDINATE GEOMETRY', '1', 'C', 'Active', '2024-08-26 19:57:32', '2024-08-26 19:57:32'),
+(20, 7, 1, 1, 1, 1, '328962603', 'PHY101', 'MECHANICS AND PROPERTIES OF MATTER', '3', 'C', 'Active', '2024-08-26 19:58:56', '2024-08-26 19:58:56'),
+(21, 7, 1, 1, 1, 1, '360124451', 'PHY102', 'INTRODUCTION TO HEAT AND THERMODYNAMICS', '2', 'C', 'Active', '2024-08-26 20:00:02', '2024-08-26 20:00:02'),
+(22, 7, 1, 1, 1, 1, '219406915', 'PHY108', 'BASIC EXPERIMENTAL PHYSICS I', '1', 'C', 'Active', '2024-08-26 20:01:40', '2024-08-26 20:01:40'),
+(23, 7, 1, 1, 1, 1, '881544765', 'STA101', 'PROBABILITY THEORY I', '2', 'C', 'Active', '2024-08-26 20:02:30', '2024-08-26 20:02:30'),
+(24, 7, 1, 1, 1, 2, '1506227689', 'CSC 102', 'Programming in Basic', '2', 'C', 'Active', '2024-09-09 07:49:33', '2024-09-09 07:49:33'),
+(25, 7, 1, 1, 1, 2, '1548654455', 'GST 101B', 'COMMUNICATION IN ENGLISH II', '2', 'C', 'Active', '2024-09-09 07:52:02', '2024-09-09 07:52:02'),
+(26, 7, 1, 1, 1, 2, '149986908', 'GST 102', 'LOGIC AND PHILOSOPHY', '2', 'C', 'Active', '2024-09-09 07:53:33', '2024-09-09 07:53:33'),
+(27, 7, 1, 1, 1, 2, '1656195180', 'GST 104', 'SCIENCE AND SOCIETY', '2', 'C', 'Active', '2024-09-09 07:54:52', '2024-09-09 07:54:52'),
+(28, 7, 1, 1, 1, 2, '369493767', 'GST 122', 'USE OF LIBRARY', '1', 'C', 'Active', '2024-09-09 07:56:05', '2024-09-09 07:56:05'),
+(29, 7, 1, 1, 1, 2, '20913789', 'MTH 102', 'CALCULUS AND ITS APPLICATION', '3', 'C', 'Active', '2024-09-09 07:57:29', '2024-09-09 07:57:29'),
+(30, 7, 1, 1, 1, 2, '131055686', 'MTH 104', 'VECTORS', '2', 'C', 'Active', '2024-09-09 07:58:36', '2024-09-09 07:58:36'),
+(31, 7, 1, 1, 1, 2, '800045670', 'MTH 106', 'CONICS', '2', 'C', 'Active', '2024-09-09 07:59:40', '2024-09-09 07:59:40'),
+(32, 7, 1, 1, 1, 2, '112229674', 'PHY 103', 'OPTICS, WAVES AND MODERN PHYSICS', '3', 'C', 'Active', '2024-09-09 08:00:54', '2024-09-09 08:00:54'),
+(33, 7, 1, 1, 1, 2, '1062609804', 'PHY 104', 'ELECTRICITY AND MAGNETISM', '2', 'C', 'Active', '2024-09-09 08:02:09', '2024-09-09 08:02:09'),
+(34, 7, 1, 1, 1, 2, '312834722', 'PHY 109', 'BASIC EXPERIMENTAL PHYSICS II', '1', 'C', 'Active', '2024-09-09 08:03:49', '2024-09-09 08:03:49');
 
 -- --------------------------------------------------------
 
@@ -149,7 +169,7 @@ CREATE TABLE `course_regs` (
   `faculty_id` bigint(20) UNSIGNED NOT NULL,
   `department_id` bigint(20) UNSIGNED NOT NULL,
   `level_id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `semester_id` bigint(20) UNSIGNED NOT NULL,
   `course_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
@@ -164,8 +184,38 @@ CREATE TABLE `course_regs` (
 -- Dumping data for table `course_regs`
 --
 
-INSERT INTO `course_regs` (`id`, `faculty_id`, `department_id`, `level_id`, `session_id`, `semester_id`, `course_id`, `user_id`, `unique_id`, `status`, `created_at`, `updated_at`, `course_unit`) VALUES
-(102, 7, 1, 1, 1, 1, 14, 1, '1385180430', 'Active', '2023-11-24 05:01:13', '2023-11-24 05:01:13', '2');
+INSERT INTO `course_regs` (`id`, `faculty_id`, `department_id`, `level_id`, `section_id`, `semester_id`, `course_id`, `user_id`, `unique_id`, `status`, `created_at`, `updated_at`, `course_unit`) VALUES
+(118, 7, 1, 1, 1, 1, 14, 1, '292479305', 'Active', '2024-08-27 07:44:14', '2024-08-27 07:44:14', '2'),
+(125, 7, 1, 1, 1, 1, 15, 1, '464376779', 'Active', '2024-09-08 20:50:35', '2024-09-08 20:50:35', '4'),
+(126, 7, 1, 1, 1, 1, 16, 1, '1015352060', 'Active', '2024-09-08 20:50:35', '2024-09-08 20:50:35', '3'),
+(127, 7, 1, 1, 1, 1, 17, 1, '975777689', 'Active', '2024-09-08 20:50:35', '2024-09-08 20:50:35', '2'),
+(128, 7, 1, 1, 1, 1, 18, 1, '1674786002', 'Active', '2024-09-08 20:50:35', '2024-09-08 20:50:35', '3'),
+(129, 7, 1, 1, 1, 1, 19, 1, '1627778135', 'Active', '2024-09-08 20:50:35', '2024-09-08 20:50:35', '1'),
+(130, 7, 1, 1, 1, 1, 20, 1, '1374500560', 'Active', '2024-09-08 20:50:35', '2024-09-08 20:50:35', '3'),
+(131, 7, 1, 1, 1, 1, 21, 1, '125604969', 'Active', '2024-09-08 20:50:36', '2024-09-08 20:50:36', '2'),
+(132, 7, 1, 1, 1, 1, 22, 1, '1294481910', 'Active', '2024-09-08 20:50:36', '2024-09-08 20:50:36', '1'),
+(133, 7, 1, 1, 1, 1, 23, 1, '451601127', 'Active', '2024-09-08 20:50:36', '2024-09-08 20:50:36', '2'),
+(134, 7, 1, 1, 1, 1, 14, 10, '432370833', 'Active', '2024-09-08 23:24:10', '2024-09-08 23:24:10', '2'),
+(135, 7, 1, 1, 1, 1, 15, 10, '1250472038', 'Active', '2024-09-08 23:24:10', '2024-09-08 23:24:10', '4'),
+(136, 7, 1, 1, 1, 1, 16, 10, '1453056740', 'Active', '2024-09-08 23:24:10', '2024-09-08 23:24:10', '3'),
+(137, 7, 1, 1, 1, 1, 17, 10, '768314068', 'Active', '2024-09-08 23:24:10', '2024-09-08 23:24:10', '2'),
+(138, 7, 1, 1, 1, 1, 18, 10, '991629191', 'Active', '2024-09-08 23:24:10', '2024-09-08 23:24:10', '3'),
+(139, 7, 1, 1, 1, 1, 19, 10, '964730976', 'Active', '2024-09-08 23:24:10', '2024-09-08 23:24:10', '1'),
+(140, 7, 1, 1, 1, 1, 20, 10, '1033306568', 'Active', '2024-09-08 23:24:10', '2024-09-08 23:24:10', '3'),
+(141, 7, 1, 1, 1, 1, 21, 10, '775714557', 'Active', '2024-09-08 23:24:10', '2024-09-08 23:24:10', '2'),
+(142, 7, 1, 1, 1, 1, 22, 10, '413865220', 'Active', '2024-09-08 23:24:10', '2024-09-08 23:24:10', '1'),
+(145, 7, 1, 1, 1, 1, 23, 10, '1694642610', 'Active', '2024-09-08 23:28:48', '2024-09-08 23:28:48', '2'),
+(146, 7, 1, 1, 1, 2, 24, 1, '1138066075', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '2'),
+(147, 7, 1, 1, 1, 2, 25, 1, '942698864', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '2'),
+(148, 7, 1, 1, 1, 2, 26, 1, '1126815501', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '2'),
+(149, 7, 1, 1, 1, 2, 27, 1, '1084677036', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '2'),
+(150, 7, 1, 1, 1, 2, 28, 1, '432320845', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '1'),
+(151, 7, 1, 1, 1, 2, 29, 1, '1626497171', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '3'),
+(152, 7, 1, 1, 1, 2, 30, 1, '807340678', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '2'),
+(153, 7, 1, 1, 1, 2, 31, 1, '1283110797', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '2'),
+(154, 7, 1, 1, 1, 2, 32, 1, '975585718', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '3'),
+(155, 7, 1, 1, 1, 2, 33, 1, '334180325', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '2'),
+(156, 7, 1, 1, 1, 2, 34, 1, '139903964', 'Active', '2024-09-09 08:08:27', '2024-09-09 08:08:27', '1');
 
 -- --------------------------------------------------------
 
@@ -251,7 +301,7 @@ CREATE TABLE `final_results` (
   `faculty_id` bigint(20) UNSIGNED NOT NULL,
   `department_id` bigint(20) UNSIGNED NOT NULL,
   `level_id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `semester_id` bigint(20) UNSIGNED NOT NULL,
   `result_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
@@ -276,7 +326,7 @@ CREATE TABLE `lecturers` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `faculty_id` bigint(20) UNSIGNED NOT NULL,
   `department_id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `unique_id` varchar(255) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `position` varchar(255) DEFAULT NULL,
@@ -297,8 +347,8 @@ CREATE TABLE `lecturers` (
 -- Dumping data for table `lecturers`
 --
 
-INSERT INTO `lecturers` (`id`, `faculty_id`, `department_id`, `session_id`, `unique_id`, `name`, `position`, `picture`, `password`, `remember_token`, `school_email`, `email`, `phone_no`, `location`, `last_activity`, `status`, `created_at`, `updated_at`) VALUES
-(1, 7, 1, 1, '911883908', 'Eliezer', 'Lecturer', '1697109904-Eliezer.jpg', '$2y$10$Kjynnag.cdTWGTbjG2twP..M64v59pP87kZ5ZSlUclIAeN5n.3IG2', NULL, 'eliezersunny2019@uniabuja.edu.ng', 'eliezersunny@eliezersunny.com', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-10-10 22:01:34', '2023-11-23 08:58:13'),
+INSERT INTO `lecturers` (`id`, `faculty_id`, `department_id`, `section_id`, `unique_id`, `name`, `position`, `picture`, `password`, `remember_token`, `school_email`, `email`, `phone_no`, `location`, `last_activity`, `status`, `created_at`, `updated_at`) VALUES
+(1, 7, 1, 1, '911883908', 'Eliezer', 'Lecturer', '1724563194-Eliezer.jpg', '$2y$10$Kjynnag.cdTWGTbjG2twP..M64v59pP87kZ5ZSlUclIAeN5n.3IG2', NULL, 'eliezersunny2019@uniabuja.edu.ng', 'eliezersunny@eliezersunny.com', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-10-10 22:01:34', '2024-08-25 04:19:54'),
 (2, 6, 2, 1, '1374265429', 'Priceless', 'Lecturer', 'user.png', '$2y$10$Y79ASKc.y8J2uug5EkBsEuUwzBH3okXNzZm/p53dK5s4SPlKhisca', NULL, 'priceless2019@uniabuja.edu.ng', 'priceless@priceless.com', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-10-12 16:29:14', '2023-11-23 23:13:03'),
 (3, 7, 1, 1, '515525186', 'Paulson Tsemaye', 'Lecturer', 'user.png', '$2y$10$BOnrn9piscIDs6myDGkmiej7ygBuIKQ7IsaNieyQ54OhBB3g/40fC', NULL, 'paulsontsemaye2019@uniabuja.edu.ng', 'paulsontsemaye@paulsontsemaye.com', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-10-12 16:33:16', '2023-12-18 22:40:47');
 
@@ -352,7 +402,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (4, '2023_08_22_110853_create_faculties_table', 1),
 (5, '2023_08_22_111854_create_departments_table', 1),
-(6, '2023_08_22_112050_create_sessions_table', 1),
+(6, '2023_08_22_112050_create_sections_table', 1),
 (7, '2023_10_10_090241_create_levels_table', 1),
 (8, '2014_10_12_000000_create_users_table', 2),
 (9, '2023_08_17_080838_create_admins_table', 2),
@@ -381,7 +431,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (32, '2023_11_24_170654_add_role_id_to_users', 20),
 (33, '2023_11_25_101430_create_admin_role_permissions_table', 21),
 (34, '2023_11_29_172244_add_department_abbrivation_to_departments', 22),
-(35, '2023_12_03_103324_create_permission_tables', 23);
+(35, '2023_12_03_103324_create_permission_tables', 23),
+(36, '2024_08_16_013843_create_sessions_table', 24);
 
 -- --------------------------------------------------------
 
@@ -404,6 +455,9 @@ INSERT INTO `model_has_permissions` (`permission_id`, `model_type`, `model_id`, 
 (1, 'App\\Models\\Admin', 2, NULL),
 (2, 'App\\Models\\Admin', 2, NULL),
 (3, 'App\\Models\\Admin', 2, NULL),
+(4, 'App\\Models\\Admin', 2, NULL),
+(5, 'App\\Models\\Admin', 2, NULL),
+(6, 'App\\Models\\Admin', 2, NULL),
 (7, 'App\\Models\\Admin', 2, NULL),
 (8, 'App\\Models\\Admin', 2, NULL),
 (9, 'App\\Models\\Admin', 2, NULL),
@@ -419,9 +473,23 @@ INSERT INTO `model_has_permissions` (`permission_id`, `model_type`, `model_id`, 
 (19, 'App\\Models\\Lecturer', 1, NULL),
 (19, 'App\\Models\\Lecturer', 2, NULL),
 (19, 'App\\Models\\Lecturer', 3, NULL),
+(24, 'App\\Models\\Admin', 2, NULL),
 (25, 'App\\Models\\Admin', 2, NULL),
+(26, 'App\\Models\\Admin', 2, NULL),
+(27, 'App\\Models\\Admin', 2, NULL),
+(28, 'App\\Models\\Admin', 2, NULL),
+(29, 'App\\Models\\Admin', 2, NULL),
+(30, 'App\\Models\\Admin', 2, NULL),
+(31, 'App\\Models\\Admin', 2, NULL),
+(32, 'App\\Models\\Admin', 2, NULL),
+(33, 'App\\Models\\Admin', 2, NULL),
+(34, 'App\\Models\\Admin', 2, NULL),
+(35, 'App\\Models\\Admin', 2, NULL),
+(36, 'App\\Models\\Admin', 2, NULL),
+(37, 'App\\Models\\Admin', 2, NULL),
 (42, 'App\\Models\\User', 1, NULL),
-(42, 'App\\Models\\User', 8, NULL);
+(42, 'App\\Models\\User', 8, NULL),
+(42, 'App\\Models\\User', 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -448,7 +516,8 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`, `team_id`) V
 (5, 'App\\Models\\Lecturer', 2, NULL),
 (5, 'App\\Models\\Lecturer', 3, NULL),
 (6, 'App\\Models\\User', 1, NULL),
-(6, 'App\\Models\\User', 8, NULL);
+(6, 'App\\Models\\User', 8, NULL),
+(6, 'App\\Models\\User', 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -467,7 +536,7 @@ CREATE TABLE `password_reset_tokens` (
 --
 
 INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
-('adetunjieliazer@gmail.com', '$2y$10$2y7pXfQNgLIwZexjXb7f2OUuBgFHTi6HA/QwubvSi16qozhs54Tii', '2023-10-27 07:29:29');
+('adetunjieliazer@gmail.com', '$2y$10$mOlNY8J7ZaeVR1RFqg7mG.W//GEjd6HBcn3dlpFVRhMp3HAlbAmLS', '2024-09-06 07:52:30');
 
 -- --------------------------------------------------------
 
@@ -480,7 +549,7 @@ CREATE TABLE `payments` (
   `faculty_id` bigint(20) UNSIGNED NOT NULL,
   `department_id` bigint(20) UNSIGNED NOT NULL,
   `level_id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `semester_id` bigint(20) UNSIGNED DEFAULT NULL,
   `course_id` bigint(20) UNSIGNED DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
@@ -498,8 +567,9 @@ CREATE TABLE `payments` (
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`id`, `faculty_id`, `department_id`, `level_id`, `session_id`, `semester_id`, `course_id`, `user_id`, `unique_id`, `currency`, `amount`, `payment_name`, `payment_url`, `status`, `created_at`, `updated_at`) VALUES
-(6, 7, 1, 1, 1, NULL, NULL, NULL, '1455248129', 'NGN', '50000', 'School Charges', 'school_charges', 'Active', '2023-11-27 07:19:05', '2023-11-27 07:19:05');
+INSERT INTO `payments` (`id`, `faculty_id`, `department_id`, `level_id`, `section_id`, `semester_id`, `course_id`, `user_id`, `unique_id`, `currency`, `amount`, `payment_name`, `payment_url`, `status`, `created_at`, `updated_at`) VALUES
+(6, 7, 1, 1, 1, NULL, NULL, NULL, '1455248129', 'NGN', '50000', 'School Charges', 'school_charges', 'Active', '2023-11-27 07:19:05', '2023-11-27 07:19:05'),
+(7, 6, 2, 1, 1, NULL, NULL, NULL, '421585072', 'NGN', '50000', 'School Charges', 'school_charges', 'Active', '2024-09-09 08:53:55', '2024-09-09 08:53:55');
 
 -- --------------------------------------------------------
 
@@ -594,7 +664,7 @@ CREATE TABLE `results` (
   `faculty_id` bigint(20) UNSIGNED NOT NULL,
   `department_id` bigint(20) UNSIGNED NOT NULL,
   `level_id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `semester_id` bigint(20) UNSIGNED NOT NULL,
   `course_reg_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
@@ -614,8 +684,9 @@ CREATE TABLE `results` (
 -- Dumping data for table `results`
 --
 
-INSERT INTO `results` (`id`, `faculty_id`, `department_id`, `level_id`, `session_id`, `semester_id`, `course_reg_id`, `user_id`, `lecturer_id`, `unique_id`, `course_unit`, `final_score`, `grade`, `weighted_grade_point`, `grade_point`, `status`, `created_at`, `updated_at`) VALUES
-(15, 7, 1, 1, 1, 1, 102, 1, 1, '625503759', '2', '50', 'C', '6', '3', 'Active', '2023-11-27 06:51:51', '2023-11-27 06:54:59');
+INSERT INTO `results` (`id`, `faculty_id`, `department_id`, `level_id`, `section_id`, `semester_id`, `course_reg_id`, `user_id`, `lecturer_id`, `unique_id`, `course_unit`, `final_score`, `grade`, `weighted_grade_point`, `grade_point`, `status`, `created_at`, `updated_at`) VALUES
+(20, 7, 1, 1, 1, 2, 156, 1, 1, '342468797', '1', '60', 'B', '4', '4', 'Active', '2024-09-09 19:33:16', '2024-09-09 19:33:16'),
+(21, 7, 1, 1, 1, 2, 146, 1, 1, '372479350', '2', '50', 'C', '6', '3', 'Active', '2024-09-11 05:06:03', '2024-09-11 05:14:01');
 
 -- --------------------------------------------------------
 
@@ -664,12 +735,37 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sections`
+--
+
+CREATE TABLE `sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `unique_id` varchar(255) DEFAULT NULL,
+  `section` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sections`
+--
+
+INSERT INTO `sections` (`id`, `unique_id`, `section`, `status`, `created_at`, `updated_at`) VALUES
+(1, '213363369', '2021/2022', 'Active', '2023-10-10 21:08:00', '2023-10-12 21:16:11'),
+(2, '7954922', '2022/2023', 'Active', '2023-10-10 21:08:15', '2023-10-10 21:08:15'),
+(3, '1026750623', '2023/2024', 'Active', '2023-10-10 21:08:26', '2023-10-10 21:08:26'),
+(4, '1009556041', '2024/2025', 'Active', '2024-08-25 21:59:20', '2024-08-25 21:59:20');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `semesters`
 --
 
 CREATE TABLE `semesters` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `unique_id` varchar(255) DEFAULT NULL,
   `semester` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
@@ -681,7 +777,7 @@ CREATE TABLE `semesters` (
 -- Dumping data for table `semesters`
 --
 
-INSERT INTO `semesters` (`id`, `session_id`, `unique_id`, `semester`, `status`, `created_at`, `updated_at`) VALUES
+INSERT INTO `semesters` (`id`, `section_id`, `unique_id`, `semester`, `status`, `created_at`, `updated_at`) VALUES
 (1, 1, '1181070315', 'First Semester', 'Active', '2023-10-21 05:31:20', '2023-10-21 06:21:13'),
 (2, 1, '1155615683', 'Second Semester', 'Active', '2023-10-21 05:32:39', '2023-10-21 05:32:39');
 
@@ -692,22 +788,24 @@ INSERT INTO `semesters` (`id`, `session_id`, `unique_id`, `semester`, `status`, 
 --
 
 CREATE TABLE `sessions` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `unique_id` varchar(255) DEFAULT NULL,
-  `session` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `id` varchar(255) NOT NULL,
+  `user_type` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `lecturer_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `admin_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
+  `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `sessions`
 --
 
-INSERT INTO `sessions` (`id`, `unique_id`, `session`, `status`, `created_at`, `updated_at`) VALUES
-(1, '213363369', '2021/2022', 'Active', '2023-10-10 21:08:00', '2023-10-12 21:16:11'),
-(2, '7954922', '2022/2023', 'Active', '2023-10-10 21:08:15', '2023-10-10 21:08:15'),
-(3, '1026750623', '2023/2024', 'Active', '2023-10-10 21:08:26', '2023-10-10 21:08:26');
+INSERT INTO `sessions` (`id`, `user_type`, `user_id`, `lecturer_id`, `admin_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('1dnNjVfzeffSK5stjHHDCCXR93wA55cA77dF2gQI', NULL, 1, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZFlZOThwaVVkcW9OVkNDWFJOWEhyQjFmSE11dkxFWXh1elpJV3J3ciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTk2OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY2hlY2tfcmVzdWx0P2xldmVsPTEmc2VtZXN0ZXI9MiZ0PWJuSlhWVXRVT0daRmJXOXFOMGRwV0c1c2MxRkhSWEZFUkcxR1dURkNhbXM1UVdKNlpEaDVhWGxSV25aYWRGSm9aMmhvV0dFNVVHOVpkMWRYVTNBM1NYVXpaVXh2ZFhCUVprSmpTbHBsY2tFM1FrVXlla3haZDI5SU1HaHVPVEo1TkdwbU13JTNEJTNEIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1726035267),
+('nZeZpRmH2ndXtZuvCH7mAfMqlo3FgutzMZYIUxBg', NULL, NULL, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidWpZZkpGbU9CNWFuZzhneXZiaWF1TGI5SGdibUpyMXVjSWxoSWZDZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sZWN0dXJlci9hZG1pbi9lZGl0X3Jlc3VsdHMvMjEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1726035243);
 
 -- --------------------------------------------------------
 
@@ -720,7 +818,7 @@ CREATE TABLE `student_clearances` (
   `faculty_id` bigint(20) UNSIGNED NOT NULL,
   `department_id` bigint(20) UNSIGNED NOT NULL,
   `level_id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `school_receipt` varchar(255) DEFAULT NULL,
   `student_result` varchar(255) DEFAULT NULL,
@@ -734,7 +832,7 @@ CREATE TABLE `student_clearances` (
 -- Dumping data for table `student_clearances`
 --
 
-INSERT INTO `student_clearances` (`id`, `faculty_id`, `department_id`, `level_id`, `session_id`, `user_id`, `school_receipt`, `student_result`, `proof`, `status`, `created_at`, `updated_at`) VALUES
+INSERT INTO `student_clearances` (`id`, `faculty_id`, `department_id`, `level_id`, `section_id`, `user_id`, `school_receipt`, `student_result`, `proof`, `status`, `created_at`, `updated_at`) VALUES
 (1, 7, 1, 1, 1, 1, '1698343138-feereceipt-Adetunji Eliazer Adetayo.jpg', '1698343138-result-Adetunji Eliazer Adetayo.jpg', NULL, 'Active', '2023-10-19 12:40:31', '2023-10-27 00:58:58');
 
 -- --------------------------------------------------------
@@ -748,7 +846,7 @@ CREATE TABLE `users` (
   `faculty_id` bigint(20) UNSIGNED NOT NULL,
   `department_id` bigint(20) UNSIGNED NOT NULL,
   `level_id` bigint(20) UNSIGNED NOT NULL,
-  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
   `unique_id` varchar(255) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `picture` varchar(255) DEFAULT NULL,
@@ -771,9 +869,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `faculty_id`, `department_id`, `level_id`, `session_id`, `unique_id`, `name`, `picture`, `programme`, `school_receipt`, `remember_token`, `school_email`, `email`, `email_verified_at`, `password`, `phone_no`, `location`, `last_activity`, `status`, `created_at`, `updated_at`) VALUES
-(1, 7, 1, 1, 1, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', '1697110341-Adetunji Eliazer Adetayo.png', 'QWRldHVuamkgRWxpZXplciBBZGV0YXlvQ1NDLzIzNzEvMDAxMQ==Nw==MQ==', NULL, NULL, 'eliezersunny2019@uniabuja.edu.ng', 'eliezersunny@eliezersunny.com', NULL, '$2y$10$tm9VLM2jJTyZxTBDQO8y.OQQ16vlTgkpDq2eE8pr37Ati6zAmkujq', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-10-12 15:25:56', '2023-11-23 22:53:41'),
-(8, 6, 2, 1, 1, 'ACC/2362/001', 'Sunny', 'user.png', 'U3Vubnk=QUNDLzIzNjIvMDAxMQ==Ng==Mg==', NULL, NULL, 'sunny2019@uniabuja.edu.ng', 'sunny@sunny.com', NULL, '$2y$10$Yu5dc7/Cso08CozxJHkpoOnma8BU3N7fQvZI8EFnOxVwH2bkb4MxW', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-11-30 02:39:24', '2023-11-30 02:39:24');
+INSERT INTO `users` (`id`, `faculty_id`, `department_id`, `level_id`, `section_id`, `unique_id`, `name`, `picture`, `programme`, `school_receipt`, `remember_token`, `school_email`, `email`, `email_verified_at`, `password`, `phone_no`, `location`, `last_activity`, `status`, `created_at`, `updated_at`) VALUES
+(1, 7, 1, 1, 1, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', '1697110341-Adetunji Eliazer Adetayo.png', 'QWRldHVuamkgRWxpZXplciBBZGV0YXlvQ1NDLzIzNzEvMDAxMQ==Nw==MQ==', NULL, 'pTW4NpzcmIcZk7DHFSNPjnSRVuFhbbWHhSCGQLScIs97NZ5sIQCmBlJ1XKYE', 'eliezersunny2019@uniabuja.edu.ngg', 'adetunjieliazer@gmail.com', NULL, '$2y$10$jxBaN2BBRFkl.AlQQnpU1uZAPKQ.skJbpGIZCJIpIBvvGQX7TyJhq', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-10-12 15:25:56', '2024-09-01 10:00:26'),
+(8, 6, 2, 1, 1, 'ACC/2362/001', 'Sunny', 'user.png', 'U3Vubnk=QUNDLzIzNjIvMDAxMQ==Ng==Mg==', NULL, NULL, 'sunny2019@uniabuja.edu.ng', 'sunny@sunny.com', NULL, '$2y$10$Yu5dc7/Cso08CozxJHkpoOnma8BU3N7fQvZI8EFnOxVwH2bkb4MxW', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-11-30 02:39:24', '2023-11-30 02:39:24'),
+(10, 7, 1, 1, 1, 'CSC/2471/002', 'Maxbeatx', 'user.png', 'TWF4YmVhdHg=Q1NDLzI0NzEvMDAyMQ==Nw==MQ==', NULL, NULL, 'eliezersunny2024@uniabuja.edu.ng', 'eliezersunny@eliezersunny.com', NULL, '$2y$10$sS2pTAcXvVZsxXQNWheW5OrKqQxJFZLDDLSgjPwPeJ6smV5c6KrnC', '8154596494', 'Abuja', NULL, 'Active', '2024-08-26 08:43:52', '2024-09-09 08:44:40');
 
 --
 -- Indexes for dumped tables
@@ -786,7 +885,7 @@ ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`),
   ADD KEY `admins_faculty_id_foreign` (`faculty_id`),
   ADD KEY `admins_department_id_foreign` (`department_id`),
-  ADD KEY `admins_session_id_foreign` (`session_id`);
+  ADD KEY `admins_section_id_foreign` (`section_id`);
 
 --
 -- Indexes for table `cleared_clearances`
@@ -795,7 +894,7 @@ ALTER TABLE `cleared_clearances`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cleared_clearances_faculty_id_foreign` (`faculty_id`),
   ADD KEY `cleared_clearances_department_id_foreign` (`department_id`),
-  ADD KEY `cleared_clearances_session_id_foreign` (`session_id`),
+  ADD KEY `cleared_clearances_section_id_foreign` (`section_id`),
   ADD KEY `cleared_clearances_user_id_foreign` (`user_id`),
   ADD KEY `cleared_clearances_lecturer_id_foreign` (`lecturer_id`),
   ADD KEY `cleared_clearances_admin_id_foreign` (`admin_id`),
@@ -815,7 +914,7 @@ ALTER TABLE `courses`
   ADD KEY `courses_faculty_id_foreign` (`faculty_id`),
   ADD KEY `courses_department_id_foreign` (`department_id`),
   ADD KEY `courses_level_id_foreign` (`level_id`),
-  ADD KEY `courses_session_id_foreign` (`session_id`),
+  ADD KEY `courses_section_id_foreign` (`section_id`),
   ADD KEY `courses_semester_id_foreign` (`semester_id`);
 
 --
@@ -826,7 +925,7 @@ ALTER TABLE `course_regs`
   ADD KEY `course_regs_faculty_id_foreign` (`faculty_id`),
   ADD KEY `course_regs_department_id_foreign` (`department_id`),
   ADD KEY `course_regs_level_id_foreign` (`level_id`),
-  ADD KEY `course_regs_session_id_foreign` (`session_id`),
+  ADD KEY `course_regs_section_id_foreign` (`section_id`),
   ADD KEY `course_regs_semester_id_foreign` (`semester_id`),
   ADD KEY `course_regs_course_id_foreign` (`course_id`),
   ADD KEY `course_regs_user_id_foreign` (`user_id`);
@@ -859,7 +958,7 @@ ALTER TABLE `final_results`
   ADD KEY `final_results_faculty_id_foreign` (`faculty_id`),
   ADD KEY `final_results_department_id_foreign` (`department_id`),
   ADD KEY `final_results_level_id_foreign` (`level_id`),
-  ADD KEY `final_results_session_id_foreign` (`session_id`),
+  ADD KEY `final_results_section_id_foreign` (`section_id`),
   ADD KEY `final_results_semester_id_foreign` (`semester_id`),
   ADD KEY `final_results_result_id_foreign` (`result_id`),
   ADD KEY `final_results_user_id_foreign` (`user_id`),
@@ -872,7 +971,7 @@ ALTER TABLE `lecturers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `lecturers_faculty_id_foreign` (`faculty_id`),
   ADD KEY `lecturers_department_id_foreign` (`department_id`),
-  ADD KEY `lecturers_session_id_foreign` (`session_id`);
+  ADD KEY `lecturers_section_id_foreign` (`section_id`);
 
 --
 -- Indexes for table `levels`
@@ -914,7 +1013,7 @@ ALTER TABLE `payments`
   ADD KEY `payments_faculty_id_foreign` (`faculty_id`),
   ADD KEY `payments_department_id_foreign` (`department_id`),
   ADD KEY `payments_level_id_foreign` (`level_id`),
-  ADD KEY `payments_session_id_foreign` (`session_id`),
+  ADD KEY `payments_section_id_foreign` (`section_id`),
   ADD KEY `payments_semester_id_foreign` (`semester_id`),
   ADD KEY `payments_course_id_foreign` (`course_id`),
   ADD KEY `payments_user_id_foreign` (`user_id`);
@@ -942,7 +1041,7 @@ ALTER TABLE `results`
   ADD KEY `results_faculty_id_foreign` (`faculty_id`),
   ADD KEY `results_department_id_foreign` (`department_id`),
   ADD KEY `results_level_id_foreign` (`level_id`),
-  ADD KEY `results_session_id_foreign` (`session_id`),
+  ADD KEY `results_section_id_foreign` (`section_id`),
   ADD KEY `results_semester_id_foreign` (`semester_id`),
   ADD KEY `results_course_reg_id_foreign` (`course_reg_id`),
   ADD KEY `results_user_id_foreign` (`user_id`),
@@ -963,17 +1062,27 @@ ALTER TABLE `role_has_permissions`
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
+-- Indexes for table `sections`
+--
+ALTER TABLE `sections`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `semesters`
 --
 ALTER TABLE `semesters`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `semesters_session_id_foreign` (`session_id`);
+  ADD KEY `semesters_section_id_foreign` (`section_id`);
 
 --
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_lecturer_id_index` (`lecturer_id`),
+  ADD KEY `sessions_admin_id_index` (`admin_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
 -- Indexes for table `student_clearances`
@@ -983,7 +1092,7 @@ ALTER TABLE `student_clearances`
   ADD KEY `student_clearances_faculty_id_foreign` (`faculty_id`),
   ADD KEY `student_clearances_department_id_foreign` (`department_id`),
   ADD KEY `student_clearances_level_id_foreign` (`level_id`),
-  ADD KEY `student_clearances_session_id_foreign` (`session_id`),
+  ADD KEY `student_clearances_section_id_foreign` (`section_id`),
   ADD KEY `student_clearances_user_id_foreign` (`user_id`);
 
 --
@@ -995,7 +1104,7 @@ ALTER TABLE `users`
   ADD KEY `users_faculty_id_foreign` (`faculty_id`),
   ADD KEY `users_department_id_foreign` (`department_id`),
   ADD KEY `users_level_id_foreign` (`level_id`),
-  ADD KEY `users_session_id_foreign` (`session_id`);
+  ADD KEY `users_section_id_foreign` (`section_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1023,13 +1132,13 @@ ALTER TABLE `countdowns`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `course_regs`
 --
 ALTER TABLE `course_regs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -1071,13 +1180,13 @@ ALTER TABLE `levels`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1095,7 +1204,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1104,16 +1213,16 @@ ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `sections`
+--
+ALTER TABLE `sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `semesters`
 --
 ALTER TABLE `semesters`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `sessions`
---
-ALTER TABLE `sessions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `student_clearances`
@@ -1125,7 +1234,7 @@ ALTER TABLE `student_clearances`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -1137,7 +1246,7 @@ ALTER TABLE `users`
 ALTER TABLE `admins`
   ADD CONSTRAINT `admins_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `admins_faculty_id_foreign` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `admins_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `admins_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `cleared_clearances`
@@ -1147,7 +1256,7 @@ ALTER TABLE `cleared_clearances`
   ADD CONSTRAINT `cleared_clearances_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `cleared_clearances_faculty_id_foreign` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `cleared_clearances_lecturer_id_foreign` FOREIGN KEY (`lecturer_id`) REFERENCES `lecturers` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `cleared_clearances_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cleared_clearances_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `cleared_clearances_student_clearance_id_foreign` FOREIGN KEY (`student_clearance_id`) REFERENCES `student_clearances` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `cleared_clearances_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
@@ -1158,8 +1267,8 @@ ALTER TABLE `courses`
   ADD CONSTRAINT `courses_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `courses_faculty_id_foreign` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `courses_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `courses_semester_id_foreign` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `courses_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `courses_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `courses_semester_id_foreign` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `course_regs`
@@ -1169,8 +1278,8 @@ ALTER TABLE `course_regs`
   ADD CONSTRAINT `course_regs_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `course_regs_faculty_id_foreign` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `course_regs_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `course_regs_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `course_regs_semester_id_foreign` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `course_regs_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `course_regs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
@@ -1188,8 +1297,8 @@ ALTER TABLE `final_results`
   ADD CONSTRAINT `final_results_lecturer_id_foreign` FOREIGN KEY (`lecturer_id`) REFERENCES `lecturers` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `final_results_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `final_results_result_id_foreign` FOREIGN KEY (`result_id`) REFERENCES `results` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `final_results_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `final_results_semester_id_foreign` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `final_results_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `final_results_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
@@ -1198,7 +1307,7 @@ ALTER TABLE `final_results`
 ALTER TABLE `lecturers`
   ADD CONSTRAINT `lecturers_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `lecturers_faculty_id_foreign` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `lecturers_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `lecturers_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `model_has_permissions`
@@ -1220,8 +1329,8 @@ ALTER TABLE `payments`
   ADD CONSTRAINT `payments_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `payments_faculty_id_foreign` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `payments_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `payments_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `payments_semester_id_foreign` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `payments_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `payments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
@@ -1233,8 +1342,8 @@ ALTER TABLE `results`
   ADD CONSTRAINT `results_faculty_id_foreign` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `results_lecturer_id_foreign` FOREIGN KEY (`lecturer_id`) REFERENCES `lecturers` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `results_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `results_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `results_semester_id_foreign` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `results_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `results_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
@@ -1248,7 +1357,7 @@ ALTER TABLE `role_has_permissions`
 -- Constraints for table `semesters`
 --
 ALTER TABLE `semesters`
-  ADD CONSTRAINT `semesters_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `semesters_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `student_clearances`
@@ -1257,7 +1366,7 @@ ALTER TABLE `student_clearances`
   ADD CONSTRAINT `student_clearances_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `student_clearances_faculty_id_foreign` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `student_clearances_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `student_clearances_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `student_clearances_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `student_clearances_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
@@ -1267,7 +1376,7 @@ ALTER TABLE `users`
   ADD CONSTRAINT `users_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `users_faculty_id_foreign` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `users_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `users_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `users_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

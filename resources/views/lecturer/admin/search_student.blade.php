@@ -100,7 +100,7 @@
                                           </th>
 
                                           <th scope="col" class=" table-th ">
-                                            Session
+                                            Section
                                           </th>
 
                                           <th scope="col" class=" table-th ">
@@ -157,12 +157,12 @@
                                           <td class="table-td ">{{$students->level->level}}</td>
                                           <td class="table-td ">
                                             <div>
-                                              {{$students->session->session}}
+                                              {{$students->section->section}}
                                             </div>
                                           </td>
                                           <td class="table-td ">{{$students->school_email}}</td>
                                           <td class="table-td ">{{$students->phone_no}}</td>
-                                          <td class="table-td "><?php echo time_elapsed_string($students->created_at); ?></td>
+                                          <td class="table-td ">{{$students->created_at->diffForHumans()}}</td>
                                           <td class="table-td ">
           
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500

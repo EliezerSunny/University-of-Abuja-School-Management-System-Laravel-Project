@@ -8,7 +8,7 @@ use App\Models\Course;
 use App\Models\Result;
 use App\Models\Faculty;
 use App\Models\Payment;
-use App\Models\Session;
+use App\Models\Section;
 use App\Models\Semester;
 use App\Models\Countdown;
 use App\Models\CourseReg;
@@ -45,7 +45,7 @@ class PagesController extends Controller
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $currentSession = $this->getCurrentSession();
@@ -67,7 +67,7 @@ class PagesController extends Controller
         $amountt = Payment::where('faculty_id', Auth::guard('web')->user()->faculty_id)->where('payment_name', 'School Charges')->first();
 
 
-        return view('dashboard', compact('amountt', 'currentSession', 'tokensss', 'faculty', 'semester', 'countDownTime', 'department', 'session', 'level', 'studentLevel', 'result'));
+        return view('dashboard', compact('amountt', 'currentSession', 'tokensss', 'faculty', 'semester', 'countDownTime', 'department', 'section', 'level', 'studentLevel', 'result'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -83,7 +83,7 @@ class PagesController extends Controller
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
         $course = Course::paginate();
         $dcourse = Auth::guard('web')->user()->department_id;
@@ -103,11 +103,11 @@ class PagesController extends Controller
 
 
 
-        $fcourse_unit = CourseReg::where('user_id', '=', $studentId)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->sum('course_unit');
-        $scourse_unit = CourseReg::where('user_id', '=', $studentId)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->sum('course_unit');
+        $fcourse_unit = CourseReg::where('user_id', '=', $studentId)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->sum('course_unit');
+        $scourse_unit = CourseReg::where('user_id', '=', $studentId)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->sum('course_unit');
 
 
-        return view('add_course_reg', compact('clearance', 'fcourse_unit', 'scourse_unit', 'countDownTime', 'currentDate', 'faculty', 'department', 'session', 'level', 'semester', 'course', 'fscourse', 'sscourse', 'coursereg', 'fregcourse', 'sregcourse'));
+        return view('add_course_reg', compact('clearance', 'fcourse_unit', 'scourse_unit', 'countDownTime', 'currentDate', 'faculty', 'department', 'section', 'level', 'semester', 'course', 'fscourse', 'sscourse', 'coursereg', 'fregcourse', 'sregcourse'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -125,7 +125,7 @@ public function check_course_reg(Request $request) {
 
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
     $course = Course::paginate();
     $dcourse = Auth::guard('web')->user()->department_id;
@@ -153,10 +153,10 @@ public function check_course_reg(Request $request) {
 
 
 
-    $fcourse_unit = CourseReg::where('user_id', '=', $studentId)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 1)->sum('course_unit');
-    $scourse_unit = CourseReg::where('user_id', '=', $studentId)->where('level_id', '=', 1)->where('session_id', '=', 1)->where('semester_id', '=', 2)->sum('course_unit');
+    $fcourse_unit = CourseReg::where('user_id', '=', $studentId)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 1)->sum('course_unit');
+    $scourse_unit = CourseReg::where('user_id', '=', $studentId)->where('level_id', '=', 1)->where('section_id', '=', 1)->where('semester_id', '=', 2)->sum('course_unit');
 
-    return view('check_course_reg', compact('levell', 'semesterr', 'clearance', 'fcourse_unit', 'scourse_unit', 'countDownTime', 'currentDate', 'faculty', 'department', 'session', 'level', 'semester', 'course', 'fscourse', 'sscourse', 'coursereg', 'fregcourse', 'sregcourse'));
+    return view('check_course_reg', compact('levell', 'semesterr', 'clearance', 'fcourse_unit', 'scourse_unit', 'countDownTime', 'currentDate', 'faculty', 'department', 'section', 'level', 'semester', 'course', 'fscourse', 'sscourse', 'coursereg', 'fregcourse', 'sregcourse'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -175,7 +175,7 @@ public function check_result(Request $request, Result $results, Level $levels) {
 
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
     $course = Course::paginate();
     $dcourse = Auth::guard('web')->user()->department_id;
@@ -194,17 +194,17 @@ public function check_result(Request $request, Result $results, Level $levels) {
         return back()->with('error', 'Input can\'t be empty');
     }
 
-    $fscourse_reg = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('session_id', '=', 1)->where('semester_id', '=', $semesterr)->get();
-    $sscourse_reg = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('session_id', '=', 1)->where('semester_id', '=', $semesterr)->get();
+    $fscourse_reg = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('section_id', '=', 1)->where('semester_id', '=', $semesterr)->get();
+    $sscourse_reg = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('section_id', '=', 1)->where('semester_id', '=', $semesterr)->get();
 
-    $bscourse_reg = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('session_id', '=', 1)->get();
+    $bscourse_reg = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('section_id', '=', 1)->get();
 
-    $ffscourse_reg = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('session_id', '=', 1)->where('semester_id', '=', $semesterr)->sum('weighted_grade_point');
-    $ssscourse_reg = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('session_id', '=', 1)->where('semester_id', '=', $semesterr)->sum('weighted_grade_point');
+    $ffscourse_reg = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('section_id', '=', 1)->where('semester_id', '=', $semesterr)->sum('weighted_grade_point');
+    $ssscourse_reg = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('section_id', '=', 1)->where('semester_id', '=', $semesterr)->sum('weighted_grade_point');
 
 
-    $fcourse_unit = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('session_id', '=', 1)->where('semester_id', '=', $semesterr)->sum('course_unit');
-    $scourse_unit = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('session_id', '=', 1)->where('semester_id', '=', $semesterr)->sum('course_unit');
+    $fcourse_unit = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('section_id', '=', 1)->where('semester_id', '=', $semesterr)->sum('course_unit');
+    $scourse_unit = Result::where('user_id', '=', Auth::guard('web')->user()->id)->where('level_id', '=', $levell)->where('section_id', '=', 1)->where('semester_id', '=', $semesterr)->sum('course_unit');
 
     $semester = Semester::paginate();
     $clearance = StudentClearance::where('user_id', auth()->user('web')->id)->get();
@@ -212,7 +212,7 @@ public function check_result(Request $request, Result $results, Level $levels) {
 
     $countDownTime = Countdown::where('id', '=', 1)->first();
 
-    return view('check_result', compact('levell', 'semesterr', 'fscourse_reg', 'countDownTime', 'ffscourse_reg', 'bscourse_reg', 'fcourse_unit', 'scourse_unit', 'sscourse_reg', 'ssscourse_reg', 'clearance', 'faculty', 'department', 'session', 'level', 'levels', 'semester', 'course', 'fscourse', 'sscourse', 'coursereg', 'fregcourse', 'sregcourse'));
+    return view('check_result', compact('levell', 'semesterr', 'fscourse_reg', 'countDownTime', 'ffscourse_reg', 'bscourse_reg', 'fcourse_unit', 'scourse_unit', 'sscourse_reg', 'ssscourse_reg', 'clearance', 'faculty', 'department', 'section', 'level', 'levels', 'semester', 'course', 'fscourse', 'sscourse', 'coursereg', 'fregcourse', 'sregcourse'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -229,7 +229,7 @@ public function check_result(Request $request, Result $results, Level $levels) {
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
         $clearance = StudentClearance::where('user_id', auth()->user('web')->id)->get();
         $clearedclearance = ClearedClearance::where('user_id', auth()->user('web')->id)->where('status', '=', 'Approved')->get();
@@ -249,7 +249,7 @@ public function check_result(Request $request, Result $results, Level $levels) {
 
            
 
-        return view('clearance_form', compact('clearance', 'countDownTime', 'clearedclearance', 'name', 'tokens', 'token', 'faculty', 'department', 'session', 'level'));
+        return view('clearance_form', compact('clearance', 'countDownTime', 'clearedclearance', 'name', 'tokens', 'token', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -266,14 +266,14 @@ public function check_result(Request $request, Result $results, Level $levels) {
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
         $clearance = StudentClearance::where('user_id', auth()->user('web')->id)->get();
         $clearedclearance = ClearedClearance::where('user_id', auth()->user('web')->id)->where('status', '=', 'Approved')->get();
 
         $countDownTime = Countdown::where('id', '=', 1)->first();
 
-        return view('edit_clearance_form', compact('edit', 'countDownTime', 'clearance', 'clearedclearance', 'faculty', 'department', 'session', 'level'));
+        return view('edit_clearance_form', compact('edit', 'countDownTime', 'clearance', 'clearedclearance', 'faculty', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -288,7 +288,7 @@ public function print_clearance_letter(Request $request, StudentClearance $edit,
 
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
     $clearance = StudentClearance::where('user_id', auth()->user('web')->id)->get();
     $clearedclearance = ClearedClearance::where('user_id', auth()->user('web')->id)->where('status', '=', 'Approved')->get();
@@ -306,7 +306,7 @@ public function print_clearance_letter(Request $request, StudentClearance $edit,
         
         }
 
-return view('print_clearance_letter', compact('edit', 'countDownTime', 'clearance', 'name', 'token', 'clearedclearance', 'faculty', 'department', 'session', 'level'));
+return view('print_clearance_letter', compact('edit', 'countDownTime', 'clearance', 'name', 'token', 'clearedclearance', 'faculty', 'department', 'section', 'level'));
 
 
 
@@ -326,12 +326,12 @@ return view('print_clearance_letter', compact('edit', 'countDownTime', 'clearanc
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $countDownTime = Countdown::where('id', '=', 1)->first();
 
-        return view('settings', compact('faculty', 'countDownTime', 'department', 'session', 'level'));
+        return view('settings', compact('faculty', 'countDownTime', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -345,12 +345,12 @@ return view('print_clearance_letter', compact('edit', 'countDownTime', 'clearanc
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
-        $session = Session::paginate();
+        $section = Section::paginate();
         $level = Level::paginate();
 
         $countDownTime = Countdown::where('id', '=', 1)->first();
 
-        return view('change_picture', compact('faculty', 'countDownTime', 'department', 'session', 'level'));
+        return view('change_picture', compact('faculty', 'countDownTime', 'department', 'section', 'level'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -363,12 +363,12 @@ public function change_password() {
 
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $countDownTime = Countdown::where('id', '=', 1)->first();
 
-    return view('change_password', compact('faculty', 'countDownTime', 'department', 'session', 'level'));
+    return view('change_password', compact('faculty', 'countDownTime', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
@@ -383,12 +383,12 @@ public function calender() {
 
     $faculty = Faculty::paginate();
     $department = Department::paginate();
-    $session = Session::paginate();
+    $section = Section::paginate();
     $level = Level::paginate();
 
     $countDownTime = Countdown::where('id', '=', 1)->first();
 
-    return view('calender', compact('faculty', 'countDownTime', 'department', 'session', 'level'));
+    return view('calender', compact('faculty', 'countDownTime', 'department', 'section', 'level'));
 } else {
     return back()->with('error', 'Unauthorized access!');
 }
