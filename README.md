@@ -26,7 +26,7 @@ The University of Abuja School Management System, built on the Laravel framework
   - Laravel's secure authentication system for students, faculty, and administrators.
 
 
-  * Student login page:
+* Student login page:
 ![img](public/assets/images/student_login.png)
 
 * Student dashboard page:
@@ -81,7 +81,7 @@ For detailed installation instructions, please refer to the [Installation Guide]
 
 url: 127.0.0.1:8000/lecturer/admin
 
-1. email: adetunjieliazer@gmail.com password: 12345
+1. email: eliezersunny@gmail.com password: 12345
 2. email: paulsontsemaye@paulsontsemaye.com password: 12345
 
 ### Lecturer Logins
