@@ -53,7 +53,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `faculty_id`, `department_id`, `section_id`, `unique_id`, `name`, `position`, `picture`, `password`, `remember_token`, `school_email`, `email`, `phone_no`, `location`, `last_activity`, `status`, `created_at`, `updated_at`) VALUES
-(2, 7, 1, 3, 1577303032, 'Eliezer Sunny', 'Admin', '1702910251-Eliezer Sunny.jpg', '$2y$10$YmA/fxBmcTt/QPglo9MLM.ZT0gtSJ.AurqQKVNuv4LTj5c2na0OnS', 'imYMs4gS6PLIsG4QLQWJbYynnbBlXW5mmrvuFCo7hWMJ1kfX3zvb4ssKClZp', 'eliezersunny2019@uniabuja.edu.ng', 'adetunjieliazer@gmail.com', '+2348154596494', 'Oyo State. Nigeria', NULL, 'Active Now', '2023-12-03 19:38:51', '2024-09-09 08:48:12'),
+(2, 7, 1, 3, 1577303032, 'Eliezer Sunny', 'Admin', '1702910251-Eliezer Sunny.jpg', '$2y$10$YmA/fxBmcTt/QPglo9MLM.ZT0gtSJ.AurqQKVNuv4LTj5c2na0OnS', 'imYMs4gS6PLIsG4QLQWJbYynnbBlXW5mmrvuFCo7hWMJ1kfX3zvb4ssKClZp', 'eliezersunny2019@uniabuja.edu.ng', 'eliezersunny@gmail.com', '+2348154596494', 'Oyo State. Nigeria', NULL, 'Active Now', '2023-12-03 19:38:51', '2024-09-09 08:48:12'),
 (5, 7, 1, 3, 569527403, 'Paulson Tsemaye', 'Admin', 'user.png', '$2y$10$tud4cwdjBOz3qi7I7/3kROHZqOsxFpXPRBZjeChOgpssyOB77QxjS', NULL, 'paulsontsemaye2019@uniabuja.edu.ng', 'paulsontsemaye@paulsontsemaye.com', '+2348154596494', 'Oyo State. Nigeria', NULL, 'Active Now', '2023-12-18 00:35:00', '2023-12-18 22:36:43');
 
 -- --------------------------------------------------------
