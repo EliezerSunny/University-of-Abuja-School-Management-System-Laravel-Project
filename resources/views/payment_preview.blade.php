@@ -145,6 +145,8 @@
 
 
 
+
+                    
                     <div class="lg:col-span-12 col-span-12">
                       <div class="card h-full">
                         <header class="card-header">
@@ -167,9 +169,17 @@
                                           <th scope="col" class=" table-th ">
                                             #
                                           </th>
+
+                                          <th scope="col" class=" table-th ">
+                                            Matric No
+                                          </th>
+
+                                          <th scope="col" class=" table-th ">
+                                            Name
+                                          </th>
           
                                           <th scope="col" class=" table-th ">
-                                            Academic Section
+                                            Academic Session
                                           </th>
           
                                           <th scope="col" class=" table-th ">
@@ -183,6 +193,10 @@
                                           <th scope="col" class=" table-th ">
                                             Amount
                                           </th>
+                                          
+                                          <th scope="col" class=" table-th ">
+                                            Amount in Words
+                                          </th>
           
                                           <th scope="col" class=" table-th ">
                                             Status
@@ -194,16 +208,30 @@
           
                                         </tr>
                                       </thead>
+
+                                      @if (count($paymentSuccess) === 0)
+                                      <td>
+                                         <th colspan="9">
+                                            <h5 style="color:red; text-align: center;">No record found</h5>
+                                         </td>
+                                      </tr>
+                                      @else
+    
+                                          @foreach ($paymentSuccess as $paymentSuccesss)
+
                                       <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
           
                                         <tr>
-                                          <td class="table-td">1</td>
-                                          <td class="table-td ">2018/2019</td>
+                                          <td class="table-td">{{$loop->iteration}}</td>
+                                          <td class="table-td ">{{$paymentSuccesss->matric_no}}</td>
+                                          <td class="table-td ">{{$paymentSuccesss->name}}</td>
+                                          <td class="table-td ">{{$paymentSuccesss->academic_section}}</td>
                                           <td class="table-td">
-                                            School Charges
+                                            {{$paymentSuccesss->payment_name}}
                                           </td>
-                                          <td class="table-td ">400</td>
-                                          <td class="table-td "># 49,000</td>
+                                          <td class="table-td ">{{$paymentSuccesss->level}}</td>
+                                          <td class="table-td "># {{$paymentSuccesss->amount_paid}}</td>
+                                          <td class="table-td ">{{$paymentSuccesss->amount_in_words}}</td>
                                           <td class="table-td ">
                                             <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
                                         bg-success-500">
@@ -211,8 +239,12 @@
                                             </div>
                                           </td>
                                           <td class="table-td ">
-                                            <div class="inline-block cursor-pointer px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] text-white
-                                        bg-black">Print
+                                            <div class="flex space-x-3 rtl:space-x-reverse">
+                                              <a href="{{('payment_successful/' . $paymentSuccesss->id . 'p' . $time . '?' . $tokensss)}}" target="_blank">
+                                                <button class="action-btn" type="button">
+                                                  <iconify-icon icon="heroicons:pencil-square"></iconify-icon>
+                                                </button></a>
+                                              
                                             </div>
                                           </td>
                                         </tr>
@@ -220,6 +252,8 @@
                                         {{--STOP--}}
           
                                       </tbody>
+                                      @endforeach
+                                      @endif
                                     </table>
                                   </div>
                                 </div>

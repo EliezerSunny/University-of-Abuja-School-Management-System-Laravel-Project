@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ClearedClearance;
 use App\Models\StudentClearance;
+use App\Models\PaymentSuccessful;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Console\Input\Input;
@@ -50,6 +51,8 @@ class PagesController extends Controller
 
         $currentSession = $this->getCurrentSession();
 
+        $paymentSuccess = PaymentSuccessful::where('matric_no', Auth::guard('web')->user()->matric_no)->orwhere('name', '=', Auth::guard('web')->user()->name)->get();
+
         $studentLevel = User::where('id', Auth::guard('web')->user()->id)->get();
 
         $result = Result::get();
@@ -61,13 +64,14 @@ class PagesController extends Controller
             $tokenss = Str::random(100);
         }
 
-    
+        $time = rand(time(), 100);
+
         $tokensss = base64_encode($tokenss);
 
         $amountt = Payment::where('faculty_id', Auth::guard('web')->user()->faculty_id)->where('payment_name', 'School Charges')->first();
 
 
-        return view('dashboard', compact('amountt', 'currentSession', 'tokensss', 'faculty', 'semester', 'countDownTime', 'department', 'section', 'level', 'studentLevel', 'result'));
+        return view('dashboard', compact('amountt', 'paymentSuccess', 'currentSession', 'time', 'tokensss', 'faculty', 'semester', 'countDownTime', 'department', 'section', 'level', 'studentLevel', 'result'));
     } else {
         return back()->with('error', 'Unauthorized access!');
     }
@@ -79,7 +83,7 @@ class PagesController extends Controller
 
     public function add_course_reg() {
 
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasPermissionTo('dashboard_s')) {
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
@@ -121,7 +125,7 @@ class PagesController extends Controller
 
 public function check_course_reg(Request $request) {
 
-    if (Auth::guard('web')->check()) {
+    if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasPermissionTo('dashboard_s')) {
 
     $faculty = Faculty::paginate();
     $department = Department::paginate();
@@ -169,7 +173,7 @@ public function check_course_reg(Request $request) {
 
 public function check_result(Request $request, Result $results, Level $levels) {
 
-    if (Auth::guard('web')->check()) {
+    if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasPermissionTo('dashboard_s')) {
 
 
 
@@ -225,7 +229,7 @@ public function check_result(Request $request, Result $results, Level $levels) {
 
     public function clearance_form(Request $request) {
 
-        if (Auth::guard('web')->check() /*&& Auth::guard('web')->user()->hasPermissionTo('final_year')*/) {
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasPermissionTo('dashboard_s') /*&& Auth::guard('web')->user()->hasPermissionTo('final_year')*/) {
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
@@ -262,7 +266,7 @@ public function check_result(Request $request, Result $results, Level $levels) {
 
     public function edit_clearance_form(StudentClearance $edit) {
 
-        if (Auth::guard('web')->check() /*&& Auth::guard('web')->user()->hasPermissionTo('final_year')*/) {
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasPermissionTo('dashboard_s') /*&& Auth::guard('web')->user()->hasPermissionTo('final_year')*/) {
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
@@ -284,7 +288,7 @@ public function check_result(Request $request, Result $results, Level $levels) {
 
 public function print_clearance_letter(Request $request, StudentClearance $edit, $token, $name) {
 
-    if (Auth::guard('web')->check() /*&& Auth::guard('web')->user()->hasPermissionTo('final_year')*/) {
+    if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasPermissionTo('dashboard_s') /*&& Auth::guard('web')->user()->hasPermissionTo('final_year')*/) {
 
     $faculty = Faculty::paginate();
     $department = Department::paginate();
@@ -322,7 +326,7 @@ return view('print_clearance_letter', compact('edit', 'countDownTime', 'clearanc
 
     public function change_email() {
 
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasPermissionTo('dashboard_s')) {
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
@@ -341,7 +345,7 @@ return view('print_clearance_letter', compact('edit', 'countDownTime', 'clearanc
 
     public function change_picture() {
 
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasPermissionTo('dashboard_s')) {
 
         $faculty = Faculty::paginate();
         $department = Department::paginate();
@@ -359,7 +363,7 @@ return view('print_clearance_letter', compact('edit', 'countDownTime', 'clearanc
 
 public function change_password() {
 
-    if (Auth::guard('web')->check()) {
+    if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasPermissionTo('dashboard_s')) {
 
     $faculty = Faculty::paginate();
     $department = Department::paginate();
@@ -379,7 +383,7 @@ public function change_password() {
 
 public function calender() {
 
-    if (Auth::guard('web')->check()) {
+    if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasPermissionTo('dashboard_s')) {
 
     $faculty = Faculty::paginate();
     $department = Department::paginate();

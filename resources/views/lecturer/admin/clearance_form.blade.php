@@ -81,9 +81,9 @@
                                       </div>
       
                                       <div class="input-area" hidden>
-                                        <label for="session_id" class="form-label">Session:</label>
+                                        <label for="section_id" class="form-label">Section:</label>
                                         <div class="relative">
-                                          <input id="session_id" type="text" name="session_id" class="form-control" readonly value="{{$students->session_id}}" placeholder="Session" required="required">
+                                          <input id="section_id" type="text" name="section_id" class="form-control" readonly value="{{$students->section_id}}" placeholder="Section" required="required">
                                         </div>
                                       </div>
 

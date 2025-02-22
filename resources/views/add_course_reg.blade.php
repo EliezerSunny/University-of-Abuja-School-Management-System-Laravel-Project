@@ -42,7 +42,7 @@
                           <p id="demo"></p>
                         </div>
                   
-                        <div class="exit">
+                        <div class="exit" style="display: none">
 
                     <div class="container">
 
@@ -136,7 +136,7 @@
                       
                           
                         {{-- First Semester--}}
-                        <div class="course_registeration">
+                        <div class="btnrt course_registeration" style="display: none">
                         <div class="lg:col-span-12 col-span-12">
                             <div class="card h-full">
                               <header class="card-header">
@@ -502,7 +502,7 @@
                                                   Status
                                                 </th>
 
-                                                <th scope="col" class=" table-th ">
+                                                <th scope="col " class="btnrt table-th ">
                                                   Action
                                                 </th>
                 
@@ -679,7 +679,7 @@
                                                   Status
                                                 </th>
 
-                                                <th scope="col" class=" table-th ">
+                                                <th scope="col" class="btnrt table-th ">
                                                   Action
                                                 </th>
                 

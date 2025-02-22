@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Uniabuja integrated portal">
     <link rel="icon" type="image/png" href="{{asset('assets/images/logo/Uniabuja.png')}}">
-    <title>Print Clearance Letter || Uniabuja Portal</title>
+    <title>{{Auth::guard('web')->user()->unique_id}} || {{Auth::guard('web')->user()->name}} Print Clearance Letter</title>
     <link rel="stylesheet" href="{{asset('assets/css/clearance_letter.css')}}">
 </head>
 <body>

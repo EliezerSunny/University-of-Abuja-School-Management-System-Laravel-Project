@@ -105,8 +105,8 @@
                         <div class="card-body p-6">
                             <div class="card-text h-full">
 
-                          <form class="space-y-4 wizard-form" id="paymentForm">
-
+                          <form class="space-y-4 wizard-form" id="paymentForm" action="{{route('payment_successful.post')}}" method="POST">
+                            @csrf
                             
                             <div class="grid md:grid-cols-2 gap-6">
 
@@ -118,9 +118,9 @@
                               </div>
 
                               <div class="input-area">
-                                <label for="full_name" class="form-label">Full Name:</label>
+                                <label for="name" class="form-label">Full Name:</label>
                                 <div class="relative">
-                                  <input id="full_name" type="text" name="full_name" readonly value="{{Auth::guard('web')->user()->name}}" class="form-control" placeholder="Full Name" required="required">
+                                  <input id="name" type="text" name="name" readonly value="{{Auth::guard('web')->user()->name}}" class="form-control" placeholder="Full Name" required="required">
                                 </div>
                               </div>
 
@@ -159,9 +159,9 @@
 
 
                                 <div class="input-area">
-                                    <label for="email_address" class="form-label">Email:</label>
+                                    <label for="email" class="form-label">Email:</label>
                                     <div class="relative">
-                                      <input id="email_address" type="email" name="email_address" value="{{Auth::guard('web')->user()->email}}" readonly class="form-control" placeholder="Email" required="required">
+                                      <input id="email" type="email" name="email" value="{{Auth::guard('web')->user()->email}}" readonly class="form-control" placeholder="Email" required="required">
                                     </div>
                                   </div>
                                   
@@ -173,122 +173,48 @@
                                     </div>
                                   </div>
 
+
+                                  <div class="input-area">
+                                    <label for="academic_section" class="form-label">Academic Section:</label>
+                                    <div class="relative">
+                                      <input id="academic_section" type="text" name="academic_section" class="form-control" readonly value="{{Auth::guard('web')->user()->section->section}}" placeholder="Academic Section" required="required">
+                                    </div>
+                                  </div>    
+
                                 
 
                                   <div class="input-area">
-                                    <label for="amount" class="form-label">Amount:</label>
+                                    <label for="amount_paid" class="form-label">Amount:</label>
                                     <div class="relative">
-                                      <input id="amount" type="tel" name="amount" class="form-control" readonly value="{{$amount}}" placeholder="Amount" required="required">
+                                      <input id="amount_paid" type="tel" name="amount_paid" class="form-control" readonly value="{{$amount}}" placeholder="Amount" required="required">
                                     </div>
                                   </div>
 
-                        
+                                  
                               
                               </div>
 
                             <button class="flex justify-center cursor-pointer px-3 min-w-[90px] text-center ml-auto py-2 rounded-[999px] text-white
                           bg-black" onclick="payWithPaystack()">Pay</button>
 
+                    
+
+                        
                           </form>
 
                             </div>
                         </div>
 
-                      </div>
-                    </div>
-
-                    </div>
-
-
-
-                    <div class="lg:col-span-12 col-span-12">
-                      <div class="card h-full">
-                        <header class="card-header">
-                          <h4 class="card-title">Recent Payment Made</h4>
-                        </header>
-
-                        <div class="card-body p-6">
-
-                          <div class="card">
-                            <div class="card-body px-6 pb-6">
-                              <div class="overflow-x-auto -mx-6 dashcode-data-table">
-                                <span class=" col-span-8  hidden"></span>
-                                <span class="  col-span-4 hidden"></span>
-                                <div class="inline-block min-w-full align-middle">
-                                  <div class="overflow-hidden">
-                                    <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" id="data-table">
-                                      <thead class=" border-t border-slate-100 dark:border-slate-800">
-                                        <tr>
-          
-                                          <th scope="col" class=" table-th ">
-                                            #
-                                          </th>
-          
-                                          <th scope="col" class=" table-th ">
-                                            Academic Session
-                                          </th>
-          
-                                          <th scope="col" class=" table-th ">
-                                            Payment Description
-                                          </th>
-          
-                                          <th scope="col" class=" table-th ">
-                                            Level
-                                          </th>
-          
-                                          <th scope="col" class=" table-th ">
-                                            Amount
-                                          </th>
-          
-                                          <th scope="col" class=" table-th ">
-                                            Status
-                                          </th>
-          
-                                          <th scope="col" class=" table-th ">
-                                            Action
-                                          </th>
-          
-                                        </tr>
-                                      </thead>
-                                      <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
-          
-                                        <tr>
-                                          <td class="table-td">1</td>
-                                          <td class="table-td ">2018/2019</td>
-                                          <td class="table-td">
-                                            School Charges
-                                          </td>
-                                          <td class="table-td ">400</td>
-                                          <td class="table-td "># 49,000</td>
-                                          <td class="table-td ">
-                                            <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
-                                        bg-success-500">
-                                              Successful
-                                            </div>
-                                          </td>
-                                          <td class="table-td ">
-                                            <div class="inline-block cursor-pointer px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] text-white
-                                        bg-black">Print
-                                            </div>
-                                          </td>
-                                        </tr>
-          
-                                        {{--STOP--}}
-          
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                        </div>
+                        {{-- end --}}
 
                       </div>
                     </div>
 
+                    </div>
 
+
+
+                    
                     
                   </div>
                   <!-- Payment info-500 end-->

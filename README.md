@@ -107,7 +107,7 @@ Provide a concise case study highlighting the University of Abuja's specific req
 ## Contributors
 
 - [Eliezer Sunny](https://twitter.com/eliezersunny).
-- [Paulson Tsemaye](https://twitter.com/PaulsonTsemaye).
+
 
 
 

@@ -55,20 +55,77 @@ function flip(flipCard, newNumber) {
 }
 
 
-    
-  // If the count down is over, write some text 
-  if (time < 0) {
-    clearInterval(x);
-    document.getElementById("demo1").innerHTML = "Course Registration closed!!!";
-    document.getElementById("demo").style.hidden = "hidden";
-    const cus = document.querySelector(".course_registeration");
-    if (cus) {
-      cus.style.hidden = "hidden";
-    }
-    document.querySelector(".exit").style.hidden = "hidden";
-    document.querySelectorAll(".btnrt").style.hidden = "hidden";
-  } else{
-    document.getElementById("demo").innerHTML = "Closing Course Reg. in the next...";
+  
+
+
+
+// // If the count down is over, write some text 
+// if (time < 0) {
+//   clearInterval(x);
+//   document.getElementById("demo1").innerHTML = "Course Registration closed!!!";
+//   document.getElementById("demo").style.hidden = "hidden";
+//   const cus = document.querySelector(".course_registeration");
+//   if (cus) {
+//     cus.style.hidden = "hidden";
+//   }
+//   document.querySelector(".exit").style.hidden = "hidden";
+//   document.querySelectorAll(".btnrt").style.hidden = "hidden";
+// } else{
+//   document.getElementById("demo").innerHTML = "Closing Course Reg. in the next...";
+// }
+
+
+
+
+// When countdown ends, close registration
+if (time <= 0) {
+  clearInterval(x);
+
+
+  // Show message
+  if (demo) {
+      demo.innerHTML = "Course Registration closed!!!";
   }
 
+ 
+  // Hide buttons
+  let exitBtn = document.querySelector(".exit");
+  if (exitBtn) {
+      exitBtn.style.display = "none";
+  }
+
+  let btns = document.querySelectorAll(".btnrt");
+  if (btns.length > 0) {
+      btns.forEach(btn => btn.style.display = "none");
+  }
+} else {
+  // Hide buttons
+  let exitBtn = document.querySelector(".exit");
+  if (exitBtn) {
+      exitBtn.style.display = "block";
+  }
+
+  let btns = document.querySelectorAll(".btnrt");
+  if (btns.length > 0) {
+      btns.forEach(btn => btn.style.display = "block");
+  }
+}
+
+// close end
+
+
+
+
+
 }, 1000);
+
+
+
+
+
+
+
+
+
+
+

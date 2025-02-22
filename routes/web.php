@@ -79,6 +79,9 @@ Route::group(['middleware' => 'auth:web'], function() {
 Route::get('/dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/payment_section', [PagesController::class, 'payment_section'])->name('payment_section.get');
+Route::get('/payment_successful/{paymentSuccesss}', [PaymentController::class, 'payment_successful_page'])->name('payment_successful.get');
+Route::post('/payment_successful', [PaymentController::class, 'payment_successful'])->name('payment_successful.post');
+
 Route::get('/clearance_form', [PagesController::class, 'clearance_form'])->name('clearance_form.get');
 Route::post('/clearance_form', [UserController::class, 'clearance_form'])->name('clearance_form.post');
 Route::get('/edit_clearance_form', [PagesController::class, 'edit_clearance_form'])->name('edit_clearance_form.get');

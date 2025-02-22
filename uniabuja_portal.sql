@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2024 at 06:27 AM
--- Server version: 11.5.2-MariaDB
--- PHP Version: 8.3.10
+-- Generation Time: Feb 22, 2025 at 07:37 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,7 +53,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `faculty_id`, `department_id`, `section_id`, `unique_id`, `name`, `position`, `picture`, `password`, `remember_token`, `school_email`, `email`, `phone_no`, `location`, `last_activity`, `status`, `created_at`, `updated_at`) VALUES
-(2, 7, 1, 3, 1577303032, 'Eliezer Sunny', 'Admin', '1702910251-Eliezer Sunny.jpg', '$2y$10$YmA/fxBmcTt/QPglo9MLM.ZT0gtSJ.AurqQKVNuv4LTj5c2na0OnS', 'imYMs4gS6PLIsG4QLQWJbYynnbBlXW5mmrvuFCo7hWMJ1kfX3zvb4ssKClZp', 'eliezersunny2019@uniabuja.edu.ng', 'eliezersunny@gmail.com', '+2348154596494', 'Oyo State. Nigeria', NULL, 'Active Now', '2023-12-03 19:38:51', '2024-09-09 08:48:12'),
+(2, 7, 1, 3, 1577303032, 'Eliezer Sunny', 'Admin', '1702910251-Eliezer Sunny.jpg', '$2y$10$YmA/fxBmcTt/QPglo9MLM.ZT0gtSJ.AurqQKVNuv4LTj5c2na0OnS', '9JyLAj4sXgNNXXaOpT7GPPgNrPlvO0U5c9mdtNT1MbqYBRh040Jvaus2vrL6', 'eliezersunny2019@uniabuja.edu.ng', 'eliezersunny@gmail.com', '+2348154596494', 'Oyo State. Nigeria', NULL, 'Active Now', '2023-12-03 19:38:51', '2024-09-09 08:48:12'),
 (5, 7, 1, 3, 569527403, 'Paulson Tsemaye', 'Admin', 'user.png', '$2y$10$tud4cwdjBOz3qi7I7/3kROHZqOsxFpXPRBZjeChOgpssyOB77QxjS', NULL, 'paulsontsemaye2019@uniabuja.edu.ng', 'paulsontsemaye@paulsontsemaye.com', '+2348154596494', 'Oyo State. Nigeria', NULL, 'Active Now', '2023-12-18 00:35:00', '2023-12-18 22:36:43');
 
 -- --------------------------------------------------------
@@ -84,7 +84,7 @@ CREATE TABLE `cleared_clearances` (
 --
 
 INSERT INTO `cleared_clearances` (`id`, `faculty_id`, `department_id`, `section_id`, `user_id`, `lecturer_id`, `admin_id`, `student_clearance_id`, `school_receipt`, `student_result`, `proof`, `status`, `created_at`, `updated_at`) VALUES
-(10, 7, 1, 1, 1, 1, 2, 1, NULL, NULL, 'QWRldHVuamkgRWxpZXplciBBZGV0YXlvQ1NDLzIzNzEvMDAxMQ==Nw==MQ==', 'Approved', '2023-12-03 19:52:53', '2023-12-03 19:57:36');
+(10, 7, 1, 1, 1, 1, 2, 1, NULL, NULL, 'QWRldHVuamkgRWxpZXplciBBZGV0YXlvQ1NDLzIzNzEvMDAxMQ==Nw==MQ==', 'Approved', '2023-12-03 19:52:53', '2025-02-21 03:34:46');
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ CREATE TABLE `countdowns` (
 --
 
 INSERT INTO `countdowns` (`id`, `unique_id`, `coursereg_timer`, `status`, `created_at`, `updated_at`) VALUES
-(1, '425948287', 'December 7, 2024 23:59:59', 'Active', '2023-11-17 16:20:29', '2024-09-08 23:20:46');
+(1, '425948287', 'September 08, 2025 23:59:59', 'Active', '2023-11-17 16:20:29', '2025-02-22 08:08:54');
 
 -- --------------------------------------------------------
 
@@ -432,7 +432,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (33, '2023_11_25_101430_create_admin_role_permissions_table', 21),
 (34, '2023_11_29_172244_add_department_abbrivation_to_departments', 22),
 (35, '2023_12_03_103324_create_permission_tables', 23),
-(36, '2024_08_16_013843_create_sessions_table', 24);
+(36, '2024_08_16_013843_create_sessions_table', 24),
+(37, '2025_02_21_202046_create_payment_successfuls_table', 25);
 
 -- --------------------------------------------------------
 
@@ -569,7 +570,49 @@ CREATE TABLE `payments` (
 
 INSERT INTO `payments` (`id`, `faculty_id`, `department_id`, `level_id`, `section_id`, `semester_id`, `course_id`, `user_id`, `unique_id`, `currency`, `amount`, `payment_name`, `payment_url`, `status`, `created_at`, `updated_at`) VALUES
 (6, 7, 1, 1, 1, NULL, NULL, NULL, '1455248129', 'NGN', '50000', 'School Charges', 'school_charges', 'Active', '2023-11-27 07:19:05', '2023-11-27 07:19:05'),
-(7, 6, 2, 1, 1, NULL, NULL, NULL, '421585072', 'NGN', '50000', 'School Charges', 'school_charges', 'Active', '2024-09-09 08:53:55', '2024-09-09 08:53:55');
+(7, 6, 2, 1, 1, NULL, NULL, NULL, '421585072', 'NGN', '50000', 'School Charges', 'school_charges', 'Active', '2024-09-09 08:53:55', '2024-09-09 08:53:55'),
+(8, 7, 1, 4, 5, NULL, NULL, NULL, '330074187', 'NGN', '10000', 'Transcript', 'transcript', 'Active', '2025-02-17 19:26:33', '2025-02-17 19:26:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_successfuls`
+--
+
+CREATE TABLE `payment_successfuls` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `matric_no` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `faculty` varchar(255) DEFAULT NULL,
+  `department` varchar(255) DEFAULT NULL,
+  `programme` text DEFAULT NULL,
+  `level` varchar(255) DEFAULT NULL,
+  `receipt_no` varchar(255) DEFAULT NULL,
+  `reference_no` text DEFAULT NULL,
+  `payment_name` varchar(255) DEFAULT NULL,
+  `academic_section` varchar(255) DEFAULT NULL,
+  `amount_paid` text DEFAULT NULL,
+  `amount_in_words` longtext DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payment_successfuls`
+--
+
+INSERT INTO `payment_successfuls` (`id`, `matric_no`, `name`, `email`, `faculty`, `department`, `programme`, `level`, `receipt_no`, `reference_no`, `payment_name`, `academic_section`, `amount_paid`, `amount_in_words`, `created_at`, `updated_at`) VALUES
+(1, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', 'adetunjieliazer@gmail.com', 'Science', 'Computer Science', 'B. Sc. Computer Science', '100', '250221457867', NULL, 'Transcript', '2021/2022', '10000', 'Number too large to convert', '2025-02-22 07:16:54', '2025-02-22 07:16:54'),
+(2, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', 'adetunjieliazer@gmail.com', 'Science', 'Computer Science', 'B. Sc. Computer Science', '100', '250221601756', NULL, 'Transcript', '2021/2022', '10000', 'Number too large to convert', '2025-02-22 07:24:30', '2025-02-22 07:24:30'),
+(3, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', 'adetunjieliazer@gmail.com', 'Science', 'Computer Science', 'B. Sc. Computer Science', '100', '250222712830', NULL, 'School Charges', '2021/2022', '50000', 'Number too large to convert', '2025-02-22 08:23:32', '2025-02-22 08:23:32'),
+(4, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', 'adetunjieliazer@gmail.com', 'Science', 'Computer Science', 'B. Sc. Computer Science', '100', '250222867557', NULL, 'School Charges', '2021/2022', '50000', 'Number too large to convert', '2025-02-22 08:25:14', '2025-02-22 08:25:14'),
+(5, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', 'adetunjieliazer@gmail.com', 'Science', 'Computer Science', 'B. Sc. Computer Science', '100', '250222393103', NULL, 'School Charges', '2021/2022', '50000', 'Number too large to convert', '2025-02-22 11:34:21', '2025-02-22 11:34:21'),
+(6, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', 'adetunjieliazer@gmail.com', 'Science', 'Computer Science', 'B. Sc. Computer Science', '100', '20250222386757', NULL, 'Transcript', '2021/2022', '10000', 'One hundred', '2025-02-22 11:47:53', '2025-02-22 11:47:53'),
+(7, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', 'adetunjieliazer@gmail.com', 'Science', 'Computer Science', 'B. Sc. Computer Science', '100', '20250222604817', NULL, 'Transcript', '2021/2022', '10000', 'Ten Thousand', '2025-02-22 11:54:38', '2025-02-22 11:54:38'),
+(8, 'ACC/2362/001', 'Sunny', 'sunny@sunny.com', 'Management Science', 'Accounting', 'B.B.A Accounting', '100', '20250222116835', NULL, 'School Charges', '2021/2022', '50000', 'Fifty Thousand Naira Only', '2025-02-22 14:11:27', '2025-02-22 14:11:27'),
+(9, 'ACC/2362/001', 'Sunny', 'sunny@sunny.com', 'Management Science', 'Accounting', 'B.B.A Accounting', '100', '20250222639751', NULL, 'School Charges', '2021/2022', '50000', 'Fifty Thousand Naira Only', '2025-02-22 14:26:36', '2025-02-22 14:26:36'),
+(10, 'CSC/2471/002', 'Maxbeatx', 'eliezersunny@eliezersunny.com', 'Science', 'Computer Science', 'B. Sc. Computer Science', '100', '20250222214987', NULL, 'Transcript', '2021/2022', '10000', 'Ten Thousand Naira Only', '2025-02-22 14:28:58', '2025-02-22 14:28:58');
 
 -- --------------------------------------------------------
 
@@ -755,7 +798,8 @@ INSERT INTO `sections` (`id`, `unique_id`, `section`, `status`, `created_at`, `u
 (1, '213363369', '2021/2022', 'Active', '2023-10-10 21:08:00', '2023-10-12 21:16:11'),
 (2, '7954922', '2022/2023', 'Active', '2023-10-10 21:08:15', '2023-10-10 21:08:15'),
 (3, '1026750623', '2023/2024', 'Active', '2023-10-10 21:08:26', '2023-10-10 21:08:26'),
-(4, '1009556041', '2024/2025', 'Active', '2024-08-25 21:59:20', '2024-08-25 21:59:20');
+(4, '1009556041', '2024/2025', 'Active', '2024-08-25 21:59:20', '2024-08-25 21:59:20'),
+(5, '158824972', '2025/2026', 'Active', '2025-02-17 04:59:52', '2025-02-17 04:59:52');
 
 -- --------------------------------------------------------
 
@@ -804,8 +848,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_type`, `user_id`, `lecturer_id`, `admin_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('1dnNjVfzeffSK5stjHHDCCXR93wA55cA77dF2gQI', NULL, 1, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZFlZOThwaVVkcW9OVkNDWFJOWEhyQjFmSE11dkxFWXh1elpJV3J3ciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTk2OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY2hlY2tfcmVzdWx0P2xldmVsPTEmc2VtZXN0ZXI9MiZ0PWJuSlhWVXRVT0daRmJXOXFOMGRwV0c1c2MxRkhSWEZFUkcxR1dURkNhbXM1UVdKNlpEaDVhWGxSV25aYWRGSm9aMmhvV0dFNVVHOVpkMWRYVTNBM1NYVXpaVXh2ZFhCUVprSmpTbHBsY2tFM1FrVXlla3haZDI5SU1HaHVPVEo1TkdwbU13JTNEJTNEIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1726035267),
-('nZeZpRmH2ndXtZuvCH7mAfMqlo3FgutzMZYIUxBg', NULL, NULL, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidWpZZkpGbU9CNWFuZzhneXZiaWF1TGI5SGdibUpyMXVjSWxoSWZDZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sZWN0dXJlci9hZG1pbi9lZGl0X3Jlc3VsdHMvMjEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1726035243);
+('IkMQt5T0IhvhuFtp5rzs3lbgk4MC74BPefqv5eZB', NULL, 10, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVmtCU1VBNnVPNGZBQXFYNDl3aUxtTEMwQTNuVzdPM0dqU0QzcXVoVSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMDt9', 1740206202),
+('nrzmcyT4yBpsHI3p9KKgF6yramAgqrSwEbpmVQcM', NULL, 1, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoieEsxQTg1a1EyUEhzZE1RYjUwTUxaUnIzek1kMnFMUzA2cEhjRHhTTyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NsZWFyYW5jZV9mb3JtIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTkxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcGF5bWVudF9zdWNjZXNzZnVsLzZwODUyOTk3ODUzP2VESmFZa2xPY2tGSVN6UmxTR2xUWVZWTlNFcGhSbFZCWTJsUk1VRm5hMHRKT1ZaSFVEZzNTbmRET1RNeVoyZEdNMHhNYTFKTk5qWmpTamhYWTBoUFFrNDFNWFJ4VUVkWVkwbDZZVVZMV0dKTGRqSm5aM0JIVDA1bU9HODVWMlp0ZVZkU2VnPSUzRCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1740205925);
 
 -- --------------------------------------------------------
 
@@ -870,7 +914,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `faculty_id`, `department_id`, `level_id`, `section_id`, `unique_id`, `name`, `picture`, `programme`, `school_receipt`, `remember_token`, `school_email`, `email`, `email_verified_at`, `password`, `phone_no`, `location`, `last_activity`, `status`, `created_at`, `updated_at`) VALUES
-(1, 7, 1, 1, 1, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', '1697110341-Adetunji Eliazer Adetayo.png', 'QWRldHVuamkgRWxpZXplciBBZGV0YXlvQ1NDLzIzNzEvMDAxMQ==Nw==MQ==', NULL, 'pTW4NpzcmIcZk7DHFSNPjnSRVuFhbbWHhSCGQLScIs97NZ5sIQCmBlJ1XKYE', 'eliezersunny2019@uniabuja.edu.ngg', 'adetunjieliazer@gmail.com', NULL, '$2y$10$jxBaN2BBRFkl.AlQQnpU1uZAPKQ.skJbpGIZCJIpIBvvGQX7TyJhq', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-10-12 15:25:56', '2024-09-01 10:00:26'),
+(1, 7, 1, 1, 1, 'CSC/2371/001', 'Adetunji Eliezer Adetayo', '1697110341-Adetunji Eliazer Adetayo.png', 'QWRldHVuamkgRWxpZXplciBBZGV0YXlvQ1NDLzIzNzEvMDAxMQ==Nw==MQ==', NULL, '5UT2cs5j9UjibDuB2R7y123Gjkm8ME4ibL477ORCQpeVcTU070Kolxs5z4F6', 'eliezersunny2019@uniabuja.edu.ngg', 'adetunjieliazer@gmail.com', NULL, '$2y$10$jxBaN2BBRFkl.AlQQnpU1uZAPKQ.skJbpGIZCJIpIBvvGQX7TyJhq', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-10-12 15:25:56', '2024-09-01 10:00:26'),
 (8, 6, 2, 1, 1, 'ACC/2362/001', 'Sunny', 'user.png', 'U3Vubnk=QUNDLzIzNjIvMDAxMQ==Ng==Mg==', NULL, NULL, 'sunny2019@uniabuja.edu.ng', 'sunny@sunny.com', NULL, '$2y$10$Yu5dc7/Cso08CozxJHkpoOnma8BU3N7fQvZI8EFnOxVwH2bkb4MxW', '8154596494', 'Oyo State. Nigeria', NULL, 'Active', '2023-11-30 02:39:24', '2023-11-30 02:39:24'),
 (10, 7, 1, 1, 1, 'CSC/2471/002', 'Maxbeatx', 'user.png', 'TWF4YmVhdHg=Q1NDLzI0NzEvMDAyMQ==Nw==MQ==', NULL, NULL, 'eliezersunny2024@uniabuja.edu.ng', 'eliezersunny@eliezersunny.com', NULL, '$2y$10$sS2pTAcXvVZsxXQNWheW5OrKqQxJFZLDDLSgjPwPeJ6smV5c6KrnC', '8154596494', 'Abuja', NULL, 'Active', '2024-08-26 08:43:52', '2024-09-09 08:44:40');
 
@@ -1017,6 +1061,12 @@ ALTER TABLE `payments`
   ADD KEY `payments_semester_id_foreign` (`semester_id`),
   ADD KEY `payments_course_id_foreign` (`course_id`),
   ADD KEY `payments_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `payment_successfuls`
+--
+ALTER TABLE `payment_successfuls`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `permissions`
@@ -1180,13 +1230,19 @@ ALTER TABLE `levels`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `payment_successfuls`
+--
+ALTER TABLE `payment_successfuls`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1216,7 +1272,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `semesters`

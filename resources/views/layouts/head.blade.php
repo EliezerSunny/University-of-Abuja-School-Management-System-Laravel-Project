@@ -18,7 +18,8 @@
   <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
 
-  
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
   <script src="{{asset('assets/js/store.js')}}"></script>
 
  <!-- scripts -->
@@ -26,11 +27,17 @@
   <script src="{{asset('assets/js/rt-plugins.js')}}"></script>
   <script src="{{asset('assets/js/app.js')}}"></script> 
 
+  {{-- ajax --}}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  {{-- ajax end --}}
+
   <script>
     var exitTime = {!! json_encode($countDownTime->coursereg_timer) !!};
   </script>
 
   <script src="{{asset('assets/js/script.js')}}"></script> 
+
+
 </head>
 
 
@@ -661,6 +668,8 @@
 
 
 
+
+
   </div>
 </div>
 
@@ -735,12 +744,16 @@
     </div>
 
 
-    <script src="{{url('https://js.paystack.co/v1/inline.js')}}"></script> 
-    <script src="{{asset('assets/js/payment.js')}}">
-        
+
+    {{-- paystack --}}
+
+  <script src="{{url('https://js.paystack.co/v1/inline.js')}}"></script> 
+  <script src="{{asset('assets/js/payment.js')}}">
+      
+    
         
         <!-- scripts -->
-  <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+  // <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
   <script src="{{asset('assets/js/rt-plugins.js')}}"></script>
   <script src="{{asset('assets/js/app.js')}}"></script>
   
